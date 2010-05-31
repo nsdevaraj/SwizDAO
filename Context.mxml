@@ -64,8 +64,7 @@
 			
 			<!-- Signals Begin -->
 			<signals:AbstractSignal/>
-			<signals:ResultSignal/>
-			<signals:ViewSignal/>
+			<signals:ResultSignal/> 
 			<!-- Signals End -->
 			
 			<!-- Response Begin -->

@@ -1,18 +1,18 @@
 /*
- * Copyright 2010 Swiz Framework Contributors
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
+* Copyright 2010 Swiz Framework Contributors
+* 
+* Licensed under the Apache License, Version 2.0 (the "License"); you may not
+* use this file except in compliance with the License. You may obtain a copy of
+* the License. You may obtain a copy of the License at
+* 
+* http://www.apache.org/licenses/LICENSE-2.0
+* 
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+* License for the specific language governing permissions and limitations under
+* the License.
+*/
 
 package org.swizframework.reflection
 {
@@ -20,6 +20,7 @@ package org.swizframework.reflection
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
+	import org.swizframework.core.SwizManager;
 	import org.swizframework.factories.MetadataHostFactory;
 	
 	/**
@@ -75,12 +76,18 @@ package org.swizframework.reflection
 		public var metadataHosts:Dictionary;
 		
 		// ========================================
+		// protected properties
+		// ========================================
+		
+		protected var metadataHostFactory:MetadataHostFactory = new MetadataHostFactory();
+		
+		// ========================================
 		// constructor
 		// ========================================
 		
 		public function TypeDescriptor()
 		{
-		
+			
 		}
 		
 		// ========================================
@@ -104,9 +111,10 @@ package org.swizframework.reflection
 			// parent node will be the actual property/method/class node
 			for each( var mdNode:XML in description..metadata )
 			{
+				var metadataName:String = mdNode.@name;
 				// flex 4 includes crazy metadata on every single property and method
 				// in debug mode. the name starts with _, so we ignore that
-				if( String( mdNode.@name ).indexOf( "_" ) == 0 )
+				if( metadataName.indexOf( "_" ) == 0 || SwizManager.metadataNames.indexOf( metadataName ) < 0 )
 					continue;
 				
 				// gather and store all key/value pairs for the metadata tag
@@ -119,7 +127,7 @@ package org.swizframework.reflection
 				var host:IMetadataHost = getMetadataHost( mdNode.parent() );
 				
 				var metadataTag:IMetadataTag = new BaseMetadataTag();
-				metadataTag.name = mdNode.@name.toString();
+				metadataTag.name = metadataName;
 				metadataTag.args = args;
 				metadataTag.host = host;
 				host.metadataTags.push( metadataTag );
@@ -144,7 +152,7 @@ package org.swizframework.reflection
 				return IMetadataHost( metadataHosts[ metadataHostName ] );
 			
 			// otherwise create, store and return it
-			return metadataHosts[ metadataHostName ] = new MetadataHostFactory( domain ).getMetadataHost( hostNode );
+			return metadataHosts[ metadataHostName ] = metadataHostFactory.getMetadataHost( hostNode, domain );
 		}
 		
 		// ========================================
@@ -179,13 +187,13 @@ package org.swizframework.reflection
 			type = domain.getDefinition( className ) as Class;
 			
 			for each( var constNode:XML in description.constant )
-				constants.push( new Constant( constNode.@name, type[ constNode.@name ] ) );
+			constants.push( new Constant( constNode.@name, type[ constNode.@name ] ) );
 			
 			for each( var extendsNode:XML in classDescription.extendsClass )
-				superClasses.push( extendsNode.@type.toString() );
+			superClasses.push( extendsNode.@type.toString() );
 			
 			for each( var interfaceNode:XML in classDescription.implementsInterface )
-				interfaces.push( interfaceNode.@type.toString() );
+			interfaces.push( interfaceNode.@type.toString() );
 			
 			metadataHosts = getMetadataHosts( description );
 			
@@ -339,12 +347,12 @@ package org.swizframework.reflection
 				return true;
 			
 			for each( var superClass:String in superClasses )
-				if( superClass == typeName )
-					return true;
+			if( superClass == typeName )
+				return true;
 			
 			for each( var interfaceName:String in interfaces )
-				if( interfaceName == typeName )
-					return true;
+			if( interfaceName == typeName )
+				return true;
 			
 			return false;
 		}

@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		xmlns:mx="library://ns.adobe.com/flex/mx" addedToStage="viewContext.dispatch(this)">
-	
-	<fx:Script>
-		<![CDATA[ 
-			import com.adams.scrum.signals.ViewSignal;
-			[Inject]
-			public var viewContext:ViewSignal;
-		]]>
-	</fx:Script>
-	
-	
-	<fx:Declarations> 
-	</fx:Declarations>
-	
-	<s:states> 
-	</s:states>
-	
-	
+		xmlns:mx="library://ns.adobe.com/flex/mx" >
+	 
 	<!-- host component-->
 	<fx:Metadata>
 		[HostComponent("com.adams.scrum.views.mediators.HomeViewMediator")]

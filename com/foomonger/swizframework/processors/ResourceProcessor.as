@@ -20,7 +20,6 @@ package com.foomonger.swizframework.processors {
 	
 	import mx.binding.utils.BindingUtils;
 	import mx.binding.utils.ChangeWatcher;
-	import mx.logging.ILogger;
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
@@ -29,7 +28,7 @@ package com.foomonger.swizframework.processors {
 	import org.swizframework.reflection.BaseMetadataTag;
 	import org.swizframework.reflection.IMetadataTag;
 	import org.swizframework.reflection.MetadataArg;
-	import org.swizframework.utils.SwizLogger;
+	import org.swizframework.utils.logging.SwizLogger;
 
 	/**
 	 * ResourceProcessor binds a resource to the decorated property. Define a key
@@ -39,7 +38,7 @@ package com.foomonger.swizframework.processors {
 
 		protected static const RESOURCE:String = "Resource";
 		
-		internal var logger:ILogger = SwizLogger.getLogger(this);
+		internal var logger:SwizLogger = SwizLogger.getLogger(this);
 		
 		protected var resourceManager:IResourceManager = ResourceManager.getInstance();
 		

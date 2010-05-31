@@ -62,12 +62,12 @@ package com.adams.scrum.views.mediators
 		 * listen for it.
 		 * </p>
 		 */
-		[MediateSignal(type="ViewSignal")] 
-		public function setView(value:UIComponent):void
+		[Mediate( event="flash.events.Event.ADDED_TO_STAGE" , properties="target",useCapture="true" )]
+		public function setView(value:Object):void
 		{ 
 			if(value is viewType)
 			{ 
-				this._view = value;
+				this._view = value as UIComponent;
 				
 				// determine if the view has been initialized...
 				// NO...listen for it;s creation complete event

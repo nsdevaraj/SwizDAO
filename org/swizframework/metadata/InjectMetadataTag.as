@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Swiz Framework Contributors
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,11 +16,10 @@
 
 package org.swizframework.metadata
 {
-	import mx.logging.ILogger;
 	
 	import org.swizframework.reflection.BaseMetadataTag;
 	import org.swizframework.reflection.IMetadataTag;
-	import org.swizframework.utils.SwizLogger;
+	import org.swizframework.utils.logging.SwizLogger;
 	
 	/**
 	 * Class to represent <code>[Inject]</code> metadata tags.
@@ -31,7 +30,7 @@ package org.swizframework.metadata
 		// protected properties
 		// ========================================
 		
-		protected var logger:ILogger = SwizLogger.getLogger( this );
+		protected var logger:SwizLogger = SwizLogger.getLogger( this );
 		
 		/**
 		 * Backing variable for read-only <code>source</code> property.
@@ -102,7 +101,7 @@ package org.swizframework.metadata
 		 * Returns bind attribute of [Inject] tag as a <code>Boolean</code> value.
 		 * If true will cause a binding to be established.
 		 *
-		 * @default true
+		 * @default false
 		 */
 		public function get bind():Boolean
 		{

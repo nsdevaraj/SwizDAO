@@ -18,8 +18,6 @@ package com.foomonger.swizframework.processors {
 
 	import flash.utils.getDefinitionByName;
 	
-	import mx.logging.ILogger;
-	
 	import org.osflash.signals.IDeluxeSignal;
 	import org.osflash.signals.ISignal;
 	import org.swizframework.core.Bean;
@@ -29,7 +27,7 @@ package com.foomonger.swizframework.processors {
 	import org.swizframework.reflection.MetadataArg;
 	import org.swizframework.reflection.MetadataHostMethod;
 	import org.swizframework.reflection.MethodParameter;
-	import org.swizframework.utils.SwizLogger;
+	import org.swizframework.utils.logging.SwizLogger;
 
 	/**
 	 * MediateSignalProcessor is the Signal version of MediateProcessor. After defining 
@@ -44,7 +42,7 @@ package com.foomonger.swizframework.processors {
 		
 		protected static const WILDCARD_PACKAGE:RegExp = /\A(.*)(\.\**)\Z/;
 		
-		internal var logger:ILogger = SwizLogger.getLogger(this);
+		internal var logger:SwizLogger = SwizLogger.getLogger(this);
 		
 		protected var _signalPackages:Array = [];
 

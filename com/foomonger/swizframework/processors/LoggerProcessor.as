@@ -16,13 +16,11 @@ limitations under the License.
 
 package com.foomonger.swizframework.processors {
 
-	import mx.logging.ILogger;
-	
 	import org.swizframework.core.Bean;
 	import org.swizframework.processors.BaseMetadataProcessor;
 	import org.swizframework.processors.ProcessorPriority;
 	import org.swizframework.reflection.IMetadataTag;
-	import org.swizframework.utils.SwizLogger;
+	import org.swizframework.utils.logging.SwizLogger;
 
 	/**
 	 * LoggerProcessor injects an ILogger instance to the decorated property
@@ -41,7 +39,7 @@ package com.foomonger.swizframework.processors {
 		}
  
 		override public function setUpMetadataTag(metadataTag:IMetadataTag, bean:Bean):void {
-			var logger:ILogger = SwizLogger.getLogger(bean.source);
+			var logger:SwizLogger = SwizLogger.getLogger(bean.source);
 			bean.source[metadataTag.host.name] = logger;
 		}
 		
