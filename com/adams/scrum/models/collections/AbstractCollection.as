@@ -68,7 +68,7 @@ package com.adams.scrum.models.collections
 		 * 
 		 */ 
 		public function addItem( obj:Object ):void {
-			addItemAt( obj, length - 1 );	
+			addItemAt( obj, length );	
 		}
 		
 		/**
