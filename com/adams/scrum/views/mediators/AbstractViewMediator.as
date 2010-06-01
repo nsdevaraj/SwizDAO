@@ -1,7 +1,9 @@
 package com.adams.scrum.views.mediators
 { 
 	
+	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
@@ -65,7 +67,7 @@ package com.adams.scrum.views.mediators
 		[Mediate( event="flash.events.Event.ADDED_TO_STAGE" , properties="target",useCapture="true" )]
 		public function setView(value:Object):void
 		{ 
-			if(value is viewType)
+			if(value is viewType && _view == null)
 			{ 
 				this._view = value as UIComponent;
 				
