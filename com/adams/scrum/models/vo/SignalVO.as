@@ -9,8 +9,9 @@ package com.adams.scrum.models.vo
 	[Bindable]
 	public class SignalVO extends AbstractVO
 	{
-		public function SignalVO(dao:AbstractDAO = null, actionStr:String ='', pushmsg:PushMessage = null)
+		public function SignalVO(obj:Object=null, dao:AbstractDAO = null, actionStr:String ='', pushmsg:PushMessage = null)
 		{
+			if(obj)objectId = obj.name;
 			if(dao){
 				destination = dao.destination;
 				collection = dao.collection;
@@ -24,8 +25,7 @@ package com.adams.scrum.models.vo
 			}
 		}
 		private var _receivers:Array;
-		private var _objectId:String;
-
+		
 		public function get objectId():String
 		{
 			return _objectId;
@@ -143,6 +143,6 @@ package com.adams.scrum.models.vo
 		{
 			return _description;
 		}
-		
+		private var _objectId:String
 	}
 }

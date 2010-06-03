@@ -52,7 +52,7 @@ package com.adams.scrum.controller
 			//"my-polling-amf", "spring/messagebroker/amfpolling"
 			//"my-longpolling-amf", "spring/messagebroker/amflongpolling"
 			//"my-streaming-amf",'spring/messagebroker/streamingamf'
-			var pushChannel:AMFChannel = new AMFChannel("my-polling-amf",serverLocation+"spring/messagebroker/amfpolling");
+			var pushChannel:AMFChannel = new AMFChannel("my-streaming-amf",serverLocation+"spring/messagebroker/streamingamf");
 			pushChannel.pollingEnabled= true;
 			pushChannel.pollingInterval= 5000;
 			pushChannel.piggybackingEnabled=true;

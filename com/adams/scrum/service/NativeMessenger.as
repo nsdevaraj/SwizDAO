@@ -59,7 +59,7 @@ package com.adams.scrum.service
 		}
 		protected function consumeHandler(event:MessageEvent =null) : void
 		{
-			var receivedSignal:SignalVO = new SignalVO()
+			var receivedSignal:SignalVO = new SignalVO();
 			receivedSignal.action = Action.RECEIVE_MSG;
 			receivedSignal.destination = event.message.headers["destination"];
 			receivedSignal.name = event.message.headers["name"];

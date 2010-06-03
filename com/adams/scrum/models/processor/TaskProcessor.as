@@ -22,7 +22,7 @@ package com.adams.scrum.models.processor
 		{
 			var task:Tasks = vo as Tasks; 
 			
-			task.personObject = GetVOUtil.getVOObject(task.personFk,personDAO.collection.items,'personId',Persons) as Persons;
+			//task.personObject = GetVOUtil.getVOObject(task.personFk,personDAO.collection.items,'personId',Persons) as Persons;
 		}
 	}
 }

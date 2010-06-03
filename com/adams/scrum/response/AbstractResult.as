@@ -13,6 +13,7 @@ package com.adams.scrum.response
 	import mx.rpc.events.ResultEvent;
 	
 	import org.swizframework.controller.AbstractController;
+	import org.swizframework.utils.services.ServiceHelper;
 	
 	public class AbstractResult extends AbstractController
 	{
@@ -20,7 +21,8 @@ package com.adams.scrum.response
 		public function AbstractResult()
 		{
 		} 
-		
+		[Inject]
+		public var service:ServiceHelper;
 		private var _token:AsyncToken = new AsyncToken();
 		public function get token():AsyncToken {
 			return _token;
@@ -28,14 +30,14 @@ package com.adams.scrum.response
 		
 		public function set token( value:AsyncToken ):void {
 			_token = value; 
-			this.executeServiceCall(_token, resultHandler, faultHandler);
+			service.executeServiceCall(_token, resultHandler, faultHandler,[serviceSignal]);
 		} 
 		
-		private function resultHandler( rpcevt:ResultEvent, token:Object = null ):void {
+		private function resultHandler( rpcevt:ResultEvent, token:AbstractSignal = null ):void {
 			var resultObj:Object = rpcevt.result;
-			var outCollection:ICollection = updateCollection(serviceSignal.currentCollection, serviceSignal.currentSignal,resultObj);
-			if(serviceSignal.currentProcessor) processVO(serviceSignal.currentProcessor,outCollection);
-			resultSignal.dispatch(rpcevt.result, serviceSignal.currentSignal);
+			var outCollection:ICollection = updateCollection(token.currentCollection, token.currentSignal,resultObj);
+			if(token.currentProcessor) processVO(token.currentProcessor,outCollection);
+			resultSignal.dispatch(resultObj, token.currentSignal);
 			signalSeq.onSignalDone();
 		} 
 		
@@ -75,8 +77,8 @@ package com.adams.scrum.response
 			return collection;
 		}
 		
-		private function faultHandler( event:FaultEvent, token:Object = null ):void {
-			trace('failed'+event);
+		private function faultHandler( event:FaultEvent):void {
+			trace(serviceSignal.currentSignal.action+ ' '+serviceSignal.currentSignal.destination+' failed'+event);
 			signalSeq.onSignalDone();
 		}
 		

@@ -12,20 +12,27 @@
 		<s:VerticalLayout/>
 	</s:layout> 
 	
-	<s:Group  top="4" bottom="4" left="4" right="4">
+	<s:VGroup  top="4" bottom="4" left="4" right="4">
+
+		<s:Label text="Tasks"/>
+		<s:HGroup> 
+			<mx:DataGrid id="taskList"/>
+			<s:VGroup horizontalAlign="center">		 
+				<mx:Form id="taskForm">				
+					<mx:FormItem label="TaskComment">
+						<s:TextArea id="taskcommentTxt"/>
+					</mx:FormItem>
+					<mx:FormItem label="TaskStatusFK">
+						<mx:TextInput id="taskStatusFkTxt" restrict="0-9"/>
+					</mx:FormItem>		 						
+				</mx:Form>
+				<s:HGroup id="taskBtns"> 
+					<s:Button id="taskAdd" label="add"/>
+					<s:Button id="taskEdit" label="edit"/>
+					<s:Button id="taskDelete" label="delete"/>
+				</s:HGroup>
+			</s:VGroup>	
+		</s:HGroup>
 		
-		<s:layout>
-			<s:BasicLayout/>
-		</s:layout>
-		<mx:DataGrid id="domainList"/>
-	</s:Group>
-	
-	<s:Group  top="4" bottom="4" left="4" right="4">
-		<s:layout>
-			<s:HorizontalLayout/>
-		</s:layout>
-		<s:Button id="createBtn" label="New"/>
-		<s:Button id="editBtn" label="Update"/>
-		<s:Button id="deleteBtn" label="Delete"/>
-	</s:Group>
+	</s:VGroup>
 </s:Skin>

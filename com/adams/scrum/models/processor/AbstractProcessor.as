@@ -22,28 +22,11 @@ package com.adams.scrum.models.processor
 		{
 			for each(var vo:Object in arrayCollection){
 				processVO(vo as IValueObject);
-				vo.processed = true;
 			}
 		}
 		public function processVO(vo:IValueObject):void
 		{
 			//overridden
-		}
-		public function processAddPushMessage(signal:SignalVO,dao:AbstractDAO):void{
-			signal.action = Action.FINDPUSH_ID;
-			signal.destination = dao.destination;
-			signal.collection = dao.collection;
-			signal.processor = dao.processor;
-			signal.id = signal.description as int;
-			signalSeq.addSignal(signal);			
-		}
-		public function processUpdatePushMessage(signal:SignalVO,dao:AbstractDAO):void{
-			signal.action = Action.FINDPUSH_ID;
-			signal.destination = dao.destination;
-			signal.collection = dao.collection;
-			signal.processor = dao.processor;
-			signal.id = signal.description as int;
-			signalSeq.addSignal(signal);				
-		}
+		} 
 	}
 }

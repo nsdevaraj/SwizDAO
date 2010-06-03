@@ -10,8 +10,6 @@ package com.adams.scrum.models.processor
 	public interface IVOProcessor
 	{ 
 		function processCollection(collection:IList):void
-		function processVO(vo:IValueObject):void
-		function processAddPushMessage(signal:SignalVO,dao:AbstractDAO):void
-		function processUpdatePushMessage(signal:SignalVO,dao:AbstractDAO):void
+		function processVO(vo:IValueObject):void 
 	}
 }

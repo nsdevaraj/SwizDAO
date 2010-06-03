@@ -45,10 +45,7 @@ package com.adams.scrum.dao
 						break;
 					case Action.FIND_ID:
 						findById(obj.id);
-						break;
-					case Action.FINDPUSH_ID:
-						findId(obj.id);
-						break;
+						break; 
 					case Action.DELETE:
 						deleteById(obj.valueObject);
 						break;
@@ -68,15 +65,13 @@ package com.adams.scrum.dao
 						messenger.produceMessage(obj);
 						break;
 					case Action.RECEIVE_MSG:
+						obj.action = Action.FINDPUSH_ID;
 						switch(obj.name ){
 							case Description.CREATE:
-								processor.processAddPushMessage(obj,this);
-								break;
-							case Description.UPDATE:
-								processor.processUpdatePushMessage(obj,this);
+							case Description.UPDATE: 
+								findId(obj.description as int); 
 								break;
 						}
-						break;
 				}
 			}
 		}  

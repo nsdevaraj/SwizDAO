@@ -7,7 +7,7 @@ package com.adams.scrum.models.collections
 	{
 		function get propertyNames():Array;
 		function get items():IList;
-		function set items( value:IList ):void;
+		function set items(v:IList):void;
 		function get length():int;
 		function set length(v:int):void
 		function getItemIndex( obj:Object ):int;

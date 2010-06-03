@@ -15,7 +15,7 @@
 		   xmlns:storage="org.swizframework.storage.*" 
 		   xmlns:mediators="com.adams.scrum.views.mediators.*"
 		   xmlns:processor="com.adams.scrum.models.processor.*"  
-		   activate="initializeHandler(event)">
+		   activate="initializeHandler(event)" xmlns:services="org.swizframework.utils.services.*">
 	
 	<fx:Script>
 		<![CDATA[  
@@ -27,15 +27,7 @@
 			
 			import org.swizframework.utils.SwizLogger;
 			protected function initializeHandler(event:Event):void
-			{
-				var target:TraceTarget = new TraceTarget();
-				target.includeCategory = true;
-				target.includeDate = true;
-				target.includeLevel = true;
-				target.includeTime = true;
-				target.level = LogEventLevel.ALL;
-				
-				SwizLogger.addLoggingTarget(target);    
+			{  
 			}
 		]]> 
 	</fx:Script>
@@ -60,6 +52,7 @@
 			
 			<!-- Service Begin-->
 			<service:NativeMessenger/> 
+			<services:ServiceHelper swiz="{this}" />
 			<!-- Service End -->
 			
 			<!-- Signals Begin -->
@@ -80,6 +73,7 @@
 			<!-- DAO Begin -->  
 			<swiz:Prototype name="taskDAO" constructorArguments="{['task',taskProcessor]}" type="{AbstractDAO}" singleton="true"/> 
 			<swiz:Prototype name="personDAO" constructorArguments="{['person',personProcessor]}" type="{AbstractDAO}" singleton="true"/>
+			<swiz:Prototype name="teammemberDAO" constructorArguments="{['teammember']}" type="{AbstractDAO}" singleton="true"/>
 			<!-- DAO End --> 
 			
 			<!-- Controller Begin -->

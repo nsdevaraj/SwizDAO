@@ -1,9 +1,7 @@
 package com.adams.scrum.views.mediators
 { 
 	
-	import flash.display.DisplayObject;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	
 	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
