@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Versions" table="versions">
+        <id name="versionId" type="integer">
+            <column name="version_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="versionLbl" >
+            <column name="version_lbl" />
+        </property>
+        <property name="versionStatusFk" >
+            <column name="version_status_FK" />
+        </property>
+        <property name="productFk" >
+            <column name="product_FK" />
+        </property>
+    </class>
+    <query name="Versions.findId">
+        select u from Versions u where u.versionId = ?
+    </query>    
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Sprints" table="sprints">
+        <id name="sprintId" type="integer">
+            <column name="Sprint_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="sprintLabel" >
+            <column name="Sprint_label" />
+        </property>
+        <property name="sprintStatusFk" >
+            <column name="Sprint_Status_FK" />
+        </property>
+        <property name="versionFk" >
+            <column name="Version_FK" />
+        </property>
+        <property name="teamFk" >
+            <column name="Team_FK" />
+        </property>
+        <property name="productFk">
+            <column name="Product_FK" />
+        </property>
+        <property name="SDateCreation" >
+            <column name="s_date_creation" />
+        </property>
+        <property name="SDateEnd" >
+            <column name="s_date_end" />
+        </property>
+        <property name="SDatePreparation" >
+            <column name="s_date_preparation" />
+        </property>
+        <property name="SDateDemo" >
+            <column name="s_date_demo" />
+        </property>
+        <property name="preparationComments" >
+            <column name="preparation_Comments" />
+        </property>
+        <property name="demoComments" >
+            <column name="demo_Comments" />
+        </property>
+        <set name="storySet" table="sprintstories" cascade="none" order-by="Story_FK"  lazy="false" >
+                <key column="Sprint_FK"/>
+                <many-to-many column="Story_FK" class="com.adams.scrum.pojo.Stories" />
+	    </set>
+    </class>
+	<query name="Sprints.findId">
+        select u from Sprints u where u.sprintId = ?
+    </query>
+    <query name="Sprints.findById">
+        select u from Sprints u where u.productFk = ?
+    </query>
+</hibernate-mapping>

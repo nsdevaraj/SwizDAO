@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Teams" table="teams">
+        <id name="teamId" type="integer">
+            <column name="team_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="teamLabel" >
+            <column name="team_label" />
+        </property> 
+	    <set name="teamMemberSet" table="teammembers" inverse="true" cascade="none" lazy="false">
+            <key column="team_FK" />
+            <one-to-many class="com.adams.scrum.pojo.Teammembers" />
+        </set>
+    </class>
+    <query name="Teams.findId">
+        select u from Teams u where u.teamId = ?
+    </query>
+</hibernate-mapping>

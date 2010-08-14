@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="columns"></table-filter>
+	<table-filter match-name="domains"></table-filter>
+	<table-filter match-name="events"></table-filter>
+	<table-filter match-name="files"></table-filter>
+	<table-filter match-name="persons"></table-filter>
+	<table-filter match-name="products"></table-filter>
+	<table-filter match-name="profiles"></table-filter>
+	<table-filter match-name="reports"></table-filter>
+	<table-filter match-name="reports_columns"></table-filter>
+	<table-filter match-name="sprints"></table-filter>
+	<table-filter match-name="sprintstories"></table-filter>
+	<table-filter match-name="status"></table-filter>
+	<table-filter match-name="stories"></table-filter>
+	<table-filter match-name="storythemes"></table-filter>
+	<table-filter match-name="tasks"></table-filter>
+	<table-filter match-name="teammembers"></table-filter>
+	<table-filter match-name="teams"></table-filter>
+	<table-filter match-name="themes"></table-filter>
+	<table-filter match-name="tickets"></table-filter>
+	<table-filter match-name="versions"></table-filter>
+	<table name="com.adams.scrum.pojo.events" ></table>
+	<table name="com.adams.scrum.pojo.sprints"></table>
+	<table name="com.adams.scrum.pojo.teams"></table>
+	<table name="com.adams.scrum.pojo.reports_columns"></table>
+	<table name="com.adams.scrum.pojo.tickets"></table>
+	<table name="com.adams.scrum.pojo.domains"></table>
+	<table name="com.adams.scrum.pojo.profiles"></table>
+	<table name="com.adams.scrum.pojo.teammembers"></table>
+	<table name="com.adams.scrum.pojo.versions"></table>
+	<table name="com.adams.scrum.pojo.columns"></table>
+	<table name="com.adams.scrum.pojo.storythemes"></table>
+	<table name="com.adams.scrum.pojo.files"></table>
+	<table name="com.adams.scrum.pojo.sprintstories"></table>
+	<table name="com.adams.scrum.pojo.persons"></table>
+	<table name="com.adams.scrum.pojo.themes"></table>
+	<table name="com.adams.scrum.pojo.stories"></table>
+	<table name="com.adams.scrum.pojo.products"></table>
+	<table name="com.adams.scrum.pojo.tasks"></table>
+	<table name="com.adams.scrum.pojo.reports"></table>
+	<table name="com.adams.scrum.pojo.status"></table>
+	<table name="com.adams.scrum.pojo.versions"></table>
+</hibernate-reverse-engineering>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Domains" table="domains">
+        <id name="domainId" type="integer">
+            <column name="Domain_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="domainName" >
+            <column name="Domain_Name" />
+        </property>
+        <property name="domainCode">
+            <column name="Domain_code"  />
+        </property>
+        <set name="productSet" table="products" inverse="true" cascade="none" lazy="false">
+            <key column="Domain_FK" />
+            <one-to-many class="com.adams.scrum.pojo.Products" />
+        </set>
+    </class>
+    <query name="Domains.findId">
+        select u from Domains u where u.domainId = ?
+    </query> 
+    <query name="Domains.findByName">
+        select u from Domains u where u.domainCode = ?
+    </query>   
+</hibernate-mapping>

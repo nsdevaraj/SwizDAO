@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
+ 	
+	
+	<!-- Maps request paths at /* to the BlazeDS MessageBroker my-longpolling-amf-->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	    <property name="mappings">
+	        <value>
+	            /*=mySpringManagedMessageBroker
+	        </value>
+	    </property>
+	</bean>
+	<bean id="mySpringManagedMessageBroker" class="org.springframework.flex.messaging.MessageBrokerFactoryBean" />	
+
+ 	<!-- Database Configuration-->
+ 	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="/WEB-INF/config/jdbc.properties" />
+	</bean> 
+	
+	<!-- LobHandler for JDBC drivers -->
+	<bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"></bean>
+	
+    <bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean> 
+	
+	<!-- Hibernate Configuration-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- added for testing oracle connection problem -->
+		<property name="hibernateProperties">
+	      <props>
+	        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+	        <prop key="hibernate.show_sql">true</prop>        
+			<prop key="hibernate.statement_cache.size">0</prop>
+			<prop key="hibernate.jdbc.batch_size">0</prop>			
+			<prop key="hibernate.dbcp.ps.maxIdle">0</prop>			
+			<prop key="hibernate.jdbc.wrap_result_sets">true</prop>			
+			<prop key="hibernate.connection.release_mode">auto</prop>    
+	    	<prop key="hibernate.jdbc.use_scrollable_resultset">true</prop>
+	    	
+	    	<prop key="hibernate.c3p0.timeout">20</prop>
+			<prop key="hibernate.c3p0.max_statements">100</prop> 
+			<prop key="hibernate.c3p0.idle_test_period">5</prop>
+			<prop key="hibernate.c3p0.acquire_increment">2</prop>
+				    	
+	      </props>
+	    </property>
+		<property name="lobHandler" ref="defaultLobHandler"></property> 
+		<property name="mappingResources">
+			<list>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Columns.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Companies.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Domains.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Events.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Files.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Persons.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Products.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Profiles.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Reports.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/ReportsColumns.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Sprints.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Sprintstories.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Status.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Stories.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Storythemes.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Tasks.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Teammembers.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Teams.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Themes.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Tickets.hbm.xml
+				</value>
+				<value>
+					com/adams/scrum/dao/hibernate/maps/Versions.hbm.xml
+				</value>
+			</list>
+		</property>
+		<property name="eventListeners">
+			<map>
+				<entry key="merge">
+					<bean
+						class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener" />
+				</entry>
+			</map>
+		</property>	
+	</bean>
+
+   	<bean id="abstractDao"
+		class="org.springframework.aop.framework.ProxyFactoryBean"
+		abstract="true">
+		<property name="proxyInterfaces">
+			<value>com.adams.scrum.dao.DTInterface</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>finderIntroductionAdvisor</value>
+				<value>MyTransactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="finderIntroductionAdvisor"
+		class="com.adams.scrum.dao.hibernate.finder.impl.FinderIntroductionAdvisor" />
+
+	<bean id="abstractDaoTarget"
+		class="com.adams.scrum.dao.hibernate.DTDaoHibernateImpl"
+		abstract="true">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property> 
+		<property name="namingStrategy">
+			<ref bean="extendedFinderNamingStrategy" />
+		</property>
+	</bean>
+	
+	<bean id="namingStrategy"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField">
+			<value>
+				org.hibernate.cfg.ImprovedNamingStrategy.INSTANCE
+			</value>
+		</property>
+	</bean>
+
+	<bean id="extendedFinderNamingStrategy"
+		class="com.adams.scrum.dao.hibernate.finder.impl.ExtendedFinderNamingStrategy" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="MyTransactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributeSource"
+			ref="transactionAttributes" />
+	</bean>
+	
+	<bean id="transactionAttributes"
+		class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+		<property name="properties">
+			<value>
+				create*=PROPAGATION_REQUIRED
+				find*=PROPAGATION_REQUIRED,readOnly
+				read*=PROPAGATION_REQUIRED,readOnly
+				delete*=PROPAGATION_REQUIRED
+				update*=PROPAGATION_REQUIRED
+				directUpdate*=PROPAGATION_REQUIRED
+				bulkUpdate*=PROPAGATION_REQUIRED
+				create*=PROPAGATION_REQUIRED
+			</value>
+		</property>
+	</bean>
+
+</beans>

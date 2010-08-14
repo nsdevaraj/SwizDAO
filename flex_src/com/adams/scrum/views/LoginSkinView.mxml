@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<!-- host component-->
+	<fx:Metadata>
+		[HostComponent("com.adams.scrum.views.mediators.LoginViewMediator")]
+	</fx:Metadata> 
+	
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<s:Rect radiusX="8" radiusY="8" top="0" bottom="0" left="0" right="0">
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry color="0x232323" alpha=".5" ratio="0" /> 
+				<s:GradientEntry color="0x303030" alpha=".3" ratio="1" /> 
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Group  top="4" bottom="4" left="4" right="4">
+		
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		<s:Label text="Login Form" />
+		<mx:Form id="loginForm"  width="100%" height="100%" >
+			
+			<mx:FormItem width="100%" label="userName:" required="true">
+				<s:TextInput id="userNameTextInput" text="devaraj" />
+			</mx:FormItem>
+			
+			<mx:FormItem width="100%" label="password:" required="true">
+				<s:TextInput id="passwordTextInput" text="raj" displayAsPassword="true" />
+			</mx:FormItem>
+			<mx:Canvas width="100%" height="100%">
+				<s:Button id="submitBtn" label="Submit" horizontalCenter="0"/>
+			</mx:Canvas>
+			
+		</mx:Form>
+		<s:Label id="wrongCredentials" color="red"/>
+	</s:Group>
+	
+</s:Skin>

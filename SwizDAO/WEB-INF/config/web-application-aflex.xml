@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:flex="http://www.springframework.org/schema/flex" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/flex 
+		http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"> 
+ 
+ 	<flex:message-broker  id="_messageBroker" >
+	<flex:message-service
+			default-channels="my-amf,my-polling-amf,my-longpolling-amf,my-streaming-amf" />
+	 <flex:secured>
+	 	<flex:secured-channel channel="my-amf" access="ROLE_ADM,ROLE_SPO,ROLE_SSM,ROLE_STM,ROLE_OPE" /> 
+	 </flex:secured>  
+	</flex:message-broker>
+	
+	<flex:message-destination id="chatmessage" />
+ 	<flex:message-destination id="chatonline" />
+ 	<flex:message-destination id="adminmessage" />
+	
+</beans>

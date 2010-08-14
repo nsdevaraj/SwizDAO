@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:flex="http://www.springframework.org/schema/flex"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"       
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/flex 
+		http://www.springframework.org/schema/flex/spring-flex-1.0.xsd	
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-2.0.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	 	<bean id="columnId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Columns
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+		<bean id="companyId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Companies
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="domainId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Domains
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="eventId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Events
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="fileId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Files
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="personId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Persons
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="productId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Products
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="profileId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Profiles
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="reportId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Reports
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="reportColumnsId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.ReportsColumns
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="sprintId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Sprints
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="sprintstoryId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Sprintstories
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="statusId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Status
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  												   
+	 	<bean id="storyId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Stories
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="storyThemeId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Storythemes
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+ 
+		<bean id="taskId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Tasks
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="teammemberId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Teammembers
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="teamId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Teams
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="themeId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Themes
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>   
+ 
+		<bean id="ticketId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Tickets
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>  
+	 	<bean id="versionId" parent="abstractDao">
+			<property name="target">
+				<bean parent="abstractDaoTarget">
+					<constructor-arg>
+						<value>
+							com.adams.scrum.pojo.Versions
+						</value>
+					</constructor-arg>
+				</bean>
+			</property> 
+			<flex:remoting-destination />
+		</bean>
+    <bean id="pagingDAO"
+		class="com.adams.scrum.dao.hibernate.DTPageDAO">
+		<flex:remoting-destination />
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+</beans>

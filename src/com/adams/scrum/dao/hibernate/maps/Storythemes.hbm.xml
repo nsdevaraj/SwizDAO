@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Storythemes" table="storythemes">
+        <id name="storyThemeId" type="integer">
+            <column name="story_theme_id" />
+            <generator class="increment" />
+        </id>
+        <property name="storyFk" >
+            <column name="story_FK" />
+        </property>
+        <property name="themeFk" >
+            <column name="theme_FK" />
+        </property>
+    </class>
+</hibernate-mapping>

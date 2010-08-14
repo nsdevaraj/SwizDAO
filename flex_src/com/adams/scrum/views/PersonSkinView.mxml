@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" >
+	 
+	<!-- host component-->
+	<fx:Metadata>
+		[HostComponent("com.adams.scrum.views.mediators.HomeViewMediator")]
+	</fx:Metadata> 
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout> 
+	
+	<s:VGroup  top="4" bottom="4" left="4" right="4">
+
+		<s:Label text="Tasks"/>
+		<s:HGroup> 
+			<mx:DataGrid id="taskList"/>
+			<s:VGroup horizontalAlign="center">		 
+				<mx:Form id="taskForm">				
+					<mx:FormItem label="First Name">
+						<s:TextInput id="firstname"/>
+					</mx:FormItem>
+					<mx:FormItem label="Last Name">
+						<s:TextInput id="lastname"/>
+					</mx:FormItem>
+					<mx:FormItem label="User Name">
+						<s:TextInput id="username"/>
+					</mx:FormItem>
+					<mx:FormItem label="Password">
+						<s:TextInput id="password"/>
+					</mx:FormItem>
+					<mx:FormItem label="e Mail">
+						<s:TextInput id="email"/>
+					</mx:FormItem>  						
+				</mx:Form>
+				<s:HGroup id="taskBtns"> 
+					<s:Button id="taskAdd" label="add"/>
+					<s:Button id="taskEdit" label="edit"/>
+					<s:Button id="taskDelete" label="delete"/>
+				</s:HGroup>
+			</s:VGroup>	
+		</s:HGroup>
+		
+	</s:VGroup>
+</s:Skin>

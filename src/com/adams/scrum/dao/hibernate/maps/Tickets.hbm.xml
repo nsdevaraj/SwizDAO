@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Tickets" table="tickets">
+        <id name="ticketId" type="integer">
+            <column name="Ticket_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="personFk" >
+            <column name="Person_FK" />
+        </property>
+        <property name="taskFk" >
+            <column name="Task_FK" />
+        </property>
+        <property name="ticketDate">
+            <column name="Ticket_Date" />
+        </property>
+        <property name="ticketTimespent" >
+            <column name="Ticket_TimeSpent" />
+        </property>
+        <property name="ticketComments" >
+            <column name="Ticket_Comments" />
+        </property>
+        <property name="ticketTechnical" >
+            <column name="Ticket_Technical" />
+        </property>
+    </class>
+    <query name="Tickets.findId">
+        select u from Tickets u where u.ticketId = ?
+    </query>    
+    <query name="Tickets.findById">
+        select u from Tickets u where u.taskFk = ?
+    </query>
+</hibernate-mapping>

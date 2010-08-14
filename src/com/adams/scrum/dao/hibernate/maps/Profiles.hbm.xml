@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:48:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Profiles" table="profiles">
+        <id name="profileId" type="java.lang.Integer">
+            <column name="Profile_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="profileLabel" type="string">
+            <column name="Profile_label" />
+        </property>
+        <property name="profileCode" type="string">
+            <column name="profile_code" length="3" />
+        </property>
+    </class>
+    <query name="Profiles.findId">
+        select u from Profiles u where u.profileId = ?
+    </query>
+     <query name="Profiles.findById">
+        select p from Persons u, Teammembers t, Profiles p where u.personId = t.personFk and t.profileFk = p.profileId and u.personId = ?
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:48:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Files" table="files">
+        <id name="fileId" type="java.lang.Integer">
+            <column name="File_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="filename" type="string">
+            <column name="Filename" length="250" />
+        </property>
+        <property name="filepath" type="string">
+            <column name="Filepath" length="250" />
+        </property>
+        <property name="filedate" type="timestamp">
+            <column name="Filedate" length="19" />
+        </property>
+        <property name="taskFk" type="java.lang.Integer">
+            <column name="Task_FK" />
+        </property>
+        <property name="storyFk" type="java.lang.Integer">
+            <column name="Story_FK" />
+        </property>
+        <property name="storedfilename" type="string">
+            <column name="StoredFileName" />
+        </property>
+        <property name="productFk" type="java.lang.Integer">
+            <column name="Product_FK" />
+        </property>
+    </class>
+    <query name="Files.findId">
+        select u from Files u where u.fileId = ?
+    </query>
+    
+    <query name="Files.findByTaskId">
+        select u from Files u where u.taskFk = ?
+    </query>
+    
+    <query name="Files.findById">
+        select u from Files u where u.storyFk = ?
+    </query>
+</hibernate-mapping>

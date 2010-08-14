@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:33:16 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Reports" table="reports">
+        <id name="reportId" type="int">
+            <column name="Report_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="barcolFk" class="com.adams.scrum.pojo.Columns" >
+            <column name="BarCol_FK" />
+        </many-to-one>
+        <many-to-one name="seriescolFk" class="com.adams.scrum.pojo.Columns">
+            <column name="SeriesCol_FK" />
+        </many-to-one>
+        <property name="reportName" type="string">
+            <column name="Report_Name" />
+        </property>
+        <property name="barchartName" type="string">
+            <column name="BarChart_Name" />
+        </property>
+        <property name="piechartName" type="string">
+            <column name="PieChart_Name" />
+        </property>
+        <property name="profileFk" type="java.lang.Integer">
+            <column name="Profile_FK" />
+        </property> 
+        <set name="columnSet" table="reports_columns" cascade="none" order-by="Column_FK"  lazy="false" >
+                <key column="Report_FK"/>
+                <many-to-many column="Column_FK" class="com.adams.scrum.pojo.Columns" />
+	    </set>
+    </class>
+    <query name="Reports.findId">
+        select u from Reports u where u.reportId = ?
+    </query>
+</hibernate-mapping>

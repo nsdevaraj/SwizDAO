@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:48:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Products" table="products">
+        <id name="productId" type="java.lang.Integer">
+            <column name="Product_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="productCode" type="string">
+            <column name="Product_Code" length="15" />
+        </property>
+        <property name="productName" type="string">
+            <column name="Product_Name" />
+        </property>
+        <property name="domainFk" type="java.lang.Integer">
+            <column name="Domain_FK" />
+        </property>
+        <property name="productStatusFk" type="java.lang.Integer">
+            <column name="Product_Status_FK" />
+        </property>
+        <property name="productComment" type="binary">
+            <column name="Product_Comment" />
+        </property>
+        <property name="productDateStart" type="timestamp">
+            <column name="Product_date_start" length="19" />
+        </property>
+        <property name="productDateEnd" type="timestamp">
+            <column name="Product_date_end" length="19" />
+        </property>
+        <property name="productTasktypes" type="binary">
+            <column name="Product_taskTypes" />
+        </property>
+        <property name="productRoles" type="binary">
+            <column name="Product_Roles" />
+        </property>
+        <set name="themeSet" table="themes" inverse="true" cascade="none" lazy="false">
+            <key column="product_FK" />
+            <one-to-many class="com.adams.scrum.pojo.Themes" />
+        </set>
+        <set name="versionSet" table="versions" inverse="true" cascade="none" lazy="false">
+            <key column="product_FK" />
+            <one-to-many class="com.adams.scrum.pojo.Versions" />
+        </set>
+    </class>
+    <query name="Products.findId">
+        select u from Products u where u.productId = ?
+    </query>
+</hibernate-mapping>

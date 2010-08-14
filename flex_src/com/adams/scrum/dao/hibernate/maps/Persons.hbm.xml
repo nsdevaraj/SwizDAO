@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:48:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Persons" table="persons">
+        <id name="personId" type="java.lang.Integer">
+            <column name="Person_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="personFirstname" type="string">
+            <column name="Person_Firstname" />
+        </property>
+        <property name="personLastname" type="string">
+            <column name="Person_Lastname" />
+        </property>
+        <property name="personEmail" type="string">
+            <column name="Person_Email" />
+        </property>
+        <property name="personLogin" type="string">
+            <column name="Person_Login" length="20" />
+        </property>
+        <property name="personPassword" type="string">
+            <column name="Person_Password" length="20" />
+        </property>
+        <property name="personPosition" type="string">
+            <column name="Person_Position" />
+        </property>
+        <property name="personMobile" type="string">
+            <column name="Person_Mobile" length="20" />
+        </property>
+        <property name="personAddress" type="string">
+            <column name="Person_Address" />
+        </property>
+        <property name="personPostalCode" type="string">
+            <column name="Person_Postal_Code" length="50" />
+        </property>
+        <property name="personCity" type="string">
+            <column name="Person_City" length="50" />
+        </property>
+        <property name="personCountry" type="string">
+            <column name="Person_Country" length="50" />
+        </property>
+        <property name="personPict" type="binary">
+            <column name="Person_Pict" />
+        </property>
+        <property name="personDateentry" type="date">
+            <column name="Person_DateEntry" length="10" />
+        </property>
+        <property name="activated" type="java.lang.Short">
+            <column name="Activated" />
+        </property>
+        <property name="companyFk">
+            <column name="Company_FK" />
+        </property>  
+    </class>
+     <query name="Persons.findId">
+        select u from Persons u where u.personId = ?
+    </query>
+</hibernate-mapping>

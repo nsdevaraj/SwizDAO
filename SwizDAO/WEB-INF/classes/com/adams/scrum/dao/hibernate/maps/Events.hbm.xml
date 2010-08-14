@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Events" table="events">
+        <id name="eventId" type="integer">
+            <column name="event_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="eventDate" >
+            <column name="event_date" />
+        </property>
+        <property name="eventStatusFk">
+            <column name="event_status_FK" />
+        </property>
+        <property name="personFk" >
+            <column name="person_FK" />
+        </property>
+        <property name="taskFk" >
+            <column name="task_FK" />
+        </property>
+        <property name="productFk" >
+            <column name="product_FK" />
+        </property>
+        <property name="eventLabel" >
+            <column name="event_label" />
+        </property>
+        <property name="storyFk" >
+            <column name="story_FK" />
+        </property>
+        <property name="sprintFk" >
+            <column name="sprint_FK" />
+        </property>
+        <property name="ticketFk" >
+            <column name="ticket_FK" />
+        </property>
+    </class>
+    <query name="Events.findId">
+        select u from Events u where u.eventId = ?
+    </query>
+</hibernate-mapping>

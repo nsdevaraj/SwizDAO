@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:48:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Companies" table="companies">
+        <id name="companyId" type="integer" column="Company_ID">
+            <generator class="increment" />
+        </id>
+        <property name="companyname" type="string">
+            <column name="Company_Name" />
+        </property>
+        <property name="companycode" type="string">
+            <column name="Company_Code" />
+        </property>
+        <property name="companylogo" type="binary">
+            <column name="Company_Logo" />
+        </property>
+        <property name="companyCategory" type="string">
+            <column name="Company_Category" />
+        </property>
+          <property name="companyAddress" type="string">
+            <column name="Company_Address" />
+        </property>
+          <property name="companyPostalCode" type="string">
+            <column name="Company_Postal_Code" />
+        </property>
+          <property name="companyCity" type="string">
+            <column name="Company_City" />
+        </property>
+          <property name="companyCountry" type="string">
+            <column name="Company_Country" />
+        </property>
+          <property name="companyPhone" type="string">
+            <column name="Company_Phone" />
+        </property>
+    </class> 
+    <query name="Companies.findById">
+        select u from Companies u where u.companyId = ?
+    </query>
+    <query name="Companies.findByName">
+        select u from Companies u where u.companyname = ?
+    </query>
+</hibernate-mapping>

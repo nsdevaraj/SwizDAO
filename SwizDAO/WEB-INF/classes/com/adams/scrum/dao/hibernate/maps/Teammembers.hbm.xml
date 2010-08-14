@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Teammembers" table="teammembers">
+        <id name="teammemberId" type="integer">
+            <column name="teammember_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="teamFk" >
+            <column name="team_FK" />
+        </property>
+        <property name="profileFk" >
+            <column name="profile_FK" />
+        </property>
+        <property name="personFk" >
+            <column name="person_FK" />
+        </property>
+    </class>
+</hibernate-mapping>

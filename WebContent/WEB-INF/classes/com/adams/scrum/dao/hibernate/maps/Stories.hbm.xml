@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Stories" table="stories">
+        <id name="storyId" type="integer">
+            <column name="story_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="productFk" >
+            <column name="Product_FK" />
+        </property>
+        <property name="asLabel" >
+            <column name="As_label" />
+        </property>
+        <property name="IWantToLabel" >
+            <column name="I_Want_To_label" />
+        </property>
+        <property name="soThatICanLabel" >
+            <column name="So_That_I_Can_label" />
+        </property>
+        <property name="storyStatusFk" >
+            <column name="Story_status_FK" />
+        </property>
+        <property name="versionFk" >
+            <column name="version_FK" />
+        </property>
+        <property name="visible" >
+            <column name="visible" />
+        </property>
+        <property name="storyComments" >
+            <column name="Story_comments" />
+        </property>
+        <property name="storypoints" >
+            <column name="StoryPoints" />
+        </property>
+        <property name="priority" >
+            <column name="Priority" />
+        </property>
+        <property name="effort" >
+            <column name="Effort" />
+        </property>
+        <set name="taskSet" table="tasks" inverse="true" cascade="none" lazy="false">
+            <key column="story_FK" />
+            <one-to-many class="com.adams.scrum.pojo.Tasks" />
+        </set>
+        <set name="themeSet" table="storythemes" cascade="none" order-by="theme_FK"  lazy="false" >
+                <key column="story_FK"/>
+                <many-to-many column="theme_FK" class="com.adams.scrum.pojo.Themes" />
+	    </set>
+    </class>
+    <query name="Stories.findId">
+        select u from Stories u where u.storyId = ?
+    </query>
+    <query name="Stories.findById">
+        select u from Stories u where u.productFk = ?
+    </query> 
+</hibernate-mapping>

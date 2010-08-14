@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:49:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.adams.scrum.pojo.Tasks" table="tasks">
+        <id name="taskId" type="integer">
+            <column name="task_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="storyFk" >
+            <column name="story_FK" />
+        </property>
+        <property name="taskComment" >
+            <column name="task_comment"/>
+        </property>
+        <property name="taskStatusFk" >
+            <column name="task_status_FK" />
+        </property>
+        <property name="taskType">
+            <column name="task_type" />
+        </property>
+        <property name="TDateCreation" >
+            <column name="t_date_creation" />
+        </property>
+        <property name="TDateInprogress" >
+            <column name="t_date_inprogress"  />
+        </property>
+        <property name="TDateValidation" >
+            <column name="t_date_validation" />
+        </property>
+        <property name="TDateDone" >
+            <column name="t_date_done" />
+        </property>
+        <property name="onairTime" >
+            <column name="onair_time" />
+        </property>
+        <property name="estimatedTime" >
+            <column name="estimated_time" />
+        </property>
+        <property name="doneTime" >
+            <column name="done_time" />
+        </property>
+        <property name="personFk" >
+            <column name="person_FK" />
+        </property>
+        <property name="visible" >
+            <column name="visible" />
+        </property>
+    </class>
+	<query name="Tasks.findId">
+        select u from Tasks u where u.taskId = ?
+    </query>
+</hibernate-mapping>
