@@ -18,7 +18,7 @@
 		   activate="initializeHandler(event)" xmlns:services="org.swizframework.utils.services.*">
 	
 	<fx:Script>
-		<![CDATA[  //edited
+		<![CDATA[  
 			import com.adams.scrum.dao.AbstractDAO;
 			import com.adams.scrum.models.vo.*;
 			
