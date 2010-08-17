@@ -7,10 +7,7 @@ package com.adams.cambook.models.processor
 	import com.adams.cambook.utils.GetVOUtil;
 
 	public class NoteProcessor extends AbstractProcessor
-	{ 
-		
-		[Inject]
-		public var noteProcessor:NoteProcessor;
+	{  
 		
 		public function NoteProcessor()
 		{

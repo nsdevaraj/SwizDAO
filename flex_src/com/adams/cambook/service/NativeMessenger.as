@@ -45,6 +45,7 @@ package com.adams.cambook.service
 		public function get controlService():ServiceController {
 			return _controlService;
 		}
+		
 		[Inject]
 		public function set controlService( ro:ServiceController ):void {
 			_controlService = ro; 

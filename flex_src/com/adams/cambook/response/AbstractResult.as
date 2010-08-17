@@ -55,18 +55,6 @@ package com.adams.cambook.response
 		[Inject]
 		public var signalSeq:SignalSequence;
 		
-		[Inject("domainDAO")]
-		public var domainDAO:AbstractDAO;	
-		
-		[Inject("productDAO")]
-		public var productDAO:AbstractDAO;	
-		
-		[Inject("sprintDAO")]
-		public var sprintDAO:AbstractDAO;	
-		
-		[Inject("storyDAO")]
-		public var storyDAO:AbstractDAO;
-		
 		[Inject]
 		public var currentInstance:CurrentInstance; 
 		
