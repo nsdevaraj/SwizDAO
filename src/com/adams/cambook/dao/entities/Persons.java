@@ -17,11 +17,11 @@ public class Persons implements Serializable {
 	private String personEmail;
 	private int personRelations;
 	private String personPassword;
-	private int tweetId;
+	private String tweetId;
 	private int personAvailability;
 	private FileDetails personPhotoFK;
 	private String personMobile;
-	private String personQuestion;
+	private int personQuestion;
 	private String personPostalCode;
 	private String personAnswer;
 	private String personCity;
@@ -77,13 +77,7 @@ public class Persons implements Serializable {
 	}
 	public void setPersonPassword(String personPassword) {
 		this.personPassword = personPassword;
-	}
-	public int getTweetId() {
-		return tweetId;
-	}
-	public void setTweetId(int tweetId) {
-		this.tweetId = tweetId;
-	}
+	} 
 	public int getPersonAvailability() {
 		return personAvailability;
 	}
@@ -102,11 +96,17 @@ public class Persons implements Serializable {
 	}
 	public void setPersonMobile(String personMobile) {
 		this.personMobile = personMobile;
+	} 
+	public String getTweetId() {
+		return tweetId;
 	}
-	public String getPersonQuestion() {
+	public void setTweetId(String tweetId) {
+		this.tweetId = tweetId;
+	}
+	public int getPersonQuestion() {
 		return personQuestion;
 	}
-	public void setPersonQuestion(String personQuestion) {
+	public void setPersonQuestion(int personQuestion) {
 		this.personQuestion = personQuestion;
 	}
 	public String getPersonPostalCode() {
