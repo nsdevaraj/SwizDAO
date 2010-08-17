@@ -17,11 +17,12 @@ package com.adams.cambook.controller
 {
 	
 	import com.adams.cambook.models.vo.CurrentInstance;
-	import com.adams.cambook.service.NativeMessenger;
+	import com.adams.cambook.service.NativeMessenger; 
 	
 	import flash.events.StatusEvent;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	import mx.core.Application;
 	import mx.core.FlexGlobals;
 	import mx.utils.URLUtil;
@@ -42,8 +43,9 @@ package com.adams.cambook.controller
 		[PostConstruct]
 		public function execute():void
 		{
-			currentInstance.config.serverLocation ="http://192.168.1.102:8080/cambook/"; 
+			currentInstance.config.serverLocation = FlexGlobals.topLevelApplication.parameters.serverLocation; 
 			service.serverLocation = currentInstance.config.serverLocation;
+			
 			service.assignChannelSets();
 			if(!service.consumer.subscribed)service.consumer.subscribe();
 		} 
