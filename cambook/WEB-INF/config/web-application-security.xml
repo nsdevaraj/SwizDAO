@@ -8,8 +8,7 @@
 	<authentication-provider> 
 		<jdbc-user-service data-source-ref="dataSource"
 		users-by-username-query='SELECT U.Person_Email, U.Person_Password, U.Activated AS "enabled" FROM persons U where U.Person_Email=?'
-		/>
-	</authentication-provider> 
-	 
+		authorities-by-username-query="SELECT U.Person_Email, U.Person_COUNTRY as authority FROM persons U WHERE U.Person_Email = ?"/>
+	</authentication-provider>  
 	
 </beans:beans>

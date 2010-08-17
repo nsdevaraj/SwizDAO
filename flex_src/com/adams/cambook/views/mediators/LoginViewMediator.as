@@ -10,6 +10,7 @@ package com.adams.cambook.views.mediators
 	import flash.events.MouseEvent;
 	import flash.utils.setTimeout;
 	
+	import mx.controls.Alert;
 	import mx.controls.TextInput;
 	import mx.events.ValidationResultEvent;
 	import mx.validators.StringValidator;
@@ -151,6 +152,7 @@ package com.adams.cambook.views.mediators
 		{
 			if(personDAO.controlService.authCS.authenticated)
 			{
+				Alert.show('here')
 				cleanup(null);
 				currentInstance.mainViewStackIndex = Utils.HOME_INDEX;
 				cursorManager.removeBusyCursor();

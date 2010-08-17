@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 		   
 	<bean id="PersonId" parent="abstractDao">
- 	   	<flex:remoting-destination channels="my-polling-amf" />
+ 	   	<flex:remoting-destination/>
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
@@ -27,7 +27,7 @@
 		</property>
 	</bean>   
 	<bean id="fileID" parent="abstractDao">
-		<flex:remoting-destination channels="my-longpolling-amf"/>
+		<flex:remoting-destination/>
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
@@ -39,7 +39,7 @@
 		</property>
 	</bean>  
 	<bean id="statusID" parent="abstractDao">
-		<flex:remoting-destination channels="my-longpolling-amf" />
+		<flex:remoting-destination />
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
@@ -52,7 +52,7 @@
 	</bean> 
 	
 	<bean id="NoteId" parent="abstractDao">
-		<flex:remoting-destination channels="my-longpolling-amf" />
+		<flex:remoting-destination />
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
@@ -65,7 +65,7 @@
 	</bean> 
 	
 	 <bean id="ConnectionId" parent="abstractDao">
-     	<flex:remoting-destination channels="my-longpolling-amf" />
+     	<flex:remoting-destination />
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>

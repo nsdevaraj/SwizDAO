@@ -9,7 +9,7 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.utils.GetVOUtil;
 	import com.adams.cambook.utils.Utils;
 	import com.adams.cambook.views.HomeSkinView;
-	import com.adams.cambook.views.components.NativeList; 
+	import com.adams.cambook.views.components.NativeList;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -76,7 +76,8 @@ package com.adams.cambook.views.mediators
 		override protected function init():void {
 			super.init();  
 			viewIndex = Utils.HOME_INDEX;
- 
+ 			var newSignal:SignalVO = new SignalVO(this,personDAO,Action.GET_LIST);
+			signalSeq.addSignal(newSignal); 
 			
 		} 
 		override protected function setRenderers():void {
