@@ -74,20 +74,7 @@
 		            <user-agent match-on="AppleWebKit" kickstart-bytes="2048" max-streaming-connections-per-session="10"/>
 		        </user-agent-settings>
 		    </properties>
-        </channel-definition>
-        
-        <!-- <channel-definition id="pushamfsecure" class="mx.messaging.channels.SecureStreamingAMFChannel">
-        	<endpoint url="https://{server.name}:{server.port}/{context.root}/spring/messagebroker/streamingamfsecure" class="flex.messaging.endpoints.SecureStreamingAMFEndpoint" />
-            	<properties>
-                	<idle-timeout-minutes>0</idle-timeout-minutes>
-                    <max-streaming-clients>50</max-streaming-clients>
-                    <server-to-client-heartbeat-millis>5000</server-to-client-heartbeat-millis>
-                    <user-agent-settings>
-                      	<user-agent match-on="MSIE" kickstart-bytes="2048" max-streaming-connections-per-session="25" />
-                        <user-agent match-on="Firefox" kickstart-bytes="2048" max-streaming-connections-per-session="25" />
-                    </user-agent-settings>
-                 </properties>
-        </channel-definition>  -->
+        </channel-definition> 
 
     </channels>
     

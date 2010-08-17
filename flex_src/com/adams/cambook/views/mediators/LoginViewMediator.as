@@ -151,8 +151,7 @@ package com.adams.cambook.views.mediators
 		protected function checkLogin(ev:Object =null) : void
 		{
 			if(personDAO.controlService.authCS.authenticated)
-			{
-				Alert.show('here')
+			{ 
 				cleanup(null);
 				currentInstance.mainViewStackIndex = Utils.HOME_INDEX;
 				cursorManager.removeBusyCursor();

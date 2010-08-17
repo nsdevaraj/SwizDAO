@@ -16,4 +16,7 @@
 	 </flex:secured>  
 	</flex:message-broker>
 	
+	<flex:message-destination id="chatmessage" />
+ 	<flex:message-destination id="chatonline" />
+ 	<flex:message-destination id="adminmessage" />
 </beans>

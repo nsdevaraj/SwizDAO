@@ -35,6 +35,10 @@ package com.adams.cambook.views.mediators
 		 
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
+		
+		[Inject("statusDAO")]
+		public var statusDAO:AbstractDAO;
+		
 		 
 		private var _mainViewStackIndex:int
 		public function get mainViewStackIndex():int {
@@ -76,16 +80,35 @@ package com.adams.cambook.views.mediators
 		override protected function init():void {
 			super.init();  
 			viewIndex = Utils.HOME_INDEX;
- 			var newSignal:SignalVO = new SignalVO(this,personDAO,Action.GET_LIST);
-			signalSeq.addSignal(newSignal); 
+			
+			
+			//load all persons
+			if( !personDAO.collection.findAll ) {
+				var persignal:SignalVO = new SignalVO( this, personDAO, Action.GET_LIST );
+				signalSeq.addSignal( persignal );
+				Alert.show('here1')
+			}
+			else {
+				currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
+			}
+			
+			//load all status
+			if( !statusDAO.collection.findAll ) {
+				var statusSignal:SignalVO = new SignalVO( this, statusDAO, Action.GET_LIST ); 
+				signalSeq.addSignal( statusSignal );
+			}
 			
 		} 
 		override protected function setRenderers():void {
 			super.setRenderers(); 
 		} 
 		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void { 
-		}	 
-
+		 	 	if( signal.destination == personDAO.destination ) {
+					if( signal.action == Action.GET_LIST ){
+						currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
+					}
+				}
+		}
 
 		/**
 		 * Create listeners for all of the view's children that dispatch events
