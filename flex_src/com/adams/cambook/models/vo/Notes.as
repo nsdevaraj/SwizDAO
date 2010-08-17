@@ -1,134 +1,97 @@
 package com.adams.cambook.models.vo
 {
+	import mx.collections.ArrayCollection;
+
 	[Bindable]
-	[RemoteClass(alias='com.adams.scrum.pojo.Events')]
+	[RemoteClass(alias='com.adams.cambook.dao.entities.Notes')]
 	public class Notes extends AbstractVO
 	{
-		private var _eventDate:Date;
-		private var _eventId:int;
-		private var _eventLabel:String;
-		private var _eventStatusFk:int;
-		private var _personFk:int;
-		private var _productFk:int;
-		private var _sprintFk:int;
-		private var _storyFk:int;
-		private var _taskFk:int;
-		private var _ticketFk:int;
+		private var _NoteId:int;
+		private var _description:String;
+		private var _creationDate:Date;
+		private var _createdPersonFK:int;
+		private var _FileObj:Files;
+		private var  _noteType:int;
+		private var  _PersonObj:Persons;
 		
-		private var _statusObject:Status;
-		
+		[ArrayElementType( "com.adams.cambook.models.vo.Notes" )]
+		public var  notesSet:ArrayCollection;
+		public var  personFK:int;
+ 
 		public function Notes()
 		{
 			super();
 		}
-		
-		public function get ticketFk():int
+
+		public function get PersonObj():Persons
 		{
-			return _ticketFk;
+			return _PersonObj;
 		}
-		
-		public function set ticketFk(value:int):void
+
+		public function set PersonObj(value:Persons):void
 		{
-			_ticketFk = value;
+			_PersonObj = value;
 		}
-		
-		public function get taskFk():int
+
+		public function get noteType():int
 		{
-			return _taskFk;
+			return _noteType;
 		}
-		
-		public function set taskFk(value:int):void
+
+		public function set noteType(value:int):void
 		{
-			_taskFk = value;
+			_noteType = value;
 		}
-		
-		public function get storyFk():int
+
+		public function get FileObj():Files
 		{
-			return _storyFk;
+			return _FileObj;
 		}
-		
-		public function set storyFk(value:int):void
+
+		public function set FileObj(value:Files):void
 		{
-			_storyFk = value;
+			_FileObj = value;
 		}
-		
-		public function get sprintFk():int
+
+		public function get creationDate():Date
 		{
-			return _sprintFk;
+			return _creationDate;
 		}
-		
-		public function set sprintFk(value:int):void
+
+		public function set creationDate(value:Date):void
 		{
-			_sprintFk = value;
+			_creationDate = value;
 		}
-		
-		public function get productFk():int
+
+		public function get createdPersonFK():int
 		{
-			return _productFk;
+			return _createdPersonFK;
 		}
-		
-		public function set productFk(value:int):void
+
+		public function set createdPersonFK(value:int):void
 		{
-			_productFk = value;
+			_createdPersonFK = value;
 		}
-		
-		public function get personFk():int
+
+		public function get description():String
 		{
-			return _personFk;
+			return _description;
 		}
-		
-		public function set personFk(value:int):void
+
+		public function set description(value:String):void
 		{
-			_personFk = value;
+			_description = value;
 		}
-		
-		public function get eventStatusFk():int
+
+		public function get NoteId():int
 		{
-			return _eventStatusFk;
+			return _NoteId;
 		}
-		
-		public function set eventStatusFk(value:int):void
+
+		public function set NoteId(value:int):void
 		{
-			_eventStatusFk = value;
+			_NoteId = value;
 		}
-		
-		public function get eventLabel():String
-		{
-			return _eventLabel;
-		}
-		
-		public function set eventLabel(value:String):void
-		{
-			_eventLabel = value;
-		}
-		
-		public function get eventId():int
-		{
-			return _eventId;
-		}
-		
-		public function set eventId(value:int):void
-		{
-			_eventId = value;
-		} 
-		
-		public function get eventDate():Date
-		{
-			return _eventDate;
-		}
-		
-		public function set eventDate(value:Date):void
-		{
-			_eventDate = value;
-		}
-		public function get statusObject():Status
-		{
-			return _statusObject;
-		}
-		
-		public function set statusObject(value:Status):void
-		{
-			_statusObject = value;
-		}
+
 	}
 }

@@ -36,6 +36,11 @@ package com.adams.cambook.utils
 		public static const SQL_TYPE:String="type";  
 		public static const ALERTHEADER:String='CamBook';
 		public static const DELETEITEMALERT:String="Are you sure you want to delete this item?";
+		
+		
+		public static var FileSeparator:String='//';
+		public static const VIEW_INDEX_ARR:Array = ['com'+FileSeparator+'adams'+FileSeparator+'cambook'+FileSeparator+'views'+FileSeparator+'modules'+FileSeparator+'LoginModule.swf',
+			'com'+FileSeparator+'adams'+FileSeparator+'cambook'+FileSeparator+'views'+FileSeparator+'modules'+FileSeparator+'HomeViewModule.swf'];
 		 
 		public static const PERSONKEY 	:String="personId"; 
 		public static const NOTEKEY 	:String="noteId";  

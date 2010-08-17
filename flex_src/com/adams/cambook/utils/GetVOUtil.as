@@ -35,10 +35,10 @@ package com.adams.cambook.utils
 		//@TODO
 		public static function getPersonObject( username:String, password:String,arrc:ArrayCollection):Persons{
 			var item:IValueObject = new Persons();
-			Persons(item).personLogin = username;
+			Persons(item).personEmail= username;
 			Persons(item).personPassword = password;
 			arrc.sort = null;
-			var returnPerson:Persons = getValueObject(item,'personLogin',arrc) as Persons;
+			var returnPerson:Persons = getValueObject(item,'personEmail',arrc) as Persons;
 			arrc.sort = null;
 			return returnPerson; 
 		}   

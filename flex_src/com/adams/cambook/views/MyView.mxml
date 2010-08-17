@@ -37,7 +37,7 @@
 			
 			protected function changeModuleIndex():void{
 				part.url ='';
-			//	part.url = Utils.VIEW_INDEX_ARR[moduleIndex];
+				part.url = Utils.VIEW_INDEX_ARR[moduleIndex];
 			}
 		]]>  
 	</fx:Script> 

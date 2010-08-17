@@ -141,7 +141,7 @@ package com.adams.cambook.views.mediators
 			personDAO.controlService.authCS.loginAttempt.add(checkLogin);
 			personDAO.controlService.authCS.login(userName,password);
 			cursorManager.setBusyCursor();
-			currentInstance.currentPerson.personLogin = userName;
+			currentInstance.currentPerson.personEmail= userName;
 			currentInstance.currentPerson.personPassword = password;
 		}
 		/**

@@ -94,7 +94,7 @@ package com.adams.cambook.service
 			
 			avoidSignal = false;   
 			
-			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.personId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {
+			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.PersonId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {
 					signalSeq.addSignal( receivedSignal );
 			}			
 		}

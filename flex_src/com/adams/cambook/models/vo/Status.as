@@ -1,10 +1,10 @@
 package com.adams.cambook.models.vo
 {
 	[Bindable]
-	[RemoteClass(alias='com.adams.scrum.pojo.Status')]
+	[RemoteClass(alias='com.adams.cambook.dao.entities.Status')]
 	public class Status extends AbstractVO
 	{
-		private var _statusId:int;
+		private var _statusID:int;
 		private var _statusLabel:String;
 		private var _type:String;
 		
@@ -33,14 +33,14 @@ package com.adams.cambook.models.vo
 			_statusLabel = value;
 		}
 		
-		public function get statusId():int
+		public function get statusID():int
 		{
-			return _statusId;
+			return _statusID;
 		}
 		
-		public function set statusId(value:int):void
+		public function set statusID(value:int):void
 		{
-			_statusId = value;
+			_statusID = value;
 		}
 		 
 	}

@@ -22,6 +22,5 @@
 	</fx:Script>
 	
 	<mediators:HomeViewMediator id="home" skinClass="com.adams.cambook.views.HomeSkinView"
-								scrumState="{currentInstance.scrumState}" 
 								width="100%" height="100%"/>
 </mx:Module>
