@@ -90,7 +90,7 @@ package com.foomonger.swizframework.processors {
 				var deluxeSignal:IDeluxeSignal = signalBean.source as IDeluxeSignal;
 				var priorityArg:MetadataArg = metadataTag.getArg("priority");
 				var priority:int = priorityArg ? int(priorityArg.value) : 0; 
-				deluxeSignal.add(listener, priority);
+				deluxeSignal.addWithPriority(listener, priority);
 			}
 		}
 						

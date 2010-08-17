@@ -4,7 +4,6 @@ package org.osflash.signals
 	import org.osflash.signals.events.IEvent;
 
 	import flash.errors.IllegalOperationError;
-	import flash.utils.Dictionary;
 
 	/**
 	 * Signal dispatches events to multiple listeners.
@@ -64,14 +63,24 @@ package org.osflash.signals
 		
 		/** @inheritDoc */
 		//TODO: @throws
-		public function add(listener:Function, priority:int = 0):Function
+		public function add(listener:Function):Function
+		{
+			return addWithPriority(listener)
+		}
+		
+		public function addWithPriority(listener:Function, priority:int = 0):Function
 		{
 			registerListener(listener, false, priority);
 			return listener;
 		}
 		
+		public function addOnce(listener:Function):Function
+		{
+			return addOnceWithPriority(listener)
+		}
+		
 		/** @inheritDoc */
-		public function addOnce(listener:Function, priority:int = 0):Function
+		public function addOnceWithPriority(listener:Function, priority:int = 0):Function
 		{
 			registerListener(listener, true, priority);
 			return listener;
@@ -158,9 +167,9 @@ package org.osflash.signals
 			{
 				if (currentTarget is IBubbleEventHandler)
 				{
-					//TODO: incorporate secoif's Boolean return to check whether to continue.
-					IBubbleEventHandler(event.currentTarget = currentTarget).onEventBubbled(event);
-					break;
+					// onEventBubbled() can stop the bubbling by returning false.
+					if (!IBubbleEventHandler(event.currentTarget = currentTarget).onEventBubbled(event))
+						break;
 				}
 			}
 		}

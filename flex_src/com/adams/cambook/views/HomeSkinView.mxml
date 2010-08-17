@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" 
+		xmlns:mediators="com.adams.cambook.views.mediators.*" 
+		xmlns:components="com.adams.scrum.views.components.*" xmlns:components1="com.adams.cambook.views.components.*">	
+	<fx:Metadata>
+		[HostComponent("com.adams.cambook.views.mediators.HomeViewMediator")]
+	</fx:Metadata>  
+	<s:states>
+		<s:State name="BasicState" />
+		<s:State name="NewDomain" /> 
+		<s:State name="NewProduct" /> 
+		<s:State name="NewSprint" /> 
+	</s:states>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout> 
+	
+	<s:HGroup horizontalCenter="0" height="100%" width="100%" verticalCenter="0" >	
+		<s:Panel id="domainPanel" height="100%" width="100%" title="Domain" >
+			<s:Scroller width="100%" height="100%">
+				<s:Group>
+					<components1:NativeList id="domainList" width="100%" height="100%"
+										   labelField="domainName"					
+										   horizontalCenter="0" 
+										   verticalCenter="0"/>
+				</s:Group>
+			</s:Scroller>
+			<s:controlBarContent>
+					<components1:NativeButton id="newDomainBtn" styleName="NewIcon" label="New"/>
+					<components1:NativeButton id="editDomainBtn" styleName="EditIcon" label="Edit"/> 
+					<components1:NativeButton id="openHistoryBtn" styleName="NewIcon" label="History"/>	
+			</s:controlBarContent>
+		</s:Panel>
+		<s:Panel height="100%" width="100%" title="Product">
+			<components1:NativeList id="productList"  height="100%" width="100%"
+					labelField="productName"					
+					horizontalCenter="0" 
+					verticalCenter="0">
+			</components1:NativeList>
+			<s:controlBarContent>
+				<components1:NativeButton id="newProductBtn" styleName="NewIcon" label="New"/>
+				<components1:NativeButton id="editProductBtn" styleName="EditIcon" label="Edit"/> 
+			</s:controlBarContent>
+		</s:Panel>
+		<s:Panel height="100%" width="100%" title="Sprint">
+					<components1:NativeList id="sprintList" height="100%" width="100%"
+							labelField="sprintLabel"					
+							horizontalCenter="0" 
+							verticalCenter="0"/>
+			<s:controlBarContent>
+				<components1:NativeButton id="createSprintBtn" styleName="NewIcon" label="New"/>
+				<components1:NativeButton id="editSprintBtn" styleName="EditIcon" label="Edit"/> 
+			</s:controlBarContent>	
+		</s:Panel>	 
+	</s:HGroup>
+	
+	<mediators:DomainViewMediator id="newDomainMediator" skinClass="com.adams.cambook.views.DomainSkinView" width="100%" height="100%" includeIn="NewDomain"/>
+	<mediators:ProductViewMediator id="newProductMediator" skinClass="com.adams.cambook.views.ProductSkinView" width="100%" height="100%" includeIn="NewProduct"/>
+	<mediators:SprintViewMediator id="newSprintMediator" skinClass="com.adams.cambook.views.SprintSkinView" width="100%" height="100%" includeIn="NewSprint"/>
+</s:Skin>

@@ -33,6 +33,8 @@ package org.swizframework.utils.chain
 		function stepError():void;
 		
 		function addStep( step:IChainStep ):IChain;
+		
+		function start():void;
 		function doProceed():void;
 	}
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" initialize="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.effects.Fade;
+			import mx.events.FlexEvent;
+			import mx.modules.ModuleLoader;
+			[Bindable]
+			private var _url:String;
+			private var _moduleLoader:ModuleLoader;
+			
+			private var fade:Fade;
+			public function get url():String
+			{
+				return _url;
+			}
+			
+			public function set url( value:String ):void
+			{
+				_url = value;
+				_url.length>0 ?load(_url) : unload();
+			}
+			private function load(url:String):void 
+			{ 
+				if (!_moduleLoader) 
+				{ 
+					_moduleLoader = new ModuleLoader(); 
+					_moduleLoader.url = url; 
+					_moduleLoader.addEventListener("loading", onLoading);
+					_moduleLoader.applicationDomain =ApplicationDomain.currentDomain;
+					addElement(_moduleLoader); 
+					_moduleLoader.percentHeight = 100; 
+					_moduleLoader.percentWidth = 100; 
+					_moduleLoader.y =  0; 
+					_moduleLoader.loadModule(); 
+				} 
+			} 
+			private function unload():void 
+			{ 
+				if (_moduleLoader) 
+				{ 
+					_moduleLoader.removeEventListener("loading", onLoading);
+					_moduleLoader.unloadModule(); 
+					_moduleLoader.applicationDomain = null;
+					_moduleLoader.url = null; 
+					removeElement(_moduleLoader); 
+					_moduleLoader = null; 
+					System.gc();
+				} 
+			} 
+			private function onLoading(event:Event):void {
+				if (_moduleLoader) fade.play([_moduleLoader]); 
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				fade = new Fade();
+				fade.alphaFrom =0;
+				fade.alphaTo = 1;
+				fade.duration =1200;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" />
+	</s:layout> 
+</s:Group>

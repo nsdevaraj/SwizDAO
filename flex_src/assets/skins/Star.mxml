@@ -1,0 +1,15 @@
+<s:Group horizontalCenter="0" verticalCenter="0" width="25" height="25" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:lib="Haupt_library.*" xmlns:fc="http://ns.adobe.com/thermo/2009" xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+	<s:Path winding="nonZero" ai:knockout="0" data="M 12.55 0.054 L 16.413 7.88 L 25.05 9.135 L 18.8 15.228 L 20.276 23.83 L 12.55 19.769 L 4.825 23.83 L 6.3 15.228 L 0.05 9.135 L 8.688 7.88 L 12.55 0.054 Z" >
+		<s:fill>
+			<s:LinearGradient x="12.5684" y="0.0722656" scaleX="23.7763" rotation="90">
+				<s:GradientEntry color="0xfbfbfb" ratio="0"/>
+				<s:GradientEntry color="0xdcdcdc" ratio="0.5"/>
+				<s:GradientEntry color="0xcccccc" ratio="0.5"/>
+				<s:GradientEntry color="0x909090" ratio="1"/>
+			</s:LinearGradient>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="0xd8d8d8" caps="none" weight="1" joints="miter" miterLimit="4"/>
+		</s:stroke>
+	</s:Path>
+</s:Group>

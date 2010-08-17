@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%" xmlns:views="com.adams.cambook.views.*"
+		 xmlns:mediators="com.adams.cambook.views.mediators.*" 
+		 creationComplete="creationCompleteHandler(event)" xmlns:modules="com.adams.cambook.views.modules.*">
+	
+	<fx:Binding destination="moduleIndex" source="{currentInstance.mainViewStackIndex}"/>
+	<fx:Script> 
+		<![CDATA[ 
+			import com.adams.cambook.models.vo.CurrentInstance;
+			import com.adams.cambook.utils.Utils;
+			import com.adams.cambook.views.modules.ModuleGroup; 
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			[Inject]
+			public var currentInstance:CurrentInstance;  
+			
+			private var _moduleIndex:int;
+			public function get moduleIndex():int
+			{
+				return _moduleIndex;
+			}
+			
+			public function set moduleIndex(value:int):void
+			{
+				_moduleIndex = value;
+				changeModuleIndex();
+			} 
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				changeModuleIndex();
+			}
+			
+			protected function changeModuleIndex():void{
+				part.url ='';
+			//	part.url = Utils.VIEW_INDEX_ARR[moduleIndex];
+			}
+		]]>  
+	</fx:Script> 
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout> 
+	<modules:ModuleGroup id="part" width="100%" height="100%"/>
+ </s:Group>

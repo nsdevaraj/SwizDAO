@@ -25,6 +25,7 @@
 				</constructor-arg>
 			</bean>
 		</property>
+		<flex:remoting-destination />
 	</bean>   
 	<bean id="fileid" parent="abstractDao">
 		<flex:remoting-destination channels="my-longpolling-amf"/>
@@ -37,6 +38,7 @@
 				</constructor-arg>
 			</bean>
 		</property>
+		<flex:remoting-destination />		
 	</bean>  
 	<bean id="statusid" parent="abstractDao">
 		<flex:remoting-destination channels="my-longpolling-amf" />
@@ -48,7 +50,8 @@
 					</value>
 				</constructor-arg>
 			</bean>
-		</property> 
+		</property>
+		<flex:remoting-destination />	 
 	</bean> 
 	
 	<bean id="noteid" parent="abstractDao">
@@ -61,7 +64,8 @@
 					</value>
 				</constructor-arg>
 			</bean>
-		</property> 
+		</property>
+		<flex:remoting-destination />	 
 	</bean> 
 	
 	 <bean id="connectionid" parent="abstractDao">
@@ -75,6 +79,7 @@
 				</constructor-arg>
 			</bean>
 		</property>
+		<flex:remoting-destination />	
 	</bean> 
 		
 </beans>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s:Group xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:lib="Haupt_library.*" xmlns:fc="http://ns.adobe.com/thermo/2009" xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:Group horizontalCenter="0" verticalCenter="2" >
+	<s:Path ai:knockout="0" data="M 26.703 0.009 L 3.299 0.009 C 1.477 0.009 0 1.485 0 3.306 L 0 8.519 C 0 10.341 1.477 11.818 3.299 11.818 L 5.541 11.818 C 5.541 12.963 6.47 13.891 7.615 13.891 C 8.76 13.891 9.688 12.963 9.688 11.818 L 20.443 11.818 C 20.443 12.963 21.371 13.891 22.516 13.891 C 23.661 13.891 24.59 12.963 24.59 11.818 L 26.703 11.818 C 28.523 11.818 30 10.341 30 8.519 L 30 3.306 C 30 1.485 28.523 0.009 26.703 0.009 Z M 2.432 6.627 C 1.859 6.627 1.395 6.162 1.395 5.589 L 1.395 3.258 C 1.395 2.684 1.859 2.221 2.432 2.221 L 7.355 2.221 C 7.928 2.221 8.393 2.684 8.393 3.258 L 8.393 5.589 C 8.393 6.162 7.928 6.627 7.355 6.627 L 2.432 6.627 Z">
+		<s:fill>
+			<s:SolidColor color="0x050505"/>
+		</s:fill>
+	</s:Path>
+	</s:Group>
+</s:Group>

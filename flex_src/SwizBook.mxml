@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   xmlns:swiz='*' xmlns:views="com.adams.cambook.views.*">
+	<fx:Style source="Style.css" />
+	<fx:Declarations>
+		<swiz:Context dispatcher="{ this }"/>
+	</fx:Declarations>
+	<s:layout><s:VerticalLayout gap="0"/></s:layout>
+	<views:MyView/>
+</s:Application>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:components="com.adams.scrum.views.components.*" xmlns:components1="com.adams.cambook.views.components.*">
+	 
+	<fx:Metadata>
+		[HostComponent("com.adams.cambook.views.mediators.LoginViewMediator")]
+	</fx:Metadata> 
+	
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:Panel width="300"  horizontalCenter="0" verticalCenter="0">
+		<mx:Form id="loginForm"   horizontalCenter="0"  paddingBottom="0">
+			<mx:FormItem width="100%" label="userName:" required="true">
+				<s:TextInput id="userNameTextInput" text="deva" />
+			</mx:FormItem>
+			<mx:FormItem width="100%" label="password:" required="true">
+				<s:TextInput id="passwordTextInput" text="raj" displayAsPassword="true" />
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
+			</mx:FormItem>
+		</mx:Form>
+		<s:controlBarContent>
+			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
+				<components1:NativeButton id="submitBtn" label="Login"/>	
+			</s:HGroup>
+		</s:controlBarContent>
+	</s:Panel> 
+</s:Skin>

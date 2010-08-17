@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" alpha.disabled=".25"  > 
+	
+	<!-- host component -->
+	<fx:Metadata>
+		<![CDATA[ 
+        [HostComponent("com.adams.cambook.views.components.RatingComponent")]
+    ]]>
+	</fx:Metadata> 
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="open" stateGroups="overStates" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<fx:Declarations>
+		<s:Linear id="easer1" easeInFraction="0" easeOutFraction="1"    />
+	</fx:Declarations>
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="open" autoReverse="true">
+			<s:Animate duration="500" targets="{[dsf, ratingHolder]}" >
+			</s:Animate>
+		</s:Transition>
+	</s:transitions>
+	
+	<s:Label id="labelText" verticalCenter="2" width="30" textAlign="right" />
+	
+	<!--- A Placeholder for the openButton. An Icon specified on the
+	component is pushed down to this group. The Listeners are added to this group, so
+	the group can serve as a button -->
+	<s:Group id="openButton" left="42" right="5" top="5" bottom="5" focusEnabled="false" >
+		<s:filters>
+			<s:DropShadowFilter strength="0.75" distance="2" alpha="0" alpha.over="1" />
+		</s:filters>
+	</s:Group>  
+	
+	<!-- border -->
+	<s:Rect includeIn="open" left="0" right="0" top="0" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke color="0x686868" weight="1" alpha=".25"/>
+		</s:stroke>
+	</s:Rect>
+	
+	<s:PopUpAnchor id="popup"   displayPopUp.normal="false" displayPopUp.open="true" 
+				   left="0" right="0" top="0" bottom="0" 
+				   popUpPosition="right" 
+				   popUpHeightMatchesAnchorHeight="false">
+		
+		<!--- 
+		The drop down area of the skin. This includes borders, background colors, scrollers, and filters. 
+		To create a custom drop down, edit this skin and create a custom skin class. 
+		-->
+		<s:Group id="dropDown"  >
+			<!-- fill -->
+			<!---  
+			Defines the appearance of the DropDownList component popup's rectangular background fill.
+			-->
+			<s:Rect id="background" left="3" right="0" top="0" bottom="0" >
+				<s:fill>
+					<!---  
+					The color of the drop down's background fill.
+					The default color is 0xFFFFFF.
+					-->
+					<s:SolidColor id="bgFill" color="0xFFFFFF" />
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="0x686868" weight="1" alpha=".1"/>
+				</s:stroke>
+			</s:Rect>
+			<s:Group id="ratingHolder" left="10" right="10" top="5" bottom="5" alpha="0" alpha.open="1" >
+				<!---
+					Holds the default icons (greyscaled) that are pushed down by the component
+				-->
+				<s:HGroup  id="passiveGroup" width="100%" height="100%"  gap="3" />
+				<!---
+					Holds the colorized version of the icons that are pushed down by the component.
+					Forr the color-fill-effect to work, this group has to be on top of the passiveGroup
+				-->	 
+				<s:HGroup id="activeGroup" width="100%" height="100%" gap="3"  />
+			</s:Group>
+			<s:filters>
+				<s:DropShadowFilter id="dsf" blurX="2" blurY="2" distance="2" angle="45" alpha="0" alpha.open="0.35" />
+			</s:filters>
+		</s:Group>
+	</s:PopUpAnchor>
+</s:Skin>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
+			 alpha.disabledGroup="0.5">
+	
+	<fx:Metadata>
+		[HostComponent("Object")]
+	</fx:Metadata> 
+	 
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="disabled" stateGroups="disabledGroup" />
+		<s:State name="normalAndInactive" stateGroups="inactiveGroup" />
+		<s:State name="disabledAndInactive" stateGroups="disabledGroup, inactiveGroup" />
+	</s:states>
+	 
+	<s:Rect left="1" right="1" top="1" bottom="1" >
+		<s:fill>
+			<s:SolidColor color="#232323" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect left="0" right="0" top="0" bottom="0" >
+		<s:stroke>
+			<s:LinearGradientStroke rotation="90" weight="1">
+				<s:GradientEntry color="0xBEBEBE" />
+				<s:GradientEntry color="0x000000" />
+			</s:LinearGradientStroke>
+		</s:stroke>
+	</s:Rect>
+	<s:Group id="contentGroup" left="3" right="3" top="0" bottom="0" width="100%" height="100%" minHeight="0" minWidth="0"/>
+		
+		<s:Group id="statusBar" width="100%" minHeight="14" bottom="0">
+			<!-- status bar fill --> 
+			<!-- status bar highlight -->
+			
+			<!-- status text -->
+			<!--- @copy spark.components.WindowedApplication#statusText -->
+			<s:Label id="statusText" top="2" bottom="2" left="10" right="10" verticalAlign="middle" 
+					 fontSize="10" color="0x585858" width="100%" maxDisplayedLines="1" />
+			
+		</s:Group>  
+	
+</s:SparkSkin>

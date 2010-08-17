@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/halo" 
+	currentStateChange="stateChangeHandler(event)" initialize="init()"
+	minHeight="30" alpha.disabled='0.3'
+	>
+	<!-- host component -->
+	<fx:Metadata>
+		<![CDATA[  
+		[HostComponent("spark.components.Button")]
+	    ]]>
+	</fx:Metadata>
+	
+	<fx:Script>
+	<![CDATA[
+		import assets.skins.Components.Buttons.*;
+		
+		import mx.core.IVisualElementContainer;
+		import mx.events.StateChangeEvent;
+		import mx.graphics.IFill;
+		import mx.graphics.SolidColor;
+		
+		import spark.primitives.BitmapImage;
+		import spark.primitives.supportClasses.FilledElement;
+		
+		//Variables for lazy initialization, caching and reference for transitions
+		private var currentIconKey:String;
+		private var currentColor:uint;
+		[Bindable]
+		private var currentSymbol:Group;
+		[Bindable]
+		private var baseIconScale:Number;
+		private var cachedSymbols:Array = new Array();
+		
+		/**
+		 * Creates an instance from a FXG Component.
+		 * Adapt this to define your own Graphics
+		 */
+		private function init():void{
+			//var buttonComponents:Array=[TodoList]
+		}
+		protected function createFXGComponent(definitionName:String):Group {
+			var el:Group;
+			switch (definitionName.toLowerCase()) {
+					case 'bus':				el = new Bus(); break;
+					case 'plane':			el = new Plane(); break;
+					case 'todolist': 		el 	= new TodoList(); break;
+					default: 				el 	= new TodoList(); break;
+			}
+			return el;
+		} 
+		       
+		/* Define the skin elements that should not be colorized. 
+		exclude symbol and text group */
+		static private const exclusions:Array = ["symbol", "textGroup"];
+		
+		/** 
+		 * @copy spark.skins.SparkSkin#colorizeExclusions
+		 */		
+		/* override public function get colorizeExclusions():Array {
+			return exclusions;
+		} */
+		
+		/**
+		 * get a instance from the library and set it up
+		 */
+		protected function getLibraryDefinitionInstance (name:String, oldState:String, newState:String):Group {
+			
+			var el:Group = null;
+			if ((el = cachedSymbols[name]) != null) {
+				return el;
+			} else {
+				if(name!=null){
+					el = createFXGComponent (name);	
+				}
+				
+				
+				//configurate the element as needed
+				el.horizontalCenter = 2;
+				el.verticalCenter = -1;
+				el.width = el.height = 0;
+				
+				//Make sure the effects work the way we want it, even for changing icons between states
+				if (currentState == "up" || (currentState == "over" && oldState != "down")) {
+					el.scaleX = el.scaleY = baseIconScale;
+				} else {
+					el.scaleX = el.scaleY = 1;
+				}	
+							
+				//cache the symbol for better perfomance
+				cachedSymbols[name] = el;
+				return el;
+			}
+		}
+		
+		override protected function childrenCreated(): void {
+			super.childrenCreated();
+			var scale:Object = hostComponent.getStyle("iconScale");
+			scale != null ? baseIconScale = Number(scale) : baseIconScale = Number(5);
+		}
+		/**
+		 * Updates a symbol based on the color and the iconName
+		 * Leverages pseudo selectors. so that there can be different colors and icons per state
+		 */
+		private function updateSymbol (event:StateChangeEvent):void {
+			
+			//var symbolName:String = chef.iconType;
+			var iconName:String = hostComponent.getStyle("iconName");
+			var color:uint = hostComponent.getStyle('iconColor'); 
+			//Do we really need to change the icon?
+			if (currentSymbol == null || currentSymbol != null && currentIconKey != iconName) {
+				
+				//Get the FXG Group with the graphics for this iconName, leveraging old and new state
+				var el:Group = getLibraryDefinitionInstance (iconName, event.oldState, event.newState);
+			
+				//Remove the previous one, if there is one
+				symbol.removeAllElements();
+				
+				//add to symbol holder and set flags
+				symbol.addElementAt(el,0);
+				currentSymbol = el;
+				currentIconKey = iconName;
+				fillIconWithColor (currentSymbol, color);
+			} else {
+				if (currentColor != color) {
+					fillIconWithColor (currentSymbol, color);
+				}
+			}
+			currentColor = color;
+		}
+		
+		/*
+		 * Recursively seek for nested FilledElements and set the fill color to the current color
+		 */
+		private function fillIconWithColor (el:IVisualElementContainer, color:uint):void {
+			for (var i:int = 0; i < el.numElements; i++) {
+				var elem:Object = el.getElementAt(i);
+				if (elem is IVisualElementContainer) {
+					fillIconWithColor (IVisualElementContainer(elem), color);
+				} else if (elem is FilledElement) {
+					var fill:IFill = FilledElement(elem).fill;
+					if (fill is SolidColor) {
+						SolidColor(fill).color = color;
+					}
+				}
+			}
+		}
+		
+		/*
+		 * Handles state change events and calls to update the symbol.
+		 */
+		protected function stateChangeHandler(event:StateChangeEvent):void
+		{
+			var iconName:String = hostComponent.getStyle("iconName");
+			var buttonSkin:String = hostComponent.getStyle("buttonSkin");
+			
+			if(iconName){
+				updateSymbol(event)
+			}
+			else{
+				symbol.visible = false;
+				symbol.includeInLayout = false;
+				textGroup.left = 10;
+			}
+			
+			if(buttonSkin ){  
+				 var btImg:BitmapImage = new BitmapImage();
+				
+				this.addElement(btImg);
+				bg.includeInLayout=false;
+				bg.visible=false;
+				buttonSkins = buttonSkin;
+			}
+			
+		}
+		private var buttonSkins:String;
+	]]>        
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:Linear id="easer1" easeInFraction=".35" easeOutFraction=".65" />
+	</fx:Declarations>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" stateGroups="overStates"/>
+		<s:State name="down" stateGroups="overStates" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<!-- Transitions for the background gradient and the shadows between declared styles -->
+	<s:transitions>
+		<s:Transition  fromState="up" toState="over" autoReverse="true" >
+			<s:Parallel>
+				<s:Scale duration="150" target="{currentSymbol}" scaleXTo="1" scaleYTo="1" 
+						 easer="{easer1}" autoCenterTransform="true" />
+			</s:Parallel>
+		</s:Transition>
+	
+		<s:Transition  fromState="over" toState="up" autoReverse="true" >
+			<s:Parallel>
+			<s:Scale duration="150" target="{currentSymbol}" scaleXTo="{baseIconScale}" scaleYTo="{baseIconScale}" 
+					 easer="{easer1}"  autoCenterTransform="true" />
+				</s:Parallel>
+		</s:Transition> 
+	</s:transitions>
+	
+	<!-- The background gradient in greyscale, using lighter values on overstates (stateGroup) -->
+	<s:Rect left="1" right="1" id="bg" top="1" bottom="1" radiusX="0" radiusY="0">
+		<s:filters>
+			<s:DropShadowFilter id="dsfBg" alpha="0.5" blurX="0" blurY="0" distance="1" strength="1" strength.down="0"  />
+		</s:filters>
+		<s:fill>
+			<s:SolidColor color="#607a86" color.over="#829ca8"/>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#4f4f4f" color.down="#000000" caps="none" weight="1" joints="miter" miterLimit="4"/>
+		</s:stroke>
+	</s:Rect>
+	
+	<!-- Label with a shadow applied to it. In a group for colorization exclusion -->
+	<s:Group id="textGroup" verticalCenter="1" left="{symbol.width+10}">
+		<s:Label id="labelDisplay" color="#000000"
+					  textAlign="center"
+					  verticalAlign="middle"
+					  lineBreak="toFit"
+					    right="10" >
+		</s:Label>
+	</s:Group>
+	
+	 <!-- DropShadow-->
+	<s:Group id="symbol" left="3" verticalCenter="0"  width="30" height="35"  >
+		<s:filters>
+			<s:DropShadowFilter id="dsfSymbol" blurX="0" blurY="0" distance="1"  strength="1" strength.down="0"/>
+		</s:filters>
+	</s:Group>
+</s:Skin>
