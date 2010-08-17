@@ -1,0 +1,138 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace view "com.adams.scrum.views.components.*";
+
+@font-face {
+	font-family: "scFont";
+	src: url("assets/fonts/mriam.ttf");
+	embedAsCff: true;
+}
+ 
+mx|Button, mx|Form,mx|FormItem, mx|FormItemLabel{
+	font-family: scFont;
+	textFieldClass: ClassReference("mx.core.UIFTETextField");
+}
+mx|DateField {
+	font-family: Tahoma;
+	textInputClass: ClassReference("mx.controls.MXFTETextInput");
+	textFieldClass: ClassReference("mx.core.UIFTETextField");
+} 
+mx|Label { 
+	textFieldClass: ClassReference("mx.core.UIFTETextField");
+} 
+.headerStyle{
+	font-size:24;
+}
+ 
+s|Label{
+	font-family:scFont;
+	color:#000000;
+	font-size:11;
+} 
+s|Application{
+	symbol-color:#ff0000; 
+	baseColor:#363636;
+	color: #000000;
+	background-alpha:0;
+	skin-class:ClassReference('assets.skins.DTApplicationSkin');
+}
+s|TextInput{
+	font-family:scFont;
+	skinClass: ClassReference('assets.skins.Components.DTTextInput');
+	focus-alpha:0;
+}
+ 
+s|Button {
+	font-family:scFont;
+	skinClass: ClassReference('assets.skins.ButtonIcon');
+	color: #959494;
+}  
+.ResizeBtn{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#resize');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#resize_over');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#resize_over');
+	skinClass: ClassReference('assets.skins.ButtonSkin');
+}
+.OkIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#ok");
+}
+.NewIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#new");
+}
+.EditIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#edit");
+}
+.ResetIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#reset");
+}
+.ConfigIcon{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#config');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#config');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#config');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.OpenIcon{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#open');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#open');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#open');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.DeleteSkin{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#delete');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#delete');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#delete');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.HomeIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#home");
+}
+
+.CancelIcon{
+	skinClass: ClassReference("assets.skins.ButtonIcon");
+	icon: Embed(source="assets/swf/Scrum_Assets.swf#cancel");
+}
+.waitingSkin{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#waiting');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#waiting');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#waiting');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.standBySkin{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#stand_by');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#stand_by');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#stand_by');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.inProgressSkin{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#in_progress');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#in_progress');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#in_progress');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.finishedSkin{
+	upSkin: Embed(source='assets/swf/Scrum_Assets.swf#finished');	
+	overSkin:Embed(source='assets/swf/Scrum_Assets.swf#finished');
+	downSkin:Embed(source='assets/swf/Scrum_Assets.swf#finished');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+s|List s|Scroller {
+	horizontalScrollPolicy: off;
+	verticalScrollPolicy: off;
+}
+s|List{
+	
+	skinClass:ClassReference("assets.skins.ListSkin");
+	font-family:scFont;
+	alternating-item-colors:#f4f4f4,#e5e5e5;
+}
+view|RatingComponent.Star{
+	font-family:scFont;
+	ratingIcon: ClassReference('assets.skins.Star');
+	activeIconColor: "0xffff00";
+}
