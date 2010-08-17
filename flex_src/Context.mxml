@@ -50,11 +50,11 @@
 	</fx:Declarations>
 	
 	<Swiz:config>
-		<swiz:SwizConfig viewPackages="com.adams.scrum.views.*" tearDownEventType="{ Event.REMOVED_FROM_STAGE }"/>
+		<swiz:SwizConfig viewPackages="com.adams.cambook.views.*" tearDownEventType="{ Event.REMOVED_FROM_STAGE }"/>
 	</Swiz:config>
 	
 	<Swiz:customProcessors>
-		<processors:MediateSignalProcessor id="signalProcessor" signalPackages="com.adams.scrum.signals" strictArgumentTypes="true"/>		
+		<processors:MediateSignalProcessor id="signalProcessor" signalPackages="com.adams.cambook.signals" strictArgumentTypes="true"/>		
  		<mediateview:MediateViewProcessor/>
 		<formprocessors:FormProcessor/>
 	</Swiz:customProcessors>
