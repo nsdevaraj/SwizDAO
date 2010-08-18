@@ -24,7 +24,6 @@ package com.adams.cambook.dao
 	import com.adams.cambook.utils.Action;
 	
 	import mx.collections.IList;
-	import mx.controls.Alert;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.remoting.mxml.RemoteObject;
 
@@ -195,8 +194,7 @@ package com.adams.cambook.dao
  		 */		
 		public function getList():AsyncToken {
 			invoke();
-			delegate.token = remoteService.getList();
-			Alert.show('here2')
+			delegate.token = remoteService.getList(); 
 			return delegate.token;
 		}
 		/**

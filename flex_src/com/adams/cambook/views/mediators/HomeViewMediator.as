@@ -85,8 +85,7 @@ package com.adams.cambook.views.mediators
 			//load all persons
 			if( !personDAO.collection.findAll ) {
 				var persignal:SignalVO = new SignalVO( this, personDAO, Action.GET_LIST );
-				signalSeq.addSignal( persignal );
-				Alert.show('here1')
+				signalSeq.addSignal( persignal ); 
 			}
 			else {
 				currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
