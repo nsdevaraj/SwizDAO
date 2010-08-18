@@ -26,14 +26,17 @@
 	  
         <many-to-one name="FileObj" class="com.adams.cambook.dao.entities.FileDetails" column="File_FK" cascade="none" lazy="false" />
         
-        <set name="notesSet" table="notes" order-by="Creation_Date" inverse="false" cascade="none" lazy="true">
-        	<key column="noteFK"></key>
+        <set name="notesSet" table="notes" order-by="Creation_Date" inverse="true" cascade="none" lazy="false">
+        	<key column="Note_FK"></key>
         	<one-to-many class="com.adams.cambook.dao.entities.Notes"/>
-        </set> 
+        </set>
         
-		<property name="noteStatusFK">
+  		<property name="noteStatusFK">
             <column name="Note_Status_FK" />
         </property>
 		
 	</class>
+	<query name="Notes.findMyUpdates">
+		select u from Notes u where u.personFK = 0 and u.createdPersonFK = ?
+	</query>
 </hibernate-mapping>

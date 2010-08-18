@@ -18,6 +18,7 @@ public class Persons implements Serializable {
 	private int personRelations;
 	private String personPassword;
 	private String tweetId;
+	private String tweetPassword;	
 	private int personAvailability;
 	private FileDetails personPhotoFK;
 	private String personMobile;
@@ -27,7 +28,10 @@ public class Persons implements Serializable {
 	private String personCity;
 	private String personCountry;
 	private boolean activated;
+	private String personRole;
+	
 	private Set<Persons> connectionSet;
+	
 	public Set<Notes> getNotesSet() {
 		return notesSet;
 	}
@@ -139,5 +143,16 @@ public class Persons implements Serializable {
 	public void setActivated(boolean activated) {
 		this.activated = activated;
 	}
-
+	public String getTweetPassword() {
+		return tweetPassword;
+	}
+	public void setTweetPassword(String tweetPassword) {
+		this.tweetPassword = tweetPassword;
+	}
+	public String getPersonRole() {
+		return personRole;
+	}
+	public void setPersonRole(String personRole) {
+		this.personRole = personRole;
+	}
 }

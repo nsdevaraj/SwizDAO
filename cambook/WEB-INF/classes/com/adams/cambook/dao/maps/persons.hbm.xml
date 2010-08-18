@@ -27,6 +27,10 @@
 		<property name="tweetId">
             <column name="Tweet_id" />
         </property>
+        
+        <property name="tweetPassword">
+            <column name="Tweet_Password" />
+        </property>
 		
 		<property name="personAvailability">
             <column name="Person_Availability" />
@@ -54,13 +58,16 @@
         <property name="personCountry">
             <column name="Person_Country" />
         </property> 
+         <property name="personRole">
+            <column name="Person_Role" />
+        </property> 
 		
         <property name="activated">
             <column name="Activated" />
         </property>  
         
          
-        <many-to-one name="personPhotoFK" class="com.adams.cambook.dao.entities.FileDetails" column="Person_Photo_FK" cascade="none" lazy="false" />
+         <many-to-one name="personPhotoFK" class="com.adams.cambook.dao.entities.FileDetails" column="Person_Photo_FK" cascade="none" lazy="false" />
         
         <set name="connectionSet" table="connections" inverse="false" cascade="none" lazy="false">
         	<key column="Person_FK"></key> 
@@ -73,5 +80,8 @@
         </set>
         
     </class> 
+    <query name="Persons.findByLogin">
+        select u from Persons u where u.personEmail=?
+    </query>
     
 </hibernate-mapping>

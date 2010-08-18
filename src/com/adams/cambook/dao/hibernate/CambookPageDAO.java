@@ -2,10 +2,15 @@ package com.adams.cambook.dao.hibernate;
  
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.adams.cambook.dao.entities.Notes;
+import com.adams.cambook.dao.entities.Persons;
+import com.adams.cambook.util.TwitterSupport;
 
 public class CambookPageDAO extends HibernateDaoSupport {
 
@@ -15,7 +20,17 @@ public class CambookPageDAO extends HibernateDaoSupport {
 			throw new Exception("Order id is null.");
 
 		return q.list();
-	} 	 	
+	}
+	
+	public List<?> getList(Class type) {
+		List list = null;
+		try {
+			list = (getHibernateTemplate().find("from " + type.getName() + " x"));
+		} catch (HibernateException sqle) {
+			sqle.printStackTrace();			
+		}
+		return list;
+	}
 	
 	public Object save(Object o)  {
 		 try {
@@ -195,4 +210,32 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		}
 		return query.list();
 	}	
+	
+	public List<?> refreshTweets(String userId) {
+		Query query = null;
+		TwitterSupport tw;
+		List<Notes> notesSet; 
+		try {
+			
+			query = getSession().createQuery("select u.PersonId, u.tweetId, u.tweetPassword from Persons u where u.personEmail=?");
+			query.setParameter(0, userId);
+			List value = query.list();
+			
+			if(null!=value) {
+				Object[] vals = (Object[])value.get(0);
+				int personId = (Integer)vals[0];
+				tw = new TwitterSupport((String)vals[1],(String)vals[2], personId);
+				notesSet = tw.getTwitterUpdates();
+				
+				query = getSession().createQuery("delete from Notes u where u.noteType=3 and createdPersonFK=?");
+				query.setParameter(0, personId);
+				query.executeUpdate();
+				bulkUpdate(notesSet);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

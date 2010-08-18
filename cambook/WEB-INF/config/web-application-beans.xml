@@ -77,4 +77,11 @@
 		</property>
 	</bean> 
 		
+	<bean id="pagingDAO"
+		class="com.adams.cambook.dao.hibernate.CambookPageDAO">
+		<flex:remoting-destination />
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 </beans>

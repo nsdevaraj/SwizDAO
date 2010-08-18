@@ -10,13 +10,14 @@ package com.adams.cambook.models.vo
 	{
 		 
 		 
-		public var  personRelations:int;
-		public var  tweetId:String;
-		public var  personAvailability:int;
-		public var  personPhotoFK:Files;
-		public var  personQuestion:int;
-		public var  personAnswer:String;
-		
+		private var  _personRelations:int;
+		private var  _tweetId:String;
+		private var  _personAvailability:int;
+		private var  _personPhotoFK:Files;
+		private var  _personQuestion:int;
+		private var  _personAnswer:String;
+		private var  _tweetPassword:String;
+		private var  _personRole:String;
 		[ArrayElementType( "com.adams.cambook.models.vo.Persons" )]
 		public var  connectionSet:ArrayCollection;
 		
@@ -35,6 +36,86 @@ package com.adams.cambook.models.vo
 			super();
 		} 
 		 
+
+		public function get personRelations():int
+		{
+			return _personRelations;
+		}
+
+		public function set personRelations(value:int):void
+		{
+			_personRelations = value;
+		}
+
+		public function get tweetId():String
+		{
+			return _tweetId;
+		}
+
+		public function set tweetId(value:String):void
+		{
+			_tweetId = value;
+		}
+
+		public function get personPhotoFK():Files
+		{
+			return _personPhotoFK;
+		}
+
+		public function set personPhotoFK(value:Files):void
+		{
+			_personPhotoFK = value;
+		}
+
+		public function get personAvailability():int
+		{
+			return _personAvailability;
+		}
+
+		public function set personAvailability(value:int):void
+		{
+			_personAvailability = value;
+		}
+
+		public function get personQuestion():int
+		{
+			return _personQuestion;
+		}
+
+		public function set personQuestion(value:int):void
+		{
+			_personQuestion = value;
+		}
+
+		public function get personAnswer():String
+		{
+			return _personAnswer;
+		}
+
+		public function set personAnswer(value:String):void
+		{
+			_personAnswer = value;
+		}
+
+		public function get tweetPassword():String
+		{
+			return _tweetPassword;
+		}
+
+		public function set tweetPassword(value:String):void
+		{
+			_tweetPassword = value;
+		}
+
+		public function get personRole():String
+		{
+			return _personRole;
+		}
+
+		public function set personRole(value:String):void
+		{
+			_personRole = value;
+		}
 
 		public function get personPostalCode():String
 		{

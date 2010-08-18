@@ -55,4 +55,19 @@
   <session-config>
   	<session-timeout>-1</session-timeout> 
   </session-config>
+  <servlet>
+    <servlet-name>setDefaults</servlet-name>
+    <servlet-class>com.adams.cambook.servlets.SetDefaults</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>rssfeeds</display-name>
+    <servlet-name>rssfeeds</servlet-name>
+    <servlet-class>com.adams.cambook.servlets.RssFeeds</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>rssfeeds</servlet-name>
+    <url-pattern>/rssfeeds</url-pattern>
+  </servlet-mapping>
 </web-app>

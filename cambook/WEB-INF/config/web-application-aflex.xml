@@ -12,7 +12,8 @@
 	<flex:message-service
 			default-channels="my-amf,my-polling-amf,my-longpolling-amf,my-streaming-amf" />
 	 <flex:secured>
-	 	<flex:secured-channel channel="my-amf" access="ROLE_ADMIN" /> 
+	 	<flex:secured-channel channel="my-amf" access="ROLE_ADMIN,ROLE_USER" /> 
+	 	<flex:secured-channel channel="my-longpolling-amf" access="ROLE_ADMIN" /> 
 	 </flex:secured>  
 	</flex:message-broker>
 	
