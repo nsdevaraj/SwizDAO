@@ -83,18 +83,18 @@ package com.adams.cambook.views.mediators
 			
 			
 			//load all persons
-			if( !personDAO.collection.findAll ) {
+		//	if( !personDAO.collection.findAll ) {
 				var persignal:SignalVO = new SignalVO( this, personDAO, Action.GET_LIST );
 				signalSeq.addSignal( persignal ); 
-			}
+			/*}
 			else {
 				currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
-			}
+			}*/
 			
 			//load all status
 			if( !statusDAO.collection.findAll ) {
 				var statusSignal:SignalVO = new SignalVO( this, statusDAO, Action.GET_LIST ); 
-				signalSeq.addSignal( statusSignal );
+			//	signalSeq.addSignal( statusSignal );
 			}
 			
 		} 

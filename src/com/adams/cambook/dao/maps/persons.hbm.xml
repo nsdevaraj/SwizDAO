@@ -62,12 +62,12 @@
          
         <many-to-one name="personPhotoFK" class="com.adams.cambook.dao.entities.FileDetails" column="Person_Photo_FK" cascade="none" lazy="false" />
         
-        <set name="connectionSet" table="connections" order-by="Person_Firstname" inverse="false" cascade="none" lazy="true">
-        	<key column="Connection_FK"></key>
-        	<many-to-many class="com.adams.cambook.dao.entities.Persons"></many-to-many>
-        </set>
-        
-        <set name="notesSet" table="notes" order-by="Creation_Date" inverse="true" cascade="none" lazy="true">
+        <set name="connectionSet" table="connections" inverse="false" cascade="none" lazy="false">
+        	<key column="Person_FK"></key> 
+        	<many-to-many column="Connection_FK" class="com.adams.cambook.dao.entities.Persons" />
+        </set> 
+	     
+        <set name="notesSet" table="notes" order-by="Creation_Date" inverse="true" cascade="none" lazy="false">
         	<key column="Created_person_FK"></key>
         	<one-to-many class="com.adams.cambook.dao.entities.Notes"/>
         </set>
