@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v7.02 
-MySQL - 5.1.48-community : Database - cambook
+MySQL - 5.1.30-community : Database - cambook
 *********************************************************************
 */
 
@@ -59,9 +59,11 @@ CREATE TABLE `notes` (
   PRIMARY KEY (`Note_ID`),
   KEY `FK6424EC1AD772D09` (`Created_person_FK`),
   KEY `FK6424EC1C41DACCA` (`File_FK`)
-) ENGINE=MyISAM AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
 
 /*Data for the table `notes` */
+
+insert  into `notes`(`Note_ID`,`Description`,`Creation_Date`,`Created_person_FK`,`File_FK`,`Note_Type`,`Person_FK`,`Note_FK`,`Note_Status_FK`) values (111,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `persons` */
 
@@ -74,13 +76,15 @@ CREATE TABLE `persons` (
   `Person_Email` varchar(255) DEFAULT NULL,
   `Person_Relations` int(11) DEFAULT NULL,
   `Person_Password` varchar(20) DEFAULT NULL,
+  `Person_Role` varchar(20) DEFAULT NULL,
   `Tweet_id` varchar(50) DEFAULT NULL,
+  `Tweet_Password` varchar(50) DEFAULT NULL,
   `Person_Availability` int(11) DEFAULT NULL,
   `Person_Photo_FK` int(11) DEFAULT NULL,
   `Person_Mobile` varchar(20) DEFAULT NULL,
   `Person_Question` int(11) DEFAULT NULL,
-  `Person_Postal_Code` varchar(50) DEFAULT NULL,
-  `Person_Answer` varchar(20) DEFAULT NULL,
+  `Person_Answer` varchar(50) DEFAULT NULL,
+  `Person_Postal_Code` varchar(20) DEFAULT NULL,
   `Person_City` varchar(50) DEFAULT NULL,
   `Person_Country` varchar(50) DEFAULT NULL,
   `Activated` binary(1) DEFAULT NULL,
@@ -91,18 +95,7 @@ CREATE TABLE `persons` (
 
 /*Data for the table `persons` */
 
-/*Table structure for table `status` */
-
-DROP TABLE IF EXISTS `status`;
-
-CREATE TABLE `status` (
-  `status_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) DEFAULT NULL,
-  `status_label` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`status_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
-
-/*Data for the table `status` */
+insert  into `persons`(`Person_ID`,`Person_Firstname`,`Person_Lastname`,`Person_Email`,`Person_Relations`,`Person_Password`,`Person_Role`,`Tweet_id`,`Tweet_Password`,`Person_Availability`,`Person_Photo_FK`,`Person_Mobile`,`Person_Question`,`Person_Answer`,`Person_Postal_Code`,`Person_City`,`Person_Country`,`Activated`) values (1,'Deva','raj','devaraj@wp.pl',1,'test','ROLE_ADMIN','nsdevaraj',NULL,0,NULL,'9962083601',2,'No','636102','Chennai','India','1');
 
 /* Procedure structure for procedure `getProjects` */
 
