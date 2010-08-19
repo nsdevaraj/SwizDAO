@@ -32,6 +32,15 @@ package com.adams.cambook.utils
 		public static const DELETE_ALL:String = 'DeleteAll';
 		public static const PUSH_MSG:String = 'PushMsg';
 		public static const RECEIVE_MSG:String = 'receiveMsg';
+		
+		public static const GETQUERYRESULT:String = 'getQueryResult';
+		public static const PAGINATIONLISTVIEW:String = 'paginationListView';
+		public static const QUERYLISTVIEW:String = 'queryListView';
+		public static const PAGINATIONLISTVIEWID:String = 'paginationListViewId';
+		public static const QUERYPAGINATION:String = 'queryPagination';
+		public static const REFRESHTWEETS:String = 'refreshTweets';
+		public static const UPDATETWEET:String = 'updateTweet';
+		public static const PAGINGACTIONS:Array = [GETQUERYRESULT,PAGINATIONLISTVIEW,QUERYLISTVIEW,PAGINATIONLISTVIEWID,QUERYPAGINATION,REFRESHTWEETS,UPDATETWEET];
 		public function Action()
 		{
 		}

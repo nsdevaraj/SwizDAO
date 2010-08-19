@@ -115,9 +115,9 @@ package com.adams.cambook.views.mediators
 				}
 		}
 		protected function chatPush(ev:Object):void{
-			var pushChatMessage:PushMessage = new PushMessage( 'Chat Message', [view.personid.value],  currentInstance.currentPerson.personId );
+		/*	var pushChatMessage:PushMessage = new PushMessage( 'Chat Message', [view.personid.value],  currentInstance.currentPerson.personId );
 			var pushChatSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushChatMessage );
-			signalSeq.addSignal( pushChatSignal );
+			signalSeq.addSignal( pushChatSignal );*/
 		}
 		/**
 		 * Create listeners for all of the view's children that dispatch events
@@ -125,7 +125,6 @@ package com.adams.cambook.views.mediators
 		 */
 		override protected function setViewListeners():void {
 			super.setViewListeners(); 
-			view.chat.addEventListener(MouseEvent.CLICK,chatPush);
 		}
  
 		 

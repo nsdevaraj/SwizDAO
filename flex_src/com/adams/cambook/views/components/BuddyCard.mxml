@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="40">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect width="100%" height="100%" verticalCenter="0" horizontalCenter="0"  >
+		<s:fill><s:SolidColor color="#ffffff" alpha=".8"/></s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#cfcfcf" />
+		</s:stroke>
+	</s:Rect>
+	<s:Label text="{'Alagu'+'Vel'}" left="5" top="5"/>
+	<s:Button toolTip="online"  styleName="onlineSkin" top="5" right="5"/>
+	<s:HGroup  bottom="2" right="2">
+		<s:Button toolTip="follow" styleName="followSkin"/>
+		<s:Button toolTip="Tweet" styleName="tweetSkin"/>
+		<s:Button toolTip="message" styleName="messageSkin"/>
+		<s:Button toolTip="chat" styleName="chatSkin"/>
+	</s:HGroup>
+</s:Group>

@@ -32,7 +32,6 @@ s|Label{
 } 
 s|Application{
 	symbol-color:#ff0000; 
-	baseColor:#363636;
 	color: #000000;
 	background-alpha:0;
 	skin-class:ClassReference('assets.skins.DTApplicationSkin');
@@ -135,4 +134,67 @@ view|RatingComponent.Star{
 	font-family:scFont;
 	ratingIcon: ClassReference('assets.skins.Star');
 	activeIconColor: "0xffff00";
+}
+.messageSkin{
+	upSkin: Embed(source='assets/images/icons/message.png');	
+	overSkin:Embed(source='assets/images/icons/message.png');
+	downSkin:Embed(source='assets/images/icons/message.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.tweetSkin{
+	upSkin: Embed(source='assets/images/icons/tweet.png');	
+	overSkin:Embed(source='assets/images/icons/tweet.png');
+	downSkin:Embed(source='assets/images/icons/tweet.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.followSkin{
+	upSkin: Embed(source='assets/images/icons/follow.png');	
+	overSkin:Embed(source='assets/images/icons/follow.png');
+	downSkin:Embed(source='assets/images/icons/follow.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.unfollowSkin{
+	upSkin: Embed(source='assets/images/icons/unfollow.png');	
+	overSkin:Embed(source='assets/images/icons/unfollow.png');
+	downSkin:Embed(source='assets/images/icons/unfollow.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.onlineSkin{
+	upSkin: Embed(source='assets/images/icons/online.png');	
+	overSkin:Embed(source='assets/images/icons/online.png');
+	downSkin:Embed(source='assets/images/icons/online.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.offlineSkin{
+	upSkin: Embed(source='assets/images/icons/offline.png');	
+	overSkin:Embed(source='assets/images/icons/offline.png');
+	downSkin:Embed(source='assets/images/icons/offline.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.chatSkin{
+	upSkin: Embed(source='assets/images/icons/chat.png');	
+	overSkin:Embed(source='assets/images/icons/chat.png');
+	downSkin:Embed(source='assets/images/icons/chat.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.commentSkin{
+	upSkin: Embed(source='assets/images/icons/comment.png');	
+	overSkin:Embed(source='assets/images/icons/comment.png');
+	downSkin:Embed(source='assets/images/icons/comment.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.likeSkin{
+	upSkin: Embed(source='assets/images/icons/like.png');	
+	overSkin:Embed(source='assets/images/icons/like.png');
+	downSkin:Embed(source='assets/images/icons/like.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+.shareSkin{
+	upSkin: Embed(source='assets/images/icons/share.png');	
+	overSkin:Embed(source='assets/images/icons/share.png');
+	downSkin:Embed(source='assets/images/icons/share.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+global
+{
 }

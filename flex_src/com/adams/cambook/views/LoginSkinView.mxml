@@ -2,7 +2,7 @@
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx"
-		xmlns:components="com.adams.cambook.views.components.*" >
+		xmlns:components="com.adams.cambook.views.components.*"  >
 	 
 	<fx:Metadata>
 		[HostComponent("com.adams.cambook.views.mediators.LoginViewMediator")]
@@ -11,21 +11,82 @@
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
-	<s:Panel width="300"  horizontalCenter="0" verticalCenter="0">
-		<mx:Form id="loginForm"   horizontalCenter="0"  paddingBottom="0">
-			<mx:FormItem width="100%" label="userName:" required="true">
-				<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
-			</mx:FormItem>
-			<mx:FormItem width="100%" label="password:" required="true">
-				<s:TextInput id="passwordTextInput" text="test" displayAsPassword="true" />
-			</mx:FormItem>
-			<mx:FormItem>
-				<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
-			</mx:FormItem>
-		</mx:Form>
+
+	 
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="register"/>
+	</s:states>
+	 
+	<s:Panel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="center"/>
+		</s:layout>
+		<s:Group width="100%">
+			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  />
+			<!--<s:Rect width="600" height="95%" verticalCenter="0" right="10">
+				<s:fill><s:SolidColor color="#ffffff" alpha=".8"/></s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="#cfcfcf" />
+				</s:stroke>
+			</s:Rect>-->
+			<mx:Form id="loginForm"  includeIn="normal" verticalCenter="0" horizontalCenter="0" paddingBottom="0">
+				<mx:FormItem width="100%" label="email id:" required="true">
+					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
+				</mx:FormItem>
+				<mx:FormItem width="100%" label="password:" required="true">
+					<s:TextInput id="passwordTextInput" text="test" displayAsPassword="true" />
+				</mx:FormItem>
+				<mx:FormItem>
+					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
+				</mx:FormItem>
+			</mx:Form>
+			<mx:Form includeIn="register" horizontalCenter="0">
+				<mx:FormHeading label="New User"/>
+				<mx:FormItem label="First Name">
+					<s:TextInput id="personFirstname"/>
+				</mx:FormItem>
+				<mx:FormItem id="personLastname" label="Last Name">
+					<s:TextInput  />
+				</mx:FormItem>
+				<mx:FormItem label="Email">
+					<s:TextInput id="personEmail" />
+				</mx:FormItem>
+				<mx:FormItem label="Password">
+					<s:TextInput id="personPassword" displayAsPassword="true"/>
+				</mx:FormItem>
+				<mx:FormItem label="Twitter id">
+					<s:TextInput  id="tweetId"/>
+				</mx:FormItem>
+				<mx:FormItem label="Photo" direction="horizontal" horizontalGap="0">
+					<s:TextInput  width="76"/>
+					<s:Button label="Browse" />
+				</mx:FormItem>
+				<mx:FormItem id="personMobile" label="Mobile">
+					<s:TextInput  />
+				</mx:FormItem>
+				<mx:FormItem label="Question">
+					<s:TextInput  id="personQuestion"/>
+				</mx:FormItem>
+				<mx:FormItem label="Answer">
+					<s:TextInput  id="personAnswer"/>
+				</mx:FormItem>
+				<mx:FormItem label="City">
+					<s:TextInput  id="personCity"/>
+				</mx:FormItem>
+				<mx:FormItem label="Country">
+					<s:TextInput  id="personCountry"/>
+				</mx:FormItem>
+				<mx:FormItem label="Postal Code">
+					<s:TextInput  id="personPostalCode" />
+				</mx:FormItem>
+			</mx:Form>
+		</s:Group>
 		<s:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
-				<components:NativeButton id="submitBtn" label="Login"/>	
+				<components:NativeButton id="submitBtn" label="Login" includeIn="normal"/>
+				<components:NativeButton label="New User" click="currentState='register'" includeIn="normal"/>
+				<components:NativeButton id="registerBtn" label="Register" includeIn="register" click="currentState='normal'"/>
 			</s:HGroup>
 		</s:controlBarContent>
 	</s:Panel> 
