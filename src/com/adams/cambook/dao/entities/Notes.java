@@ -17,7 +17,6 @@ public class Notes implements Serializable{
 	private int createdPersonFK;
 	private FileDetails FileObj;
 	private int noteType;
-	private Persons PersonObj;
 	private Set<Notes> notesSet;
 	private int personFK;
 	public int getPersonFK() {
@@ -63,12 +62,6 @@ public class Notes implements Serializable{
 	}
 	public void setNoteType(int noteType) {
 		this.noteType = noteType;
-	}
-	public Persons getPersonObj() {
-		return PersonObj;
-	}
-	public void setPersonObj(Persons personObj) {
-		PersonObj = personObj;
 	} 
 	public Set<Notes> getNotesSet() {
 		return notesSet;

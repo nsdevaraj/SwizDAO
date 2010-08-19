@@ -36,10 +36,10 @@
 			protected function initializeHandler( event:Event ):void { 
 				   var target:TraceTarget = new TraceTarget();
 				target.includeCategory = true; 
-				target.level = LogEventLevel.ALL;    
+				//target.level = LogEventLevel.ALL;    
 				var targets:AbstractSwizLoggingTarget = new AbstractSwizLoggingTarget();
 				targets.level = SwizLogEventLevel.INFO;
-				SwizLogger.addLoggingTarget( targets );    
+				//SwizLogger.addLoggingTarget( targets );    
 				messenger.beanFactory = this.beanFactory;
 			}
 		]]> 

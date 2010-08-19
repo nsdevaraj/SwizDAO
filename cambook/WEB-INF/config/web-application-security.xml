@@ -3,13 +3,12 @@
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
- 	<http auto-config="true" session-fixation-protection="newSession"/>
-	
-	<authentication-provider> 
+	<http auto-config="true" session-fixation-protection="newSession" />
+
+	<authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"
-		users-by-username-query='SELECT U.Person_Email, U.Person_Password, U.Activated AS "enabled" FROM persons U where U.Person_Email=?'
-		authorities-by-username-query="SELECT U.Person_Email, U.Person_Role as authority FROM persons U WHERE U.Person_Email = ?"
-		/>
-	</authentication-provider>  
-	
+			users-by-username-query='SELECT U.Person_Email, U.Person_Password, U.Activated AS "enabled" FROM persons U where U.Person_Email=?'
+			authorities-by-username-query="SELECT U.Person_Email, U.Person_Role as authority FROM persons U WHERE U.Person_Email = ?" />
+	</authentication-provider>
+
 </beans:beans>

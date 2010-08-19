@@ -17,14 +17,16 @@ package com.adams.cambook.utils
 {
 	public class Description
 	{
-		public static const CREATE:String = 'Create';
-		public static const UPDATE:String = 'Update';
-		public static const DELETE:String = 'Delete'; 
-		public static const EVENTSTATUS:String = 'eventStatus';
-		public static const WAITING:String = 'Waiting';
-		public static const INPROGRESS:String = 'InProgress';
-		public static const STANDBY:String = 'StandBy';
-		public static const FINISHED:String = 'Finished';
+		public static const CREATE:String = 'Create$☼';
+		public static const UPDATE:String = 'Update$☼';
+		public static const ACKNOWLEDGE:String = 'Acknowledge$☼';
+		public static const DELETE:String = 'Delete$☼'; 
+		public static const EVENTSTATUS:String = 'eventStatus$☼';
+		public static const WAITING:String = 'Waiting$☼';
+		public static const INPROGRESS:String = 'InProgress$☼';
+		public static const STANDBY:String = 'StandBy$☼';
+		public static const FINISHED:String = 'Finished$☼';
+		public static const DESCARR:Array = [CREATE,UPDATE,ACKNOWLEDGE,DELETE,EVENTSTATUS,WAITING,INPROGRESS,STANDBY,FINISHED];
 		public function Description()
 		{
 		}

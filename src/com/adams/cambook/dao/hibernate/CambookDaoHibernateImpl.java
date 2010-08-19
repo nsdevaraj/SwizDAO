@@ -125,7 +125,8 @@ public class CambookDaoHibernateImpl<T, PK extends Serializable> extends Hiberna
 	}
 
 	public List<T> executeFinder(Method method, final Object[] queryArgs) {
-		final Query namedQuery = prepareQuery(method, queryArgs); 
+		final Query namedQuery = prepareQuery(method, queryArgs);
+		//System.out.print(((Persons) namedQuery.list().get(0)).getPersonAvailability() + "sdfa");
 		return (List<T>) namedQuery.list();
 	}
 

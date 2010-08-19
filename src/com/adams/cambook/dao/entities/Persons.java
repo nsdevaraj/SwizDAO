@@ -27,7 +27,7 @@ public class Persons implements Serializable {
 	private String personAnswer;
 	private String personCity;
 	private String personCountry;
-	private boolean activated;
+	private int activated;
 	private String personRole;
 	
 	private Set<Persons> connectionSet;
@@ -137,10 +137,10 @@ public class Persons implements Serializable {
 	public void setPersonCountry(String personCountry) {
 		this.personCountry = personCountry;
 	}
-	public boolean isActivated() {
+	public int getActivated() {
 		return activated;
 	}
-	public void setActivated(boolean activated) {
+	public void setActivated(int activated) {
 		this.activated = activated;
 	}
 	public String getTweetPassword() {

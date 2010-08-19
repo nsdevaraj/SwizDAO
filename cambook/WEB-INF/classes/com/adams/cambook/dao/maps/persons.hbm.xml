@@ -15,27 +15,21 @@
         <property name="personEmail">
             <column name="Person_Email" />
         </property>
-        
         <property name="personRelations">
             <column name="Person_Relations" />
         </property>
-		
         <property name="personPassword">
             <column name="Person_Password" />
         </property>
-		
 		<property name="tweetId">
             <column name="Tweet_id" />
         </property>
-        
         <property name="tweetPassword">
             <column name="Tweet_Password" />
         </property>
-		
 		<property name="personAvailability">
             <column name="Person_Availability" />
         </property>
-		
 		<property name="personMobile">
             <column name="Person_Mobile" />
         </property>	
@@ -43,15 +37,12 @@
 		<property name="personQuestion">
             <column name="Person_Question" />
         </property>
-		
 		<property name="personPostalCode">
             <column name="Person_Postal_Code" />
         </property>
-		
 		<property name="personAnswer">
             <column name="Person_Answer" />
         </property>
-		
         <property name="personCity">
             <column name="Person_City" />
         </property>
@@ -61,14 +52,10 @@
          <property name="personRole">
             <column name="Person_Role" />
         </property> 
-		
         <property name="activated">
             <column name="Activated" />
         </property>  
-        
-         
          <many-to-one name="personPhotoFK" class="com.adams.cambook.dao.entities.FileDetails" column="Person_Photo_FK" cascade="none" lazy="false" />
-        
         <set name="connectionSet" table="connections" inverse="false" cascade="none" lazy="false">
         	<key column="Person_FK"></key> 
         	<many-to-many column="Connection_FK" class="com.adams.cambook.dao.entities.Persons" />

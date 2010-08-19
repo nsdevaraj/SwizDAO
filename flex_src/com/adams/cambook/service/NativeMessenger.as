@@ -18,11 +18,15 @@ package com.adams.cambook.service
 	import com.adams.cambook.controller.ServiceController;
 	import com.adams.cambook.dao.AbstractDAO;
 	import com.adams.cambook.models.vo.CurrentInstance;
+	import com.adams.cambook.models.vo.Persons;
+	import com.adams.cambook.models.vo.PushMessage;
 	import com.adams.cambook.models.vo.SignalVO;
 	import com.adams.cambook.response.SignalSequence;
 	import com.adams.cambook.utils.Action;
+	import com.adams.cambook.utils.Description;
 	import com.adams.cambook.utils.Utils;
 	
+	import mx.controls.Alert;
 	import mx.messaging.events.MessageEvent;
 	import mx.messaging.messages.AsyncMessage;
 	
@@ -34,6 +38,9 @@ package com.adams.cambook.service
 		public var produce:NativeProducer;
 		public var consume:NativeConsumer;
 		public var dynamicDAO:AbstractDAO;
+		
+		[Inject("personDAO")]
+		public var personDAO:AbstractDAO;
 		
 		[Inject]
 		public var currentInstance:CurrentInstance;
@@ -66,7 +73,8 @@ package com.adams.cambook.service
 		public function subscribeMessage():void { 
 			consume.consumeAttempt.add( consumeHandler );
 		}
-
+		
+		private var sentMsgArr:Array=[];
 		public function produceMessage( signal:SignalVO ):void {
 			var message:AsyncMessage = new AsyncMessage();
 			message.headers = [];
@@ -77,6 +85,14 @@ package com.adams.cambook.service
 			message.body = signal.description;
 			produce.produceAttempt.add( onAckReceived ); 
 			produce.produceMessage( message );
+			//chat message
+			if (Description.DESCARR.indexOf(signal.name)==-1){
+				if(sentMsgArr[signal.receivers[0].toString()]){
+					Alert.show(signal.receivers[0], 'offline');
+				}
+				sentMsgArr[signal.receivers[0].toString()] = signal.name;
+				
+			}
 		} 
 		
 		protected function onAckReceived( event:MessageEvent = null ):void {
@@ -95,9 +111,33 @@ package com.adams.cambook.service
 			
 			avoidSignal = false;   
 			if( daoName == Utils.PERSONDAO ) {
+				var message:String = receivedSignal.name as String; 
 				//if id is not in the collection 
 				if( currentInstance.currentPerson.personId == ( receivedSignal.description as int ) ) {
 					avoidSignal = true;
+				}
+				//consume chat message
+			 	if (Description.DESCARR.indexOf(message)==-1){
+					avoidSignal = true;
+					if( currentInstance.currentPerson.personId == ( receivedSignal.receivers[0] as int ) ) {
+						var personSentId:int = receivedSignal.description as int;
+						// create acknowledge message on receivng chat message
+						if(message != Description.ACKNOWLEDGE){
+							var pushChatMessage:PushMessage = new PushMessage( Description.ACKNOWLEDGE, [personSentId],  currentInstance.currentPerson.personId );
+							var pushChatSignal:SignalVO = new SignalVO( null, personDAO, Action.PUSH_MSG, pushChatMessage );
+							signalSeq.addSignal( pushChatSignal );
+							
+							// create chat window
+							var sentPerson:Persons = new Persons();
+							sentPerson.personId = personSentId;
+							sentPerson =	Utils.findObject(sentPerson,currentInstance.currentPersonsList,personDAO.destination) as Persons;
+							Alert.show(sentPerson.personFirstname, message);
+							
+						}else{
+							//check previous push
+							sentMsgArr[personSentId.toString()] = '';
+						}
+					} 
 				}
 			}
 			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.personId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {

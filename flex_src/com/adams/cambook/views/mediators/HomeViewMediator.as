@@ -35,6 +35,9 @@ package com.adams.cambook.views.mediators
 		 
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
+		
+		[Inject("fileDAO")]
+		public var fileDAO:AbstractDAO;
 		 
 		private var _mainViewStackIndex:int
 		public function get mainViewStackIndex():int {
@@ -104,19 +107,25 @@ package com.adams.cambook.views.mediators
 						var pushOnlineMessage:PushMessage = new PushMessage( Description.UPDATE, [],  currentInstance.currentPerson.personId );
 						var pushOnlineSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushOnlineMessage );
 						signalSeq.addSignal( pushOnlineSignal );
+						
 					}
 					if( signal.action == Action.SQL_FINDALL ){
 					currentInstance.currentPersonsList = obj as ArrayCollection;
 					}
 				}
 		}
-
+		protected function chatPush(ev:Object):void{
+			var pushChatMessage:PushMessage = new PushMessage( 'Chat Message', [view.personid.value],  currentInstance.currentPerson.personId );
+			var pushChatSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushChatMessage );
+			signalSeq.addSignal( pushChatSignal );
+		}
 		/**
 		 * Create listeners for all of the view's children that dispatch events
 		 * that we want to handle in this mediator.
 		 */
 		override protected function setViewListeners():void {
 			super.setViewListeners(); 
+			view.chat.addEventListener(MouseEvent.CLICK,chatPush);
 		}
  
 		 
