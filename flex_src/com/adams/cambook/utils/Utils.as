@@ -35,6 +35,7 @@ package com.adams.cambook.utils
 		 
 		public static const SQL_TYPE:String="type";  
 		public static const ALERTHEADER:String='CamBook';
+		public static const TWEETSUCCESS:String='Success';
 		public static const DELETEITEMALERT:String="Are you sure you want to delete this item?";
 		
 		

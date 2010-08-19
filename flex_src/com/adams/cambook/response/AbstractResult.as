@@ -96,11 +96,13 @@ package com.adams.cambook.response
 				currentVO = resultObj as IValueObject;
 			}
 			
-		//	if( Object( currentVO ).hasOwnProperty( prevSignal.currentCollection.sortString ) || ( !currentVO ) ) {
-			var outCollection:ICollection = updateCollection( prevSignal.currentCollection, prevSignal.currentSignal, resultObj );
-			if( prevSignal.currentProcessor ) {
-				processVO( prevSignal.currentProcessor, outCollection );
-			} 
+			//if( Object( currentVO ).hasOwnProperty( prevSignal.currentCollection.sortString ) || ( !currentVO ) || 
+			if(Action.PAGINGACTIONS.indexOf( prevSignal.currentSignal.action ) ==-1) {
+				var outCollection:ICollection = updateCollection( prevSignal.currentCollection, prevSignal.currentSignal, resultObj );
+				if( prevSignal.currentProcessor ) {
+					processVO( prevSignal.currentProcessor, outCollection );
+				} 
+			}
 			resultSignal.dispatch( resultObj, prevSignal.currentSignal );
 			
 			// on push

@@ -242,6 +242,7 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		String returnMsg = null;
 		TwitterSupport tw;
 		Query query = null;
+		System.out.print(message);
 		try {
 			query = getSession().createQuery("select u.personId, u.tweetId, u.tweetPassword from Persons u where u.personId=?");
 			query.setParameter(0, userId);

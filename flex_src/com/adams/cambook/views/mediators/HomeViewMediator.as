@@ -1,6 +1,7 @@
 package com.adams.cambook.views.mediators
 {
 	import com.adams.cambook.dao.AbstractDAO;
+	import com.adams.cambook.dao.PagingDAO;
 	import com.adams.cambook.models.vo.*;
 	import com.adams.cambook.response.SignalSequence;
 	import com.adams.cambook.utils.Action;
@@ -35,6 +36,9 @@ package com.adams.cambook.views.mediators
 		 
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
+		
+		[Inject]
+		public var pagingDAO:PagingDAO;
 		
 		[Inject("fileDAO")]
 		public var fileDAO:AbstractDAO;
@@ -113,11 +117,23 @@ package com.adams.cambook.views.mediators
 					currentInstance.currentPersonsList = obj as ArrayCollection;
 					}
 				}
+				if( signal.destination == pagingDAO.destination ) {
+					if(obj == Utils.TWEETSUCCESS){
+						view.updateTxt.text = '';
+					}else{
+						Alert.show(obj as String,Utils.ALERTHEADER);
+					}
+				}
 		}
 		protected function chatPush(ev:Object):void{
+			var tweetSignal:SignalVO = new SignalVO( this, pagingDAO, Action.UPDATETWEET );
+			tweetSignal.id = currentInstance.currentPerson.personId;
+			tweetSignal.name = view.updateTxt.text;
+			signalSeq.addSignal( tweetSignal );
 		/*	var pushChatMessage:PushMessage = new PushMessage( 'Chat Message', [view.personid.value],  currentInstance.currentPerson.personId );
 			var pushChatSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushChatMessage );
 			signalSeq.addSignal( pushChatSignal );*/
+			
 		}
 		/**
 		 * Create listeners for all of the view's children that dispatch events
@@ -125,6 +141,7 @@ package com.adams.cambook.views.mediators
 		 */
 		override protected function setViewListeners():void {
 			super.setViewListeners(); 
+			view.tweet.clicked.add(chatPush);
 		}
  
 		 

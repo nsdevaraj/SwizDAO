@@ -29,7 +29,7 @@ package com.adams.cambook.dao
 	
 	import mx.collections.ArrayCollection;
 	
-	public class AbstractDAO extends CRUDObject
+	public class AbstractDAO extends CRUDObject implements IAbstractDAO
 	{  
 		[Inject]
 		public var messenger:NativeMessenger; 

@@ -16,6 +16,7 @@
 package com.adams.cambook.models.vo
 {
 	import com.adams.cambook.dao.AbstractDAO;
+	import com.adams.cambook.dao.IAbstractDAO;
 	import com.adams.cambook.models.collections.ICollection;
 	import com.adams.cambook.models.processor.IVOProcessor;
 	
@@ -43,7 +44,7 @@ package com.adams.cambook.models.vo
 		/**
 		 * Constructor, valueObject used to dispatch signals in a encapsulated object
 		 */
-		public function SignalVO( obj:Object=null, dao:AbstractDAO = null, actionStr:String ='', pushmsg:PushMessage = null ) {
+		public function SignalVO( obj:Object=null, dao:IAbstractDAO = null, actionStr:String ='', pushmsg:PushMessage = null ) {
 			
 			if( obj ) {
 				objectId = obj.name;	

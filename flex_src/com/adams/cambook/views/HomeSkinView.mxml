@@ -48,9 +48,9 @@
 		</s:Panel>
 		<s:VGroup width="100%" height="100%">
 			<s:HGroup verticalAlign="contentJustify" width="100%">
-				<s:TextArea height="50" width="100%"/>	
-				<s:Button label="update"/>
-				<s:Button label="tweet"/>
+				<s:TextArea id="updateTxt" height="50" width="100%"/>	
+				<components:NativeButton label="update" id="update"/>
+				<components:NativeButton label="tweet" id="tweet"/>
 			</s:HGroup>
 			<mx:TabNavigator width="100%" height="100%">
 				<s:NavigatorContent label="Wall">
@@ -83,13 +83,7 @@
 					</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-			</mx:TabNavigator>
-			<!--<s:Panel id="updatePanel" height="100%" width="100%"  >
-				<s:Scroller width="100%" height="100%">
-					<s:VGroup>
-					</s:VGroup>
-				</s:Scroller>
-			</s:Panel>-->
+			</mx:TabNavigator> 
 		</s:VGroup>
 		<s:VGroup id="searchPanel" height="100%" width="200">
 			<s:VGroup width="100%" height="150">
