@@ -16,6 +16,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.adams.cambook.dao.IGenericDAO;
+import com.adams.cambook.dao.entities.Persons;
 import com.adams.cambook.dao.hibernate.finder.FinderArgumentTypeFactory;
 import com.adams.cambook.dao.hibernate.finder.FinderExecutor;
 import com.adams.cambook.dao.hibernate.finder.FinderNamingStrategy;
@@ -124,7 +125,7 @@ public class CambookDaoHibernateImpl<T, PK extends Serializable> extends Hiberna
 	}
 
 	public List<T> executeFinder(Method method, final Object[] queryArgs) {
-		final Query namedQuery = prepareQuery(method, queryArgs);
+		final Query namedQuery = prepareQuery(method, queryArgs); 
 		return (List<T>) namedQuery.list();
 	}
 

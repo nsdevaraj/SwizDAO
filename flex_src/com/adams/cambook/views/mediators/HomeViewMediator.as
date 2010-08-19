@@ -35,10 +35,6 @@ package com.adams.cambook.views.mediators
 		 
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
-		
-		[Inject("statusDAO")]
-		public var statusDAO:AbstractDAO;
-		
 		 
 		private var _mainViewStackIndex:int
 		public function get mainViewStackIndex():int {
@@ -83,28 +79,34 @@ package com.adams.cambook.views.mediators
 			
 			
 			//load all persons
-		//	if( !personDAO.collection.findAll ) {
-				var persignal:SignalVO = new SignalVO( this, personDAO, Action.GET_LIST );
+		 	if(!int( currentInstance.currentPerson.personId) ) {
+				var persignal:SignalVO = new SignalVO( this, personDAO, Action.FINDBY_NAME );
+				persignal.name = currentInstance.currentPerson.personEmail;
 				signalSeq.addSignal( persignal ); 
-			/*}
-			else {
-				currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
-			}*/
-			
-			//load all status
-			if( !statusDAO.collection.findAll ) {
-				var statusSignal:SignalVO = new SignalVO( this, statusDAO, Action.GET_LIST ); 
-			//	signalSeq.addSignal( statusSignal );
-			}
-			
+				
+				var perAllsignal:SignalVO = new SignalVO( this, personDAO, Action.SQL_FINDALL );
+				signalSeq.addSignal( perAllsignal ); 
+			 } 
 		} 
 		override protected function setRenderers():void {
 			super.setRenderers(); 
 		} 
-		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void { 
+		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void {  
 		 	 	if( signal.destination == personDAO.destination ) {
-					if( signal.action == Action.GET_LIST ){
-						currentInstance.currentPerson = GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
+					if( signal.action == Action.FINDBY_NAME ){
+ 						currentInstance.currentPerson =GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
+						currentInstance.currentPerson.personAvailability = 1;
+						
+						var perAvailsignal:SignalVO = new SignalVO( this, personDAO, Action.UPDATE );
+						perAvailsignal.valueObject = currentInstance.currentPerson;
+						signalSeq.addSignal( perAvailsignal ); 
+						
+						var pushOnlineMessage:PushMessage = new PushMessage( Description.UPDATE, [],  currentInstance.currentPerson.personId );
+						var pushOnlineSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushOnlineMessage );
+						signalSeq.addSignal( pushOnlineSignal );
+					}
+					if( signal.action == Action.SQL_FINDALL ){
+					currentInstance.currentPersonsList = obj as ArrayCollection;
 					}
 				}
 		}

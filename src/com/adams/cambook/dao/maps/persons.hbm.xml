@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.adams.cambook.dao.entities.Persons" table="persons">
-        <id name="PersonId" type="integer" column="Person_ID">
+        <id name="personId" type="integer" column="Person_ID">
             <generator class="increment" />
         </id>
         <property name="personFirstname">
@@ -80,8 +80,11 @@
         </set>
         
     </class> 
-    <query name="Persons.findByLogin">
+    <query name="Persons.findByName">
         select u from Persons u where u.personEmail=?
-    </query>
-    
+    </query> 
+    <sql-query name="Persons.findAll">
+    <return alias="per" class="com.adams.cambook.dao.entities.Persons"/>
+    select * from persons per
+    </sql-query>
 </hibernate-mapping>

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.adams.cambook.dao.entities.Connections" table="connections">
-		<id name="ConnectionId" type="integer" column="Connection_ID">
+		<id name="connectionId" type="integer" column="Connection_ID">
             <generator class="increment" />
 		</id>
 		<property name="personFK">

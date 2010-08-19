@@ -11,7 +11,7 @@ public class Notes implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int NoteId;
+	private int noteId;
 	private String description;
 	private Date creationDate;
 	private int createdPersonFK;
@@ -27,12 +27,12 @@ public class Notes implements Serializable{
 		this.personFK = personFK;
 	}
 	private int noteStatusFK;
-	
+	 
 	public int getNoteId() {
-		return NoteId;
+		return noteId;
 	}
 	public void setNoteId(int noteId) {
-		NoteId = noteId;
+		this.noteId = noteId;
 	}
 	public String getDescription() {
 		return description;

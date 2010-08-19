@@ -42,15 +42,13 @@ package com.adams.cambook.utils
 		public static const VIEW_INDEX_ARR:Array = ['com'+FileSeparator+'adams'+FileSeparator+'cambook'+FileSeparator+'views'+FileSeparator+'modules'+FileSeparator+'LoginModule.swf',
 			'com'+FileSeparator+'adams'+FileSeparator+'cambook'+FileSeparator+'views'+FileSeparator+'modules'+FileSeparator+'HomeViewModule.swf'];
 		 
-		public static const PERSONKEY 	:String="PersonId"; 
-		public static const NOTEKEY 	:String="NoteId";  
+		public static const PERSONKEY 	:String="personId"; 
+		public static const NOTEKEY 	:String="noteId";  
 		public static const FILEKEY 	:String="fileID";  
-		public static const STATUSKEY 	:String="statusID";  
 		
 		public static const PERSONDAO 	:String="personDAO"; 
 		public static const NOTEDAO 	:String="noteDAO";  
-		public static const FILEDAO 	:String="fileDAO";  
-		public static const STATUSDAO 	:String="statusDAO";  
+		public static const FILEDAO 	:String="fileDAO";   
 		 
 		public static function getCustomRenderer( type:String):ClassFactory{
 			/*switch(type){

@@ -10,7 +10,7 @@ public class Persons implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int PersonId;
+	private int personId;
 	
 	private String personFirstname;
 	private String personLastname;
@@ -45,15 +45,15 @@ public class Persons implements Serializable {
 	}
 	public void setConnectionSet(Set<Persons> connectionSet) {
 		this.connectionSet = connectionSet;
-	}
-	public int getPersonId() {
-		return PersonId;
-	}
-	public void setPersonId(int personId) {
-		PersonId = personId;
-	}
+	} 
 	public String getPersonFirstname() {
 		return personFirstname;
+	}
+	public int getPersonId() {
+		return personId;
+	}
+	public void setPersonId(int personId) {
+		this.personId = personId;
 	}
 	public void setPersonFirstname(String personFirstname) {
 		this.personFirstname = personFirstname;

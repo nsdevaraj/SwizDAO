@@ -15,6 +15,8 @@
  */
 package com.adams.cambook.models.vo
 {
+	import mx.collections.ArrayCollection;
+
 	[Bindable]
 	public class CurrentInstance extends AbstractVO
 	{
@@ -26,6 +28,16 @@ package com.adams.cambook.models.vo
 		{ 
 		}  
 		
+		public function get currentPersonsList():ArrayCollection
+		{
+			return _currentPersonsList;
+		}
+
+		public function set currentPersonsList(value:ArrayCollection):void
+		{
+			_currentPersonsList = value;
+		}
+
 		public function get serverLastAccessedAt():Date
 		{
 			return _serverLastAccessedAt;
@@ -76,7 +88,10 @@ package com.adams.cambook.models.vo
 			return _config;
 		}  
 		private var _mainViewStackIndex:int;
-		private var _currentPerson:Persons = new Persons(); 
+		private var _currentPerson:Persons = new Persons();
+		
+		[ArrayElementType( "com.adams.cambook.models.vo.Persons" )]
+		private var _currentPersonsList:ArrayCollection = new ArrayCollection();
 		
 		private var _serverLastAccessedAt:Date = new Date();
 		private var _idle:Boolean; 

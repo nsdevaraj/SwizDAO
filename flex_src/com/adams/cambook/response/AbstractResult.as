@@ -154,6 +154,8 @@ package com.adams.cambook.response
 				case Action.DELETE_ALL:
 					collection.removeAll();
 				break;
+				case Action.SQL_FINDALL:
+					break;
 				default:
 				break;	
 			}

@@ -27,6 +27,7 @@ package com.adams.cambook.utils
 		public static const DELETE:String = 'Delete';
 		public static const GET_COUNT:String = 'Count';
 		public static const GET_LIST:String = 'FindAll';
+		public static const SQL_FINDALL:String = 'SQLFindAll';
 		public static const BULK_UPDATE:String = 'BulkUpdate';
 		public static const DELETE_ALL:String = 'DeleteAll';
 		public static const PUSH_MSG:String = 'PushMsg';

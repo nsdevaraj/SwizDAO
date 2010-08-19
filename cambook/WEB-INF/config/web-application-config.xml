@@ -75,10 +75,7 @@
 				</value>
 				<value>
 					com/adams/cambook/dao/maps/persons.hbm.xml
-				</value>
-				<value>
-					com/adams/cambook/dao/maps/status.hbm.xml
-				</value>
+				</value> 
 			</list>
 		</property>
 		<property name="eventListeners">

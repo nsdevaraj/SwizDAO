@@ -94,8 +94,13 @@ package com.adams.cambook.service
 			receivedSignal.description = event.message.body;
 			
 			avoidSignal = false;   
-			
-			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.PersonId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {
+			if( daoName == Utils.PERSONDAO ) {
+				//if id is not in the collection 
+				if( currentInstance.currentPerson.personId == ( receivedSignal.description as int ) ) {
+					avoidSignal = true;
+				}
+			}
+			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.personId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {
 					signalSeq.addSignal( receivedSignal );
 			}			
 		}

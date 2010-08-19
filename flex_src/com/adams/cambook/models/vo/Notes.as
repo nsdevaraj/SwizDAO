@@ -6,7 +6,7 @@ package com.adams.cambook.models.vo
 	[RemoteClass(alias='com.adams.cambook.dao.entities.Notes')]
 	public class Notes extends AbstractVO
 	{
-		private var _NoteId:int;
+		private var _noteId:int;
 		private var _description:String;
 		private var _creationDate:Date;
 		private var _createdPersonFK:int;
@@ -83,14 +83,14 @@ package com.adams.cambook.models.vo
 			_description = value;
 		}
 
-		public function get NoteId():int
+		public function get noteId():int
 		{
-			return _NoteId;
+			return _noteId;
 		}
 
-		public function set NoteId(value:int):void
+		public function set noteId(value:int):void
 		{
-			_NoteId = value;
+			_noteId = value;
 		}
 
 	}

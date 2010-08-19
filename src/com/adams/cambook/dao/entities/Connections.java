@@ -9,17 +9,17 @@ public class Connections implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int ConnectionId;
+	private int connectionId;
     
 	private int personFK;
 	
 	private int connectionFK;
-	
+	 
 	public int getConnectionId() {
-		return ConnectionId;
+		return connectionId;
 	}
 	public void setConnectionId(int connectionId) {
-		ConnectionId = connectionId;
+		this.connectionId = connectionId;
 	}
 	public int getPersonFK() {
 		return personFK;

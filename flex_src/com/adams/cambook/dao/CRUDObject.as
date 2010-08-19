@@ -197,6 +197,11 @@ package com.adams.cambook.dao
 			delegate.token = remoteService.getList(); 
 			return delegate.token;
 		}
+		public function getSQLList():AsyncToken {
+			invoke();
+			delegate.token = remoteService.findAll(); 
+			return delegate.token;
+		}
 		/**
 		 * Whenever an bulk update action is called by AbstractDAO.
 		 * invokeAction initates to perform Generic bulk update Action

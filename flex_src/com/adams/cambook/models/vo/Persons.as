@@ -18,15 +18,19 @@ package com.adams.cambook.models.vo
 		private var  _personAnswer:String;
 		private var  _tweetPassword:String;
 		private var  _personRole:String;
+		
 		[ArrayElementType( "com.adams.cambook.models.vo.Persons" )]
 		public var  connectionSet:ArrayCollection;
+		
+		[ArrayElementType( "com.adams.cambook.models.vo.Notes" )]
+		public var  notesSet:ArrayCollection;
 		
 		private var _activated:int;
 		private var _personCity:String;
 		private var _personCountry:String;
 		private var _personEmail:String;
 		private var _personFirstname:String;
-		private var _PersonId:int;
+		private var _personId:int;
 		private var _personLastname:String;
 		private var _personMobile:String;
 		private var _personPassword:String;
@@ -157,14 +161,14 @@ package com.adams.cambook.models.vo
 			_personLastname = value;
 		}
 		
-		public function get PersonId():int
+		public function get personId():int
 		{
-			return _PersonId;
+			return _personId;
 		}
 		
-		public function set PersonId(value:int):void
+		public function set personId(value:int):void
 		{
-			_PersonId = value;
+			_personId = value;
 		}
 		
 		public function get personFirstname():String

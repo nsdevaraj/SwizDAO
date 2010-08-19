@@ -119,6 +119,9 @@ package com.adams.cambook.dao
 						collection.findAll = true;
 						getList();
 					break;
+					case Action.SQL_FINDALL: 
+						getSQLList();
+						break;
 					case Action.BULK_UPDATE:
 						bulkUpdate( obj.list );
 					break;
