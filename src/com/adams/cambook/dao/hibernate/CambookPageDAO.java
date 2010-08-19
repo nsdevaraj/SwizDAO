@@ -44,7 +44,7 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		return o;
 	}
 	
-	public List<?> bulkUpdate(List<?> objList){		
+	private List<?> bulkUpdate(List<?> objList){		
 		getHibernateTemplate().saveOrUpdateAll(objList);
 		return objList;
 	}
@@ -211,13 +211,13 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		return query.list();
 	}	
 	
-	public List<?> refreshTweets(String userId) {
+	public void refreshTweets(int userId) {
 		Query query = null;
 		TwitterSupport tw;
 		List<Notes> notesSet; 
 		try {
 			
-			query = getSession().createQuery("select u.PersonId, u.tweetId, u.tweetPassword from Persons u where u.personEmail=?");
+			query = getSession().createQuery("select u.personId, u.tweetId, u.tweetPassword from Persons u where u.personId=?");
 			query.setParameter(0, userId);
 			List value = query.list();
 			
@@ -236,6 +236,26 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+	}
+	
+	public String updateTweet(String message, int userId) {
+		String returnMsg = null;
+		TwitterSupport tw;
+		Query query = null;
+		try {
+			query = getSession().createQuery("select u.personId, u.tweetId, u.tweetPassword from Persons u where u.personId=?");
+			query.setParameter(0, userId);
+			List value = query.list();
+			
+			if(null!=value) {
+				Object[] vals = (Object[])value.get(0);
+				int personId = (Integer)vals[0];
+				tw = new TwitterSupport((String)vals[1],(String)vals[2], personId);
+				returnMsg = tw.updateNewTweet(message);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnMsg;
 	}
 }

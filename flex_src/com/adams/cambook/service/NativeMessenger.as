@@ -24,7 +24,10 @@ package com.adams.cambook.service
 	import com.adams.cambook.response.SignalSequence;
 	import com.adams.cambook.utils.Action;
 	import com.adams.cambook.utils.Description;
+	import com.adams.cambook.utils.GetVOUtil;
 	import com.adams.cambook.utils.Utils;
+	
+	import flash.utils.Dictionary;
 	
 	import mx.controls.Alert;
 	import mx.messaging.events.MessageEvent;
@@ -74,7 +77,7 @@ package com.adams.cambook.service
 			consume.consumeAttempt.add( consumeHandler );
 		}
 		
-		private var sentMsgArr:Array=[];
+		private var sentMsgArr:Dictionary=new Dictionary();
 		public function produceMessage( signal:SignalVO ):void {
 			var message:AsyncMessage = new AsyncMessage();
 			message.headers = [];
@@ -88,9 +91,23 @@ package com.adams.cambook.service
 			//chat message
 			if (Description.DESCARR.indexOf(signal.name)==-1){
 				if(sentMsgArr[signal.receivers[0].toString()]){
-					Alert.show(signal.receivers[0], 'offline');
+					sentMsgArr[signal.receivers[0].toString()].push(signal.name);
+					if(sentMsgArr[signal.receivers[0].toString()].length>3){
+						if(personDAO.collection.findItem(signal.receivers[0])){
+							var perAvailsignal:SignalVO = new SignalVO( null, personDAO, Action.UPDATE );
+							var offlinePerson:Persons = GetVOUtil.getVOObject(signal.receivers[0],personDAO.collection.items,personDAO.destination,Persons) as Persons;
+							offlinePerson.personAvailability = 0;
+							perAvailsignal.valueObject = offlinePerson;
+							signalSeq.addSignal( perAvailsignal ); 
+							
+							var pushOfflineMessage:PushMessage = new PushMessage( Description.UPDATE, [],  signal.receivers[0]);
+							var pushOfflineSignal:SignalVO = new SignalVO( null, personDAO, Action.PUSH_MSG, pushOfflineMessage );
+							signalSeq.addSignal( pushOfflineSignal );
+						}
+					}
+				}else{
+					sentMsgArr[signal.receivers[0].toString()] = [signal.name];
 				}
-				sentMsgArr[signal.receivers[0].toString()] = signal.name;
 				
 			}
 		} 
@@ -117,12 +134,15 @@ package com.adams.cambook.service
 					avoidSignal = true;
 				}
 				//consume chat message
-			 	if (Description.DESCARR.indexOf(message)==-1){
+			 	if (Description.DESCARR.indexOf(message)==-1 || Description.ACKNOWLEDGE == message){
 					avoidSignal = true;
+					// find message intended to me
 					if( currentInstance.currentPerson.personId == ( receivedSignal.receivers[0] as int ) ) {
 						var personSentId:int = receivedSignal.description as int;
-						// create acknowledge message on receivng chat message
+						
+						// on receivng chat message
 						if(message != Description.ACKNOWLEDGE){
+							// create acknowledge message
 							var pushChatMessage:PushMessage = new PushMessage( Description.ACKNOWLEDGE, [personSentId],  currentInstance.currentPerson.personId );
 							var pushChatSignal:SignalVO = new SignalVO( null, personDAO, Action.PUSH_MSG, pushChatMessage );
 							signalSeq.addSignal( pushChatSignal );
@@ -131,14 +151,14 @@ package com.adams.cambook.service
 							var sentPerson:Persons = new Persons();
 							sentPerson.personId = personSentId;
 							sentPerson =	Utils.findObject(sentPerson,currentInstance.currentPersonsList,personDAO.destination) as Persons;
-							Alert.show(sentPerson.personFirstname, message);
+							Alert.show(message,sentPerson.personFirstname);
 							
-						}else{
+						}else if( currentInstance.currentPerson.personId != ( receivedSignal.description as int ) ) {
 							//check previous push
-							sentMsgArr[personSentId.toString()] = '';
+							sentMsgArr[personSentId.toString()] = [];
 						}
 					} 
-				}
+				} 				
 			}
 			if( (( receivedSignal.receivers.indexOf( currentInstance.currentPerson.personId ) != -1 ) || ( receivedSignal.receivers.length == 0 )) && ( !avoidSignal ) ) {
 					signalSeq.addSignal( receivedSignal );

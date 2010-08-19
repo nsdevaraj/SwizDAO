@@ -38,6 +38,8 @@ package com.adams.cambook.models.vo
 		private var _objectId:String;
 		private var _daoName:String;
 		private var _performed:Boolean;
+		private var _startIndex:int;
+		private var _endIndex:int;
 		/**
 		 * Constructor, valueObject used to dispatch signals in a encapsulated object
 		 */
@@ -63,6 +65,26 @@ package com.adams.cambook.models.vo
 		
 		}
 		
+		public function get startIndex():int
+		{
+			return _startIndex;
+		}
+
+		public function set startIndex(value:int):void
+		{
+			_startIndex = value;
+		}
+
+		public function get endIndex():int
+		{
+			return _endIndex;
+		}
+
+		public function set endIndex(value:int):void
+		{
+			_endIndex = value;
+		}
+
 		public function get performed():Boolean
 		{
 			return _performed;

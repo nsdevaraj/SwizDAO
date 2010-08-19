@@ -18,7 +18,7 @@
 		   xmlns:services="org.swizframework.utils.services.*" 
 		   xmlns:mediateview="com.briankotek.mediateview.*" 
 		   xmlns:formprocessors="com.nsdevaraj.swiz.processors.*"
-		   activate="initializeHandler(event)">
+		   activate="initializeHandler(event)" xmlns:utils="com.adams.cambook.utils.*">
 	
 	<fx:Script>
 		<![CDATA[  
@@ -88,6 +88,7 @@
 			<swiz:Prototype name="{Utils.PERSONDAO}" constructorArguments="{[Utils.PERSONKEY,Persons,personProcessor,Utils.PERSONDAO]}" type="{AbstractDAO}" singleton="true"/>
 			<swiz:Prototype name="{Utils.NOTEDAO}" constructorArguments="{[Utils.NOTEKEY,Notes,notesProcessor,Utils.NOTEDAO]}" type="{AbstractDAO}" singleton="true"/>
 		    <swiz:Prototype name="{Utils.FILEDAO}" constructorArguments="{[Utils.FILEKEY,Files,fileProcessor,Utils.FILEDAO]}" type="{AbstractDAO}" singleton="true"/>
+			<utils:PagingDAO/>
 		    <!-- DAO End --> 
 			
 			<!-- Controller Begin -->

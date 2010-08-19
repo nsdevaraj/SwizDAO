@@ -12,6 +12,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 
 public class TwitterSupport {
 
@@ -24,16 +25,22 @@ public class TwitterSupport {
 		this.personId = personId;
 	}
 
-	public void updateNewTweet() {
-		
-		Twitter tw = new TwitterFactory().getInstance(twitterId, twitterPassword);
-		
-		try { 
-			tw.updateStatus("my First Java Update.");
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
+	public String updateNewTweet(String message) {
+		String returnMsg = "Success";
+		try {
+			Twitter tw = new TwitterFactory().getInstance(twitterId, twitterPassword);
+			tw.updateStatus(message);
+		} catch (TwitterException e) {	
+			if(e.getExceptionCode().equals("15bb6564-00e304a2")) {
+				if(e.getStatusCode()==403) {
+					returnMsg = "Twitter is not Connectable.";
+				} else {
+					returnMsg = "Invalid Credentials!";
+				}
+			}
 			e.printStackTrace();
 		}
+		return returnMsg;
 	}
 	
 	public List<Notes> getTwitterUpdates() {
