@@ -11,8 +11,7 @@
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
-
-	 
+ 
 	<s:states>
 		<s:State name="normal" />
 		<s:State name="register"/>
@@ -41,13 +40,13 @@
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
 				</mx:FormItem>
 			</mx:Form>
-			<mx:Form includeIn="register" horizontalCenter="0">
+			<mx:Form id="registerForm" includeIn="register" horizontalCenter="0">
 				<mx:FormHeading label="New User"/>
 				<mx:FormItem label="First Name">
 					<s:TextInput id="personFirstname"/>
 				</mx:FormItem>
-				<mx:FormItem id="personLastname" label="Last Name">
-					<s:TextInput  />
+				<mx:FormItem label="Last Name">
+					<s:TextInput id="personLastname" />
 				</mx:FormItem>
 				<mx:FormItem label="Email">
 					<s:TextInput id="personEmail" />
@@ -57,28 +56,27 @@
 				</mx:FormItem>
 				<mx:FormItem label="Twitter id">
 					<s:TextInput  id="tweetId"/>
-				</mx:FormItem>
-				<mx:FormItem label="Photo" direction="horizontal" horizontalGap="0">
-					<s:TextInput  width="76"/>
-					<s:Button label="Browse" />
-				</mx:FormItem>
-				<mx:FormItem id="personMobile" label="Mobile">
-					<s:TextInput  />
+				</mx:FormItem> 
+				<mx:FormItem label="Twitter id">
+					<s:TextInput  id="tweetPassword" displayAsPassword="true"/>
+				</mx:FormItem> 
+				<mx:FormItem label="Mobile">
+					<s:TextInput id="personMobile"  />
 				</mx:FormItem>
 				<mx:FormItem label="Question">
-					<s:TextInput  id="personQuestion"/>
+					<s:ComboBox id="personQuestion"/>
 				</mx:FormItem>
 				<mx:FormItem label="Answer">
 					<s:TextInput  id="personAnswer"/>
 				</mx:FormItem>
 				<mx:FormItem label="City">
-					<s:TextInput  id="personCity"/>
+					<s:TextInput id="personCity"/>
 				</mx:FormItem>
 				<mx:FormItem label="Country">
-					<s:TextInput  id="personCountry"/>
+					<s:TextInput id="personCountry"/>
 				</mx:FormItem>
 				<mx:FormItem label="Postal Code">
-					<s:TextInput  id="personPostalCode" />
+					<s:TextInput id="personPostalCode" />
 				</mx:FormItem>
 			</mx:Form>
 		</s:Group>
@@ -86,7 +84,8 @@
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
 				<components:NativeButton id="submitBtn" label="Login" includeIn="normal"/>
 				<components:NativeButton label="New User" click="currentState='register'" includeIn="normal"/>
-				<components:NativeButton id="registerBtn" label="Register" includeIn="register" click="currentState='normal'"/>
+				<components:NativeButton id="registerBtn" label="Register" includeIn="register"/>
+				<components:NativeButton id="cancelBtn" label="Cancel" includeIn="register" click="currentState='normal'"/>
 			</s:HGroup>
 		</s:controlBarContent>
 	</s:Panel> 

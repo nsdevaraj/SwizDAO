@@ -4,17 +4,18 @@
 @namespace view "com.adams.scrum.views.components.*";
 
 @font-face {
-	font-family: "scFont";
+	fontFamily: "scFont";
 	src: url("assets/fonts/mriam.ttf");
 	embedAsCff: true;
 }
  
 mx|Button, mx|Form,mx|FormItem, mx|FormItemLabel{
-	font-family: scFont;
+	fontFamily: scFont;
+	fontLookup: embeddedCFF;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 }
 mx|DateField {
-	font-family: Tahoma;
+	fontFamily: scFont;
 	textInputClass: ClassReference("mx.controls.MXFTETextInput");
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
@@ -26,7 +27,8 @@ mx|Label {
 }
  
 s|Label{
-	font-family:scFont;
+	fontFamily:scFont;
+	fontLookup: embeddedCFF;
 	color:#000000;
 	font-size:11;
 } 
@@ -37,13 +39,15 @@ s|Application{
 	skin-class:ClassReference('assets.skins.DTApplicationSkin');
 }
 s|TextInput{
-	font-family:scFont;
+	fontFamily:scFont;
+	fontLookup: embeddedCFF;
 	skinClass: ClassReference('assets.skins.Components.DTTextInput');
 	focus-alpha:0;
 }
  
 s|Button {
-	font-family:scFont;
+	fontFamily:scFont;
+	fontLookup: embeddedCFF;
 	skinClass: ClassReference('assets.skins.ButtonIcon');
 	color: #959494;
 }  
@@ -52,13 +56,14 @@ s|List s|Scroller {
 	verticalScrollPolicy: off;
 }
 s|List{
-	
 	skinClass:ClassReference("assets.skins.ListSkin");
-	font-family:scFont;
+	fontFamily:scFont;
+	fontLookup: embeddedCFF;
 	alternating-item-colors:#f4f4f4,#e5e5e5;
 }
 view|RatingComponent.Star{
-	font-family:scFont;
+	fontFamily:scFont;
+	fontLookup: embeddedCFF;
 	ratingIcon: ClassReference('assets.skins.Star');
 	activeIconColor: "0xffff00";
 }
