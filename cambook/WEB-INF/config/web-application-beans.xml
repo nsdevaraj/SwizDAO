@@ -57,4 +57,12 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+
+	<bean id="unsecureDAO"
+		class="com.adams.cambook.dao.hibernate.CambookPageDAO">
+		<flex:remoting-destination channels="my-longpolling-amf" include-methods="SmtpSSLMail" />
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 </beans>

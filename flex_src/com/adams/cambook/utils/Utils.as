@@ -46,7 +46,8 @@ package com.adams.cambook.utils
 		public static const PERSONKEY 	:String="personId"; 
 		public static const NOTEKEY 	:String="noteId";  
 		public static const FILEKEY 	:String="fileID";  
-		public static const PAGINGDAO 	:String='pagingDAO'
+		public static const PAGINGDAO 	:String='pagingDAO';
+		public static const UNSECUREDAO	:String='unsecureDAO';
 		public static const PERSONDAO 	:String="personDAO"; 
 		public static const NOTEDAO 	:String="noteDAO";  
 		public static const FILEDAO 	:String="fileDAO";   

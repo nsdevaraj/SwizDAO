@@ -2,7 +2,9 @@ package com.adams.cambook.views.mediators
 { 
 	
 	import com.adams.cambook.dao.AbstractDAO;
+	import com.adams.cambook.dao.PagingDAO;
 	import com.adams.cambook.models.vo.*;
+	import com.adams.cambook.utils.Action;
 	import com.adams.cambook.utils.Utils;
 	import com.adams.cambook.views.LoginSkinView;
 	
@@ -31,6 +33,8 @@ package com.adams.cambook.views.mediators
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
 		
+		[Inject]
+		public var pagingDAO:PagingDAO;
 		/**
 		 * Field validator for the user name form field.
 		 */
@@ -95,7 +99,7 @@ package com.adams.cambook.views.mediators
 			// set the focus to the username field
 			view.userNameTextInput.setFocus();
 		}
-		
+		private var registerState:Boolean;
 		/**
 		 * Create listeners for all of the view's children that dispatch events
 		 * that we want to handle in this mediator.
@@ -107,11 +111,41 @@ package com.adams.cambook.views.mediators
 			// handle user input on the form fields for instant form validation feedback
 			view.userNameTextInput.addEventListener(Event.CHANGE, inputChgHandler);
 			view.passwordTextInput.addEventListener(Event.CHANGE, inputChgHandler);
-			
+			view.newUserBtn.clicked.add(changeToRegisterView);
+			view.cancelBtn.clicked.add(changeToRegisterView);
+			view.registerBtn.clicked.add(createNewUser);
 			// handle the click of the submit button
 			view.submitBtn.clicked.add( submitBtnClickHandler);
 		}
-		
+		protected function createNewUser(evt:MouseEvent):void
+		{
+			var loginMailSignal:SignalVO = new SignalVO( this, pagingDAO, Action.SENDMAIL );
+			loginMailSignal.emailId = view.personEmail.text;
+			loginMailSignal.name = 'test mail';
+			loginMailSignal.emailBody = 'password'
+			signalSeq.addSignal( loginMailSignal );			
+		}
+		protected function changeToRegisterView(evt:MouseEvent):void
+		{
+			registerState = !registerState;
+			changeState(registerState);
+		}
+		protected function changeState(register:Boolean):void
+		{
+			view.registerBtn.includeInLayout = register;
+			view.cancelBtn.includeInLayout = register;
+			view.registerForm.includeInLayout = register
+			view.registerBtn.visible = register;
+			view.cancelBtn.visible = register;
+			view.registerForm.visible = register;
+			
+			view.loginForm.includeInLayout = !register;
+			view.loginForm.visible = !register;
+			view.submitBtn.visible = !register;
+			view.submitBtn.includeInLayout = !register;
+			view.newUserBtn.includeInLayout = !register;
+			view.newUserBtn.visible = !register;
+		}
 		/**
 		 * Handles the click event from the submit button.
 		 * Grabs the username and password from the respeective text

@@ -10,26 +10,15 @@
 	
 	<s:layout>
 		<s:BasicLayout/>
-	</s:layout>
- 
-	<s:states>
-		<s:State name="normal" />
-		<s:State name="register"/>
-	</s:states>
+	</s:layout> 
 	 
 	<s:Panel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"/>
 		</s:layout>
 		<s:Group width="100%">
-			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  />
-			<!--<s:Rect width="600" height="95%" verticalCenter="0" right="10">
-				<s:fill><s:SolidColor color="#ffffff" alpha=".8"/></s:fill>
-				<s:stroke>
-					<s:SolidColorStroke color="#cfcfcf" />
-				</s:stroke>
-			</s:Rect>-->
-			<mx:Form id="loginForm"  includeIn="normal" verticalCenter="0" horizontalCenter="0" paddingBottom="0">
+			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  /> 
+			<mx:Form id="loginForm" verticalCenter="0" horizontalCenter="0" paddingBottom="0">
 				<mx:FormItem width="100%" label="email id:" required="true">
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
 				</mx:FormItem>
@@ -40,8 +29,8 @@
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
 				</mx:FormItem>
 			</mx:Form>
-			<mx:Form id="registerForm" includeIn="register" horizontalCenter="0">
-				<mx:FormHeading label="New User"/>
+			<mx:Form id="registerForm" includeInLayout="false" visible="false" horizontalCenter="0">
+				<mx:FormHeading label="Register Form"/>
 				<mx:FormItem label="First Name">
 					<s:TextInput id="personFirstname"/>
 				</mx:FormItem>
@@ -82,10 +71,10 @@
 		</s:Group>
 		<s:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
-				<components:NativeButton id="submitBtn" label="Login" includeIn="normal"/>
-				<components:NativeButton label="New User" click="currentState='register'" includeIn="normal"/>
-				<components:NativeButton id="registerBtn" label="Register" includeIn="register"/>
-				<components:NativeButton id="cancelBtn" label="Cancel" includeIn="register" click="currentState='normal'"/>
+				<components:NativeButton id="submitBtn" label="Login"/>
+				<components:NativeButton id="newUserBtn" label="New User"/>
+				<components:NativeButton id="registerBtn" label="Register" includeInLayout="false" visible="false"/>
+				<components:NativeButton id="cancelBtn" label="Cancel" includeInLayout="false" visible="false" />
 			</s:HGroup>
 		</s:controlBarContent>
 	</s:Panel> 

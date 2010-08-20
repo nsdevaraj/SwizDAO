@@ -24,7 +24,6 @@ package com.adams.cambook.dao
 		
 		public function PagingDAO()
 		{
-			
 		}
 		private var _daoName:String;
 		public function get daoName():String
@@ -55,7 +54,7 @@ package com.adams.cambook.dao
 			_collection=v;
 		}
 		
-		protected var _destination:String =Utils.PAGINGDAO;  
+		protected var _destination:String = Utils.PAGINGDAO;  
 		public function get destination():String {
 			return _destination;
 		}
@@ -106,6 +105,8 @@ package com.adams.cambook.dao
 						return delegate.token;
 						break;
 					case Action.SENDMAIL:
+						remoteService = _controlService.unAuthRo;
+						remoteService.destination = Utils.UNSECUREDAO;
 						delegate.token = remoteService.SmtpSSLMail(obj.emailId, obj.name, obj.emailBody); 
 						return delegate.token;
 						break;
