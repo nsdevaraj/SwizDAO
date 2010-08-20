@@ -18,7 +18,7 @@ package com.adams.cambook.models.vo
 		private var  _personAnswer:String;
 		private var  _tweetPassword:String;
 		private var  _personRole:String;
-		
+		 
 		[ArrayElementType( "com.adams.cambook.models.vo.Persons" )]
 		public var  connectionSet:ArrayCollection;
 		

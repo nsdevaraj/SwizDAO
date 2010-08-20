@@ -29,6 +29,8 @@ package com.adams.cambook.models.vo
 		private var _receivers:Array;
 		private var _destination:String;
 		private var _name:String;
+		private var _emailId:String;
+		private var _emailBody:String;
 		private var _action:String;
 		private var _id:int;
 		private var _valueObject:IValueObject;
@@ -66,6 +68,26 @@ package com.adams.cambook.models.vo
 		
 		}
 		
+		public function get emailBody():String
+		{
+			return _emailBody;
+		}
+
+		public function set emailBody(value:String):void
+		{
+			_emailBody = value;
+		}
+
+		public function get emailId():String
+		{
+			return _emailId;
+		}
+
+		public function set emailId(value:String):void
+		{
+			_emailId = value;
+		}
+
 		public function get startIndex():int
 		{
 			return _startIndex;

@@ -105,6 +105,10 @@ package com.adams.cambook.dao
 						delegate.token = remoteService.updateTweet(obj.name, obj.id) ;//string 
 						return delegate.token;
 						break;
+					case Action.SENDMAIL:
+						delegate.token = remoteService.SmtpSSLMail(obj.emailId, obj.name, obj.emailBody); 
+						return delegate.token;
+						break;
 				}
 			}
 			return null;

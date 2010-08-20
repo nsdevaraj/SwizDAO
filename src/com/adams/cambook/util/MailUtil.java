@@ -129,9 +129,6 @@ public class MailUtil {
 			Integer projectId = 0;
 			Integer personId = 0;
 			Integer eventType = 59;
-			
-			
-
         }   
 	}	
 	
@@ -142,23 +139,4 @@ public class MailUtil {
             return new PasswordAuthentication(BuildConfig.smtpMailFromUser, BuildConfig.smtpMailFromPass);
         }
     }
-	
-	
 }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
