@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <projectDescription>
 	<name>cambook</name>
-	<comment></comment>
+	<comment/>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -44,3 +44,4 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>
+
