@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.adams.cambook.dao.entities.Notes;
 import com.adams.cambook.dao.entities.Persons;
+com.adams.cambook.util.MailUtil;
 import com.adams.cambook.util.TwitterSupport;
 
 public class CambookPageDAO extends HibernateDaoSupport {
@@ -236,6 +237,16 @@ public class CambookPageDAO extends HibernateDaoSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public void SmtpSSLMail(String msgTo, String msgSubject, String msgBody) throws Exception {
+		try {
+			MailUtil mailutil = new MailUtil();
+			mailutil.setCambookPageDAO( this ); 
+			mailutil.SmtpSSLMail(msgTo, msgSubject, msgBody);
+			
+		} catch (Exception e) {
+			throw new Exception("SMTP exception.");
+		}		
 	}
 	
 	public String updateTweet(String message, int userId) {
