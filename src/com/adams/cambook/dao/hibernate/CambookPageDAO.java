@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.adams.cambook.dao.entities.Notes;
 import com.adams.cambook.dao.entities.Persons;
-com.adams.cambook.util.MailUtil;
+import com.adams.cambook.util.MailUtil;
 import com.adams.cambook.util.TwitterSupport;
 
 public class CambookPageDAO extends HibernateDaoSupport {
