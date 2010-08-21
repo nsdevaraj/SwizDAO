@@ -8,6 +8,7 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.utils.ArrayUtil;
 	import com.adams.cambook.utils.Description;
 	import com.adams.cambook.utils.GetVOUtil;
+	import com.adams.cambook.utils.ObjectUtils;
 	import com.adams.cambook.utils.Utils;
 	import com.adams.cambook.views.HomeSkinView;
 	import com.adams.cambook.views.components.NativeList;
@@ -16,6 +17,7 @@ package com.adams.cambook.views.mediators
 	import flash.events.MouseEvent;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.ArrayList;
 	import mx.controls.Alert;
 	import mx.core.ClassFactory;
 	import mx.core.IFactory;
@@ -23,7 +25,11 @@ package com.adams.cambook.views.mediators
 	import mx.events.FlexEvent;
 	import mx.events.ItemClickEvent;
 	import mx.events.ListEvent;
+	import mx.events.ValidationResultEvent;
+	import mx.validators.StringValidator;
+	import mx.validators.Validator;
 	
+	import spark.components.TextInput;
 	import spark.events.IndexChangeEvent;
 	import spark.skins.spark.DefaultItemRenderer;
 	
@@ -42,7 +48,11 @@ package com.adams.cambook.views.mediators
 		
 		[Inject("fileDAO")]
 		public var fileDAO:AbstractDAO;
+		
+		[Form(form="view.passwordForm")]
+		public var personObj:Object;
 		 
+		protected var passWordNameValidator:StringValidator;
 		private var _mainViewStackIndex:int
 		public function get mainViewStackIndex():int {
 			return _mainViewStackIndex;
@@ -51,6 +61,19 @@ package com.adams.cambook.views.mediators
 			_mainViewStackIndex = value;
 		} 
 		
+		
+		/**
+		 * Create the form field validators for the login fields.
+		 */
+		protected function createFormValidators():void
+		{ 
+			
+			// create the user name validator
+			passWordNameValidator = new StringValidator();
+			passWordNameValidator.requiredFieldError = "Please enter minimum 5 Characters";
+			passWordNameValidator.minLength = 5;
+			passWordNameValidator.property = "text";
+		}
 		/**
 		 * Constructor.
 		 */
@@ -72,7 +95,33 @@ package com.adams.cambook.views.mediators
 		override public function setView( value:Object ):void { 
 			super.setView(value);	
 		}
+		/**
+		 * Handles text input changes to the username and password and validate them.
+		 * Only enable the submit button if both the username and password fields 
+		 * are valid.
+		 * 
+		 * @param evt    Change event from the targeted input field.
+		 */
+		protected function inputChgHandler(evt:Event):void
+		{
+			view.submitBtn.enabled = isTextInputFieldValid(view.personPassword1,passWordNameValidator) && isTextInputFieldValid(view.personPassword2,passWordNameValidator);
+		}
 		
+		/**
+		 * Determines if the username text input is valid.
+		 * @return Boolean
+		 */
+		protected function isTextInputFieldValid(textInput:spark.components.TextInput, validator:Validator):Boolean
+		{
+			textInput.errorString = "";
+			
+			var resultEvent:ValidationResultEvent = validator.validate(textInput.text);
+			if (resultEvent.type != ValidationResultEvent.VALID)
+			{
+				textInput.errorString = resultEvent.message;
+			}
+			return (resultEvent.type == ValidationResultEvent.VALID);
+		}
 		/**
 		 * The <code>init()</code> method is fired off automatically by the 
 		 * AbstractViewMediator when the creation complete event fires for the
@@ -84,7 +133,10 @@ package com.adams.cambook.views.mediators
 			super.init();  
 			viewIndex = Utils.HOME_INDEX;
 			
+			view.personQuestion.dataProvider = new ArrayList(["My Favorite Movie?","My Mother's Maiden Name?","My First Vehicle?","My Favorite Color?"]);
+			view.personQuestion.selectedIndex = 0;
 			
+			createFormValidators();
 			//load all persons
 		 	if(!int( currentInstance.currentPerson.personId) ) {
 				var persignal:SignalVO = new SignalVO( this, personDAO, Action.FINDBY_NAME );
@@ -98,15 +150,35 @@ package com.adams.cambook.views.mediators
 		override protected function setRenderers():void {
 			super.setRenderers(); 
 		} 
+		private var passwordState:Boolean;
+		
+		protected function changeToPasswordView(evt:MouseEvent = null):void
+		{
+			passwordState = !passwordState;
+			changeState(passwordState);
+		}
+		protected function changeState(register:Boolean):void
+		{
+			view.passwordForm.includeInLayout = register;
+			view.passwordForm.visible = register;
+			view.passwordBtn.includeInLayout =!register;
+			view.passwordBtn.visible = !register;
+		}
 		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void {  
 		 	 	if( signal.destination == personDAO.destination ) {
 					if( signal.action == Action.FINDBY_NAME ){
  						currentInstance.currentPerson =GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
 						currentInstance.currentPerson.personAvailability = 1;
 						
-						var perAvailsignal:SignalVO = new SignalVO( this, personDAO, Action.UPDATE );
-						perAvailsignal.valueObject = currentInstance.currentPerson;
-						signalSeq.addSignal( perAvailsignal ); 
+						ObjectUtils.setUpForm(currentInstance.currentPerson,view.personForm); 
+						ObjectUtils.setUpForm(currentInstance.currentPerson,view.passwordForm); 
+						if(currentInstance.currentPerson.personRelations == 0){
+							changeToPasswordView();
+							currentInstance.currentPerson.personRelations = 1;
+						}
+						var perAvailSignal:SignalVO = new SignalVO( this, personDAO, Action.UPDATE );
+						perAvailSignal.valueObject = currentInstance.currentPerson;
+						signalSeq.addSignal( perAvailSignal ); 
 						
 						var pushOnlineMessage:PushMessage = new PushMessage( Description.UPDATE, [],  currentInstance.currentPerson.personId );
 						var pushOnlineSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushOnlineMessage );
@@ -142,9 +214,27 @@ package com.adams.cambook.views.mediators
 		override protected function setViewListeners():void {
 			super.setViewListeners(); 
 			view.tweet.clicked.add(chatPush);
+			view.submitBtn.clicked.add(modifyPasswordHandler);
+			view.personPassword1.addEventListener(Event.CHANGE, inputChgHandler);
+			view.personPassword2.addEventListener(Event.CHANGE, inputChgHandler);
+			view.passwordBtn.clicked.add(changeToPasswordView);
+			view.cancelBtn.clicked.add(changeToPasswordView);
 		}
  
-		 
+		protected function modifyPasswordHandler( event:MouseEvent): void {
+			var perPasswdSignal:SignalVO = new SignalVO( this, personDAO, Action.UPDATE );
+			var personVo:Persons= currentInstance.currentPerson;
+			personVo = ObjectUtils.getCastObject(personObj,personVo) as Persons;
+			personVo.personPassword = view.personPassword1.text;
+			perPasswdSignal.valueObject = personVo;
+			
+			if(view.personPassword1.text == view.personPassword2.text && view.oldPersonPassword.text == currentInstance.currentPerson.personPassword){
+				signalSeq.addSignal(perPasswdSignal);
+				changeToPasswordView();
+			}else{
+				Alert.show('Passwords should match',Utils.ALERTHEADER);
+			}
+		}
 		override protected function pushResultHandler( signal:SignalVO ): void { 
 		} 
 		/**

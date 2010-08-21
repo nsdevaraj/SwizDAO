@@ -23,7 +23,7 @@
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
 				</mx:FormItem>
 				<mx:FormItem width="100%" label="password:" required="true">
-					<s:TextInput id="passwordTextInput" text="test" displayAsPassword="true" />
+					<s:TextInput id="passwordTextInput" text="tests" displayAsPassword="true" />
 				</mx:FormItem>
 				<mx:FormItem>
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
@@ -31,46 +31,31 @@
 			</mx:Form>
 			<mx:Form id="registerForm" includeInLayout="false" visible="false" horizontalCenter="0">
 				<mx:FormHeading label="Register Form"/>
-				<mx:FormItem label="First Name">
+				<mx:FormItem label="First Name" required="true">
 					<s:TextInput id="personFirstname"/>
 				</mx:FormItem>
 				<mx:FormItem label="Last Name">
 					<s:TextInput id="personLastname" />
 				</mx:FormItem>
-				<mx:FormItem label="Email">
+				<mx:FormItem label="Email" required="true">
 					<s:TextInput id="personEmail" />
 				</mx:FormItem> 
 				<mx:FormItem label="Twitter id">
 					<s:TextInput id="tweetId"/>
 				</mx:FormItem> 
-				<mx:FormItem label="Twitter id">
+				<mx:FormItem label="Twitter Password">
 					<s:TextInput id="tweetPassword" displayAsPassword="true"/>
 				</mx:FormItem> 
 				<mx:FormItem label="Mobile">
 					<s:TextInput id="personMobile"  />
-				</mx:FormItem>
-				<mx:FormItem label="Question">
-					<s:ComboBox id="personQuestion" />
-				</mx:FormItem>
-				<mx:FormItem label="Answer">
-					<s:TextInput id="personAnswer"/>
-				</mx:FormItem>
-				<mx:FormItem label="City">
-					<s:TextInput id="personCity"/>
-				</mx:FormItem>
-				<mx:FormItem label="Country">
-					<s:TextInput id="personCountry"/>
-				</mx:FormItem>
-				<mx:FormItem label="Postal Code">
-					<s:TextInput id="personPostalCode" />
-				</mx:FormItem>
+				</mx:FormItem>  
 			</mx:Form>
 		</s:Group>
 		<s:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
-				<components:NativeButton id="submitBtn" label="Login"/>
+				<components:NativeButton id="submitBtn" label="Login" enabled="false"/>
 				<components:NativeButton id="newUserBtn" label="New User"/>
-				<components:NativeButton id="registerBtn" label="Register" includeInLayout="false" visible="false"/>
+				<components:NativeButton id="registerBtn" label="Register" includeInLayout="false" visible="false" enabled="false"/>
 				<components:NativeButton id="cancelBtn" label="Cancel" includeInLayout="false" visible="false" />
 			</s:HGroup>
 		</s:controlBarContent>

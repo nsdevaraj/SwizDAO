@@ -30,6 +30,7 @@ package com.adams.cambook.utils
 	import org.swizframework.reflection.TypeDescriptor;
 	
 	import spark.components.DropDownList;
+	import spark.components.Label;
 	import spark.components.TextArea;
 	import spark.components.TextInput;
 
@@ -134,6 +135,7 @@ package com.adams.cambook.utils
 					try{
 						target[str] = new Date(source[str]);
 					}catch(er:Error){
+						if(Object(target).hasOwnProperty(str))
 						target[str] = Utils.StrToByteArray(source[str]);
 					}
 			 	} 
@@ -145,12 +147,12 @@ package com.adams.cambook.utils
 			for (var i: int =0; i<taskForm.numElements; i++){
 				if(taskForm.getChildAt(i) is FormItem){
 					var uiComp:Object = FormItem(taskForm.getChildAt(i)).getChildAt(0) as Object;
-					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea || uiComp is mx.controls.TextArea || uiComp is mx.controls.TextInput ){
+					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea || uiComp is mx.controls.TextArea || uiComp is mx.controls.TextInput  || uiComp is Label ){
 						try{
 							uiComp.text = obj[uiComp.id];
 							throw new Error("Not a Text");
 						}catch(er:Error){
-							if(obj[uiComp.id])
+							if(obj.hasOwnProperty([uiComp.id]))
 							uiComp.text = obj[uiComp.id].toString(); 
 						}
 					}else if(uiComp is DateField ){

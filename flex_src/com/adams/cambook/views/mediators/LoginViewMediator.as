@@ -18,6 +18,7 @@ package com.adams.cambook.views.mediators
 	import mx.controls.Alert;
 	import mx.controls.TextInput;
 	import mx.events.ValidationResultEvent;
+	import mx.validators.EmailValidator;
 	import mx.validators.StringValidator;
 	import mx.validators.Validator;
 	
@@ -53,7 +54,7 @@ package com.adams.cambook.views.mediators
 		/**
 		 * Field validator for the password form field.
 		 */
-		protected var passwordValidator:StringValidator;
+		protected var emailValidator:EmailValidator;
 		private var _mainViewStackIndex:int
 		public function get mainViewStackIndex():int
 		{
@@ -102,8 +103,6 @@ package com.adams.cambook.views.mediators
 			// create the form validators for the login panel
 			createFormValidators();
 			
-			view.personQuestion.dataProvider = new ArrayList(["My Favorite Movie?","My Mother's Maiden Name?","My First Vehicle?","My Favorite Color?"]);
-			view.personQuestion.selectedIndex = 0;
 			// set the focus to the username field
 			view.userNameTextInput.setFocus();
 		}
@@ -117,6 +116,9 @@ package com.adams.cambook.views.mediators
 			super.setViewListeners();
 			
 			// handle user input on the form fields for instant form validation feedback
+			view.personEmail.addEventListener(Event.CHANGE, inputChgHandler);
+			view.personFirstname.addEventListener(Event.CHANGE, inputChgHandler);
+			
 			view.userNameTextInput.addEventListener(Event.CHANGE, inputChgHandler);
 			view.passwordTextInput.addEventListener(Event.CHANGE, inputChgHandler);
 			view.newUserBtn.clicked.add(changeToRegisterView);
@@ -131,7 +133,6 @@ package com.adams.cambook.views.mediators
 			var newPerson:Persons = new Persons();
 			newPerson = ObjectUtils.getCastObject(personObj,newPerson) as Persons;
 			newPerson.activated = 1;
-			newPerson.personQuestion = view.personQuestion.selectedIndex;
 			newPerson.personPassword = randPassWord;
 			newPerson.personRole = 'ROLE_USER';
 			
@@ -242,16 +243,14 @@ package com.adams.cambook.views.mediators
 			
 			// create the user name validator
 			userNameValidator = new StringValidator();
-			userNameValidator.requiredFieldError = "Please enter a valid login";
-			userNameValidator.minLength = 4;
+			userNameValidator.requiredFieldError = "Please enter minimum 5 Characters";
+			userNameValidator.minLength = 5;
 			userNameValidator.property = "text";
 			
 			// create the password validator
-			passwordValidator = new StringValidator();
-			passwordValidator.required = true;
-			passwordValidator.requiredFieldError = "Please enter a password.";
-			passwordValidator.minLength = 3;
-			passwordValidator.property = "text";
+			emailValidator = new EmailValidator();
+			emailValidator.required = true;
+			emailValidator.requiredFieldError = "Please enter a valid Email";
 		}
 		
 		/**
@@ -263,7 +262,8 @@ package com.adams.cambook.views.mediators
 		 */
 		protected function inputChgHandler(evt:Event):void
 		{
-			view.submitBtn.enabled = isTextInputFieldValid(view.userNameTextInput,userNameValidator) && isTextInputFieldValid(view.passwordTextInput,passwordValidator);
+			view.registerBtn.enabled = isTextInputFieldValid(view.personFirstname,userNameValidator) && isTextInputFieldValid(view.personEmail,emailValidator);
+			view.submitBtn.enabled = isTextInputFieldValid(view.userNameTextInput,emailValidator) && isTextInputFieldValid(view.passwordTextInput,userNameValidator);
 		}
 		
 		/**
@@ -289,6 +289,8 @@ package com.adams.cambook.views.mediators
 		{
 			super.cleanup(event); 
 			
+			view.personEmail.removeEventListener(Event.CHANGE, inputChgHandler);
+			view.personFirstname.removeEventListener(Event.CHANGE, inputChgHandler);
 			view.userNameTextInput.removeEventListener(Event.CHANGE, inputChgHandler);
 			view.passwordTextInput.removeEventListener(Event.CHANGE, inputChgHandler);
 			view.submitBtn.clicked.removeAll();
