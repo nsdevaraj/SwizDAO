@@ -8,6 +8,19 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.adams.cambook.models.vo.Notes;
+			private var _note:Notes
+
+			public function get note():Notes
+			{
+				return _note;
+			}
+
+			public function set note(value:Notes):void
+			{
+				_note = value;
+			}
+
 			private function addReply():void{
 				var temp:Comment = new Comment();
 				temp.userTxt.text = 'Alaguvel';

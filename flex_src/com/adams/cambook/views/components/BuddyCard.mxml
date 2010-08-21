@@ -5,6 +5,23 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.adams.cambook.models.vo.Persons;
+			private var _person:Persons
+
+			public function get person():Persons
+			{
+				return _person;
+			}
+
+			public function set person(value:Persons):void
+			{
+				_person = value;
+			}
+
+		]]>
+	</fx:Script>
 	<s:Rect width="100%" height="100%" verticalCenter="0" horizontalCenter="0"  >
 		<s:fill><s:SolidColor color="#ffffff" alpha=".8"/></s:fill>
 		<s:stroke>
