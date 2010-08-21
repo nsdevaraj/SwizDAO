@@ -143,16 +143,15 @@ package com.adams.cambook.views.mediators
 		{
 			var loginMailSignal:SignalVO = new SignalVO( this, pagingDAO, Action.SENDMAIL );
 			loginMailSignal.emailId = view.personEmail.text;
-			loginMailSignal.name = 'Welcome to CamBook, New User :'+view.personFirstname.text
-				+'/n You can now login with your password and Email /n'+currentInstance.config.serverLocation+'/cambook';
-			loginMailSignal.emailBody = "Your System Generated Password :"+pswd;
+			loginMailSignal.name = 'Welcome to CamBook, New User :'+view.personFirstname.text;
+			loginMailSignal.emailBody = "Your System Generated Password :"+pswd+'\n You can now login with your password and Email \n'+currentInstance.config.serverLocation+'cambook';
 			 
 			signalSeq.addSignal( loginMailSignal );			
 		}
 		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void {  
 			if( signal.destination == pagingDAO.destination ) {
 				if(signal.action == Action.CREATEPERSON){
-					Alert.show("Login with your email and Password. Your Password have been mailed to your email" +view.personEmail.text,Utils.ALERTHEADER);
+					Alert.show("Your Password have been mailed to your email\n" +view.personEmail.text,Utils.ALERTHEADER);
 					changeToRegisterView();
 				}
 			}
