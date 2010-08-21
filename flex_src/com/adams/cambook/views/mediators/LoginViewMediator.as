@@ -143,7 +143,7 @@ package com.adams.cambook.views.mediators
 		{
 			var loginMailSignal:SignalVO = new SignalVO( this, pagingDAO, Action.SENDMAIL );
 			loginMailSignal.emailId = view.personEmail.text;
-			loginMailSignal.name = 'Welcome to CamBook, New User :'+view.personFirstname.text;
+			loginMailSignal.name = 'Welcome to '+Utils.ALERTHEADER+', New User :'+view.personFirstname.text;
 			loginMailSignal.emailBody = "Your System Generated Password :"+pswd+'\n You can now login with your password and Email \n'+currentInstance.config.serverLocation+'cambook';
 			 
 			signalSeq.addSignal( loginMailSignal );			

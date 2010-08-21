@@ -41,19 +41,19 @@
 					<s:TextInput id="personEmail" />
 				</mx:FormItem> 
 				<mx:FormItem label="Twitter id">
-					<s:TextInput  id="tweetId"/>
+					<s:TextInput id="tweetId"/>
 				</mx:FormItem> 
 				<mx:FormItem label="Twitter id">
-					<s:TextInput  id="tweetPassword" displayAsPassword="true"/>
+					<s:TextInput id="tweetPassword" displayAsPassword="true"/>
 				</mx:FormItem> 
 				<mx:FormItem label="Mobile">
 					<s:TextInput id="personMobile"  />
 				</mx:FormItem>
 				<mx:FormItem label="Question">
-					<s:ComboBox id="personQuestion"/>
+					<s:ComboBox id="personQuestion" />
 				</mx:FormItem>
 				<mx:FormItem label="Answer">
-					<s:TextInput  id="personAnswer"/>
+					<s:TextInput id="personAnswer"/>
 				</mx:FormItem>
 				<mx:FormItem label="City">
 					<s:TextInput id="personCity"/>
