@@ -57,6 +57,7 @@
 		<processors:MediateSignalProcessor id="signalProcessor" signalPackages="com.adams.cambook.signals" strictArgumentTypes="true"/>		
  		<mediateview:MediateViewProcessor/>
 		<formprocessors:FormProcessor/>
+		<formprocessors:RandomProcessor/>
 	</Swiz:customProcessors>
 	
 	<Swiz:beanProviders> 

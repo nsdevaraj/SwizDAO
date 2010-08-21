@@ -13,6 +13,8 @@ package com.adams.cambook.views.mediators
 	import flash.events.MouseEvent;
 	import flash.utils.setTimeout;
 	
+	import mx.collections.ArrayCollection;
+	import mx.collections.ArrayList;
 	import mx.controls.Alert;
 	import mx.controls.TextInput;
 	import mx.events.ValidationResultEvent;
@@ -39,6 +41,10 @@ package com.adams.cambook.views.mediators
 		
 		[Form(form="view.registerForm")]
 		public var personObj:Object;
+		
+		[Random]
+		public var randPassWord:String;
+		
 		/**
 		 * Field validator for the user name form field.
 		 */
@@ -96,10 +102,8 @@ package com.adams.cambook.views.mediators
 			// create the form validators for the login panel
 			createFormValidators();
 			
-			// disable the submit btn to start
-			//view.submitBtn.enabled = false;
-			
-			
+			view.personQuestion.dataProvider = new ArrayList(["My Favorite Movie?","My Mother's Maiden Name?","My First Vehicle?","My Favorite Color?"]);
+			view.personQuestion.selectedIndex = 0;
 			// set the focus to the username field
 			view.userNameTextInput.setFocus();
 		}
@@ -126,20 +130,34 @@ package com.adams.cambook.views.mediators
 			var personSignal:SignalVO = new SignalVO(this,pagingDAO,Action.CREATEPERSON);
 			var newPerson:Persons = new Persons();
 			newPerson = ObjectUtils.getCastObject(personObj,newPerson) as Persons;
+			newPerson.activated = 1;
+			newPerson.personQuestion = view.personQuestion.selectedIndex;
+			newPerson.personPassword = randPassWord;
+			newPerson.personRole = 'ROLE_USER';
+			
 			personSignal.valueObject = newPerson;
 			signalSeq.addSignal(personSignal);
-			//sendPasswordMail();
-		}
-		
-		protected function sendPasswordMail():void
+			sendPasswordMail(newPerson.personPassword);
+		} 
+		protected function sendPasswordMail(pswd:String):void
 		{
 			var loginMailSignal:SignalVO = new SignalVO( this, pagingDAO, Action.SENDMAIL );
 			loginMailSignal.emailId = view.personEmail.text;
-			loginMailSignal.name = 'test mail';
-			loginMailSignal.emailBody = 'password'
+			loginMailSignal.name = 'Welcome to CamBook, New User :'+view.personFirstname.text
+				+'/n You can now login with your password and Email /n'+currentInstance.config.serverLocation+'/cambook';
+			loginMailSignal.emailBody = "Your System Generated Password :"+pswd;
+			 
 			signalSeq.addSignal( loginMailSignal );			
 		}
-		protected function changeToRegisterView(evt:MouseEvent):void
+		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void {  
+			if( signal.destination == pagingDAO.destination ) {
+				if(signal.action == Action.CREATEPERSON){
+					Alert.show("Login with your email and Password. Your Password have been mailed to your email" +view.personEmail.text,Utils.ALERTHEADER);
+					changeToRegisterView();
+				}
+			}
+		}
+		protected function changeToRegisterView(evt:MouseEvent = null):void
 		{
 			registerState = !registerState;
 			changeState(registerState);

@@ -34,9 +34,23 @@ package com.nsdevaraj.swiz.processors
 			
 			// finally, we use the above references to assign a random number to the
 			// specified property on the given instance
-			bean.source[ metadataTag.host.name ] = Math.round( Math.random() * 1000 );
+			var randomStr:String = createPassWord();
+			bean.source[ metadataTag.host.name ] = randomStr;
 		}
-		
+		private function createPassWord(strHash:String = 'abchefghjkmnpqrstuvwxyz0123456789',lnHash:Number = 5):String
+		{
+			var i:Number = 0;
+			var hash:String = "";
+			var nLength:Number = strHash.length;
+			while (i <= lnHash)
+			{
+				var num:Number = Math.round(Math.random()*nLength);
+				hash += strHash.charAt(num);
+				i++;
+			}
+			return hash;
+		}
+
 		/**
 		 * Called when the bean is unwired.
 		 * Could remove listeners or do other cleanup as necessary here.

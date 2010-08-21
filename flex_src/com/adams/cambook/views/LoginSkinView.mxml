@@ -39,10 +39,7 @@
 				</mx:FormItem>
 				<mx:FormItem label="Email">
 					<s:TextInput id="personEmail" />
-				</mx:FormItem>
-				<mx:FormItem label="Password">
-					<s:TextInput id="personPassword" displayAsPassword="true"/>
-				</mx:FormItem>
+				</mx:FormItem> 
 				<mx:FormItem label="Twitter id">
 					<s:TextInput  id="tweetId"/>
 				</mx:FormItem> 
