@@ -41,7 +41,8 @@ package com.adams.cambook.utils
 		public static const REFRESHTWEETS:String = 'refreshTweets';
 		public static const UPDATETWEET:String = 'updateTweet';
 		public static const SENDMAIL:String = 'sendMail';
-		public static const PAGINGACTIONS:Array = [GETQUERYRESULT,PAGINATIONLISTVIEW,QUERYLISTVIEW,PAGINATIONLISTVIEWID,QUERYPAGINATION,REFRESHTWEETS,UPDATETWEET,SENDMAIL];
+		public static const CREATEPERSON:String = 'createPerson';
+		public static const PAGINGACTIONS:Array = [GETQUERYRESULT,PAGINATIONLISTVIEW,QUERYLISTVIEW,PAGINATIONLISTVIEWID,QUERYPAGINATION,REFRESHTWEETS,UPDATETWEET,SENDMAIL,CREATEPERSON];
 		public function Action()
 		{
 		}

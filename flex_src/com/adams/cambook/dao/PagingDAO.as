@@ -107,14 +107,25 @@ package com.adams.cambook.dao
 					case Action.SENDMAIL:
 						remoteService = _controlService.unAuthRo;
 						remoteService.destination = Utils.UNSECUREDAO;
-						delegate.token = remoteService.SmtpSSLMail(obj.emailId, obj.name, obj.emailBody); 
+						delegate.token = remoteService.SmtpSSLMail(obj.emailId, obj.name, obj.emailBody);
+						secureDAO();
+						return delegate.token;
+						break;
+					case Action.CREATEPERSON:
+						remoteService = _controlService.unAuthRo;
+						remoteService.destination = Utils.UNSECUREPERSONDAO;
+						delegate.token = remoteService.create( obj.valueObject );
+						secureDAO();
 						return delegate.token;
 						break;
 				}
 			}
 			return null;
-		}	
-		 
+		}
+		public function secureDAO():void{
+			remoteService.destination = Utils.PAGINGDAO;
+			remoteService = _controlService.authRo;
+		}
 		protected var _remoteService:RemoteObject;  
 		public function get remoteService():RemoteObject  {
 			return _remoteService;

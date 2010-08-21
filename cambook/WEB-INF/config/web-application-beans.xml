@@ -57,7 +57,18 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-
+	<bean id="unsecurePersonDAO" parent="abstractDao">
+		<flex:remoting-destination channels="my-longpolling-amf" include-methods="create" />
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>
+						com.adams.cambook.dao.entities.Persons
+					</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>   
 	<bean id="unsecureDAO"
 		class="com.adams.cambook.dao.hibernate.CambookPageDAO">
 		<flex:remoting-destination channels="my-longpolling-amf" include-methods="SmtpSSLMail" />

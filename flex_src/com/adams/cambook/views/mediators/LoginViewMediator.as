@@ -5,6 +5,7 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.dao.PagingDAO;
 	import com.adams.cambook.models.vo.*;
 	import com.adams.cambook.utils.Action;
+	import com.adams.cambook.utils.ObjectUtils;
 	import com.adams.cambook.utils.Utils;
 	import com.adams.cambook.views.LoginSkinView;
 	
@@ -35,6 +36,9 @@ package com.adams.cambook.views.mediators
 		
 		[Inject]
 		public var pagingDAO:PagingDAO;
+		
+		[Form(form="view.registerForm")]
+		public var personObj:Object;
 		/**
 		 * Field validator for the user name form field.
 		 */
@@ -117,7 +121,17 @@ package com.adams.cambook.views.mediators
 			// handle the click of the submit button
 			view.submitBtn.clicked.add( submitBtnClickHandler);
 		}
-		protected function createNewUser(evt:MouseEvent):void
+		private function createNewUser(evt:MouseEvent):void
+		{
+			var personSignal:SignalVO = new SignalVO(this,pagingDAO,Action.CREATEPERSON);
+			var newPerson:Persons = new Persons();
+			newPerson = ObjectUtils.getCastObject(personObj,newPerson) as Persons;
+			personSignal.valueObject = newPerson;
+			signalSeq.addSignal(personSignal);
+			//sendPasswordMail();
+		}
+		
+		protected function sendPasswordMail():void
 		{
 			var loginMailSignal:SignalVO = new SignalVO( this, pagingDAO, Action.SENDMAIL );
 			loginMailSignal.emailId = view.personEmail.text;
