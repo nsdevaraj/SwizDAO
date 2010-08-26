@@ -24,30 +24,8 @@ package com.adams.cambook.views.components
 	
 	public class NativeList extends List
 	{
-		public static const PRODUCTEDITED:String = 'productedit';
-		public static const PRODUCTOPENED:String = 'productopen'; 
-		public static const PRODUCTDELETED:String = 'productdelete';
-		public static const SPRINTEDITED:String = 'sprintedit';
-		public static const SPRINTOPENED:String = 'sprintopen'; 
-		public static const SPRINTDELETED:String = 'sprintdelete'; 
-		public static const VERSIONDELETED:String = 'versiondelete'; 
-		public static const THEMEDELETED:String = 'themedelete';
-		public static const STORYSELECTED:String = 'storyselect';
-		public static const STORYDESELECTED:String = 'storyUnselect';
-		
-		public static const STORYSPRINTSELECTED:String = 'storySprintselect';
-		public static const TASKSELECTED:String = 'taskselect';
-		public static const TASKCREATED:String = 'taskcreate';
-		public static const TICKETCREATED:String = 'ticketcreate';
-		public static const TICKETDETAIL:String = 'ticketdetail';
-		public static const TICKETMODIFY:String = 'ticketmodify';
-		public static const TEAMMEMBERREMOVED:String = 'teammemberdelete';
-		public static const TASKSTATUSUPDATE:String = 'taskstatusupdate';
-		public static const TASKVISIBLEUPDATE:String = 'taskvisibleupdate';
-		public static const STORYMODIFY:String = 'storyedit';
-		public static const STORYDELETE:String = 'storydelete';
-		public static const TASKLABELUPDATE:String='tasklabelupdate'	
-		public static const STORYEXPAND:String = 'StoryExpand';
+		public static const REPLIEDUPDATE:String = 'replyUpdate';
+		public static const FOLLOWPERSON:String = 'followPerson';  
 		public var renderSignal:Signal = new Signal();
 		public var collection:IList;
 		public var removeRendererProperty:Boolean;

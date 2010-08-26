@@ -12,6 +12,8 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.utils.Utils;
 	import com.adams.cambook.views.HomeSkinView;
 	import com.adams.cambook.views.components.NativeList;
+	import com.adams.cambook.views.renderers.BuddyCard;
+	import com.adams.cambook.views.renderers.UpdateCard;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -42,6 +44,9 @@ package com.adams.cambook.views.mediators
 		 
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
+		
+		[Inject("noteDAO")]
+		public var noteDAO:AbstractDAO;
 		
 		[Inject]
 		public var pagingDAO:PagingDAO;
@@ -145,10 +150,24 @@ package com.adams.cambook.views.mediators
 				
 				var perAllsignal:SignalVO = new SignalVO( this, personDAO, Action.SQL_FINDALL );
 				signalSeq.addSignal( perAllsignal ); 
-			 } 
+			 }
+		}
+		protected function setDataProviders():void {	
+			view.wallDG.dataProvider = noteDAO.collection.items;
+			view.myUpdateDG.dataProvider = currentInstance.currentPerson.notesSet;
+			view.messageDG.dataProvider = noteDAO.collection.items;
+			view.friendsListDG.dataProvider = currentInstance.currentPerson.connectionSet;
+			view.suggestFriendsListDG.dataProvider = personDAO.collection.items;
 		} 
 		override protected function setRenderers():void {
 			super.setRenderers(); 
+			BuddyCard.personsArr = currentInstance.currentPerson.connectionArr;
+			UpdateCard.currentPersonId = currentInstance.currentPerson.personId;
+			view.wallDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
+			view.myUpdateDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
+			view.messageDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
+			view.friendsListDG.itemRenderer = Utils.getCustomRenderer(Utils.PERSONDAO);
+			view.suggestFriendsListDG.itemRenderer = Utils.getCustomRenderer(Utils.PERSONDAO);
 		} 
 		private var passwordState:Boolean;
 		
@@ -183,7 +202,7 @@ package com.adams.cambook.views.mediators
 						var pushOnlineMessage:PushMessage = new PushMessage( Description.UPDATE, [],  currentInstance.currentPerson.personId );
 						var pushOnlineSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushOnlineMessage );
 						signalSeq.addSignal( pushOnlineSignal );
-						
+						setDataProviders();
 					}
 					if( signal.action == Action.SQL_FINDALL ){
 					currentInstance.currentPersonsList = obj as ArrayCollection;
@@ -197,11 +216,7 @@ package com.adams.cambook.views.mediators
 					}
 				}
 		}
-		protected function chatPush(ev:Object):void{
-			var tweetSignal:SignalVO = new SignalVO( this, pagingDAO, Action.UPDATETWEET );
-			tweetSignal.id = currentInstance.currentPerson.personId;
-			tweetSignal.name = view.updateTxt.text;
-			signalSeq.addSignal( tweetSignal );
+		protected function newTweetHandler(ev:Object):void{ 
 		/*	var pushChatMessage:PushMessage = new PushMessage( 'Chat Message', [view.personid.value],  currentInstance.currentPerson.personId );
 			var pushChatSignal:SignalVO = new SignalVO( this, personDAO, Action.PUSH_MSG, pushChatMessage );
 			signalSeq.addSignal( pushChatSignal );*/
@@ -213,12 +228,69 @@ package com.adams.cambook.views.mediators
 		 */
 		override protected function setViewListeners():void {
 			super.setViewListeners(); 
-			view.tweet.clicked.add(chatPush);
+			//view.tweet.clicked.add(chatPush);
 			view.submitBtn.clicked.add(modifyPasswordHandler);
 			view.personPassword1.addEventListener(Event.CHANGE, inputChgHandler);
 			view.personPassword2.addEventListener(Event.CHANGE, inputChgHandler);
 			view.passwordBtn.clicked.add(changeToPasswordView);
 			view.cancelBtn.clicked.add(changeToPasswordView);
+			
+			view.profilePanel.panelSignal.add(profilePanelHandler);
+			view.searchPanel.panelSignal.add(searchPanelHandler);
+			view.profileTxt.addEventListener(MouseEvent.CLICK,profilePanelHandler);
+			view.goBtn.clicked.add(searchPanelHandler);
+			view.update.clicked.add(newUpdateHandler);
+			
+			view.wallDG.renderSignal.add(wallHandler);
+			view.myUpdateDG.renderSignal.add(myUpdateDGHandler);
+			view.messageDG.renderSignal.add(messageDGHandler);
+			view.friendsListDG.renderSignal.add(friendsListDGHandler);
+			view.suggestFriendsListDG.renderSignal.add(suggestFriendsListDGHandler);
+		}
+		private function wallHandler(str:String, note:Notes):void{ 
+			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
+			updateNoteSignal.valueObject = note;
+			signalSeq.addSignal( updateNoteSignal );
+		}
+		private function myUpdateDGHandler(str:String, note:Notes):void{
+			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
+			updateNoteSignal.valueObject = note;
+			signalSeq.addSignal( updateNoteSignal );
+		}
+		private function messageDGHandler(str:String, note:Notes):void{
+			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
+			updateNoteSignal.valueObject = note;
+			signalSeq.addSignal( updateNoteSignal );
+		}
+		private function friendsListDGHandler(str:String, person:Persons):void{
+			
+		}
+		private function suggestFriendsListDGHandler(str:String, person:Persons):void{
+			
+		} 
+		
+		private function newUpdateHandler(event:MouseEvent=null):void{
+			var newNote:Notes = new Notes();
+			newNote.description =  view.updateTxt.text;
+			newNote.createdPersonFK = currentInstance.currentPerson.personId;
+			newNote.creationDate = new Date();
+			if(view.tweet.selected){
+				var tweetSignal:SignalVO = new SignalVO( this, pagingDAO, Action.UPDATETWEET );
+				tweetSignal.id = newNote.createdPersonFK; 
+				tweetSignal.name =newNote.description 
+				signalSeq.addSignal( tweetSignal );
+			}
+			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
+			updateNoteSignal.valueObject = newNote;
+			signalSeq.addSignal( updateNoteSignal );
+		}
+		private function searchPanelHandler(event:MouseEvent=null):void{
+			view.searchPanel.includeInLayout = !view.searchPanel.includeInLayout;
+			view.searchPanel.visible = !view.searchPanel.visible ;
+		}
+		private function profilePanelHandler(event:MouseEvent=null):void{
+			view.profilePanel.includeInLayout = !view.profilePanel.includeInLayout ;
+			view.profilePanel.visible = !view.profilePanel.visible;
 		}
  
 		protected function modifyPasswordHandler( event:MouseEvent): void {

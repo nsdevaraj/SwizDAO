@@ -15,9 +15,11 @@
 */
 package com.adams.cambook.utils
 {  
-	import com.adams.cambook.dao.AbstractDAO; 
+	import com.adams.cambook.dao.AbstractDAO;
 	import com.adams.cambook.models.vo.*;
-	import com.adams.cambook.views.components.RatingComponent; 
+	import com.adams.cambook.views.components.RatingComponent;
+	import com.adams.cambook.views.renderers.Comment;
+	import com.adams.cambook.views.renderers.UpdateCard;
 	
 	import flash.utils.ByteArray;
 	
@@ -52,14 +54,22 @@ package com.adams.cambook.utils
 		
 		public static const PERSONDAO 	:String="personDAO"; 
 		public static const NOTEDAO 	:String="noteDAO";  
-		public static const FILEDAO 	:String="fileDAO";   
+		public static const FILEDAO 	:String="fileDAO";  
+		public static const REPLY 	:String="reply";  
 		 
 		public static function getCustomRenderer( type:String):ClassFactory{
-			/*switch(type){
-				case PRODUCTRENDER:					
-				 	return new ClassFactory(com.adams.cambook.views.renderers.ProductRenderer);
+			switch(type){
+				case PERSONDAO:					
+				 	return new ClassFactory(com.adams.cambook.views.renderers.BuddyCard);
 					break; 
-			}	*/		
+				case NOTEDAO:					
+					return new ClassFactory(com.adams.cambook.views.renderers.UpdateCard);
+					break; 
+				case REPLY:					
+					return new ClassFactory(com.adams.cambook.views.renderers.Comment);
+					break; 
+				
+			}			
 			return null; 
 		}   		
 		//@TODO

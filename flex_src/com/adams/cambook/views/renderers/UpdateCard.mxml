@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"  
+		 xmlns:components="com.adams.cambook.views.components.*"
+		 creationComplete="onCreationComplete()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.adams.cambook.models.vo.Notes;
+			import com.adams.cambook.utils.Utils;
+			import com.adams.cambook.views.components.NativeList;
+			
+			import mx.core.FlexGlobals;
+			import mx.core.IFlexDisplayObject;
+			import mx.core.mx_internal;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			use namespace mx_internal
+			private var note:Notes = new Notes();
+
+			 private function onCreationComplete():void{
+				 commentDG.itemRenderer = Utils.getCustomRenderer(Utils.REPLY);  
+			 }
+			override public function set data(value:Object):void{
+				super.data = value;
+				if(value){
+					note = value as Notes;
+					noteTxt.text = note.description;
+					notePersonName.text = note.PersonObj.personFirstname + ' '+note.PersonObj.personLastname;
+					commentDG.dataProvider = note.notesSet;
+					sharBtn.visible = note.personFK ? true:false;
+					likeBtn.visible = note.createdPersonFK == currentPersonId ? false:true;
+				}
+			}
+			private function addReply():void{
+				/* var temp:Comment = new Comment();
+				temp.userTxt.text = 'Alaguvel';
+				temp.commentTxt.text = commentArea.text;
+				commentContainer.addElement(temp); */ 
+				var replyNote:Notes = new Notes();
+				replyNote.description = commentArea.text;
+				replyNote.createdPersonFK =currentPersonId;
+				replyNote.creationDate = new Date();
+				Object( owner ).renderSignal.dispatch(NativeList.REPLIEDUPDATE,replyNote);
+				currentState='';
+			}
+			
+			public static var currentPersonId:int;
+		 
+			private var buddyCard:BuddyCard = new BuddyCard();
+			
+			protected function rollOverHandler(event:MouseEvent):void{
+				buddyCard.x = stage.mouseX;
+				buddyCard.y = stage.mouseY;
+				PopUpManager.addPopUp(buddyCard,this);
+			}
+
+			protected function label1_rollOutHandler(event:MouseEvent):void{
+				PopUpManager.removePopUp(buddyCard);
+				
+			}
+
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="replyState" />
+	</s:states>
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:fill><s:SolidColor color="#eeeeee" alpha=".8"/></s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#cfcfcf" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" bottom="4">
+		<s:VGroup width="100%" height="100%" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+			<s:Label id="notePersonName" click="rollOverHandler(event)" width="100%" styleName="headerStyle"/>
+			<s:Label id="noteTxt"  
+					 maxDisplayedLines="3" showTruncationTip="true" width="100%"/>	
+		</s:VGroup>
+		<s:HGroup width="100%" horizontalAlign="right" paddingRight="5">
+			<components:NativeButton id="sharBtn" toolTip="share" styleName="shareSkin"/>
+			<components:NativeButton id="likeBtn" toolTip="Like" styleName="likeSkin"/>
+			<components:NativeButton id="commentBtn" toolTip="Comment" styleName="commentSkin" click="currentState='replyState'"/>	
+		</s:HGroup>
+		<s:VGroup id="commentContainer" width="100%" gap="2">
+			<components:NativeDataGroup id="commentDG" width="100%"/>
+		</s:VGroup>
+		<s:HGroup verticalAlign="contentJustify" width="100%" includeIn="replyState"
+				  paddingLeft="5" paddingRight="5">
+			<s:TextArea height="35" id="commentArea" width="100%"/>	
+			<components:NativeButton label="reply" click="addReply()"/>
+		</s:HGroup>
+	</s:VGroup>	 
+</s:ItemRenderer>

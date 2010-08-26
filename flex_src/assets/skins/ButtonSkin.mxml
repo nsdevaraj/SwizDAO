@@ -51,7 +51,8 @@
 		<s:BitmapImage 
 			source.up="{hostComponent.getStyle('upSkin')}" 
 			source.over="{hostComponent.getStyle('overSkin')}"
-			source.down="{hostComponent.getStyle('downSkin')}"/>
+			source.down="{hostComponent.getStyle('downSkin')}"
+			source.disabled="{hostComponent.getStyle('disabledSkin')}"/>
 	</s:HGroup>
 	
 </s:SparkSkin>

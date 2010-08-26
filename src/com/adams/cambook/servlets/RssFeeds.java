@@ -1,11 +1,7 @@
 package com.adams.cambook.servlets;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,11 +34,11 @@ public class RssFeeds extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private SyndFeed feed = null;
-	private String feedType = "rss_2.0";
-	
-	private List  entries = null;
+	private String feedType = "rss_2.0";	
+	private List<SyndEntry>  entries = null;
 	private static final String CONTENT_TYPE = "application/rss+xml";
 	private EncryptUtil encryptUtil = null;
+	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 	}
@@ -59,14 +55,14 @@ public class RssFeeds extends HttpServlet {
 		System.out.println("enUsername:"+enPassword);
 		int userId = 0;
 		try {
-			//userId = getUserId(encryptUtil.getDecryptedString(enUsername), encryptUtil.getDecryptedString(enPassword));
-			userId = getUserId(enUsername, enPassword);
+			userId = getUserId(encryptUtil.getDecryptedString(enUsername), encryptUtil.getDecryptedString(enPassword));
+			//userId = getUserId(enUsername, enPassword);
 			System.out.println("User Id:"+userId);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		feed = new SyndFeedImpl();
-		entries = new ArrayList();
+		entries = new ArrayList<SyndEntry>();
 		createUpdatesFeed(userId);
 		feed.setEntries(entries);
 		
@@ -88,7 +84,7 @@ public class RssFeeds extends HttpServlet {
 		int userId = 0;
 		List<?> userList;
 		try {
-			userList = BuildConfig.cambookPageDAO.paginationListViewStr("Persons.findByLogin", username, 0, 1);
+			userList = BuildConfig.cambookPageDAO.paginationListViewStr("Persons.findByName", username, 0, 1);
 			if(userList.size()>0) {
 				Persons person = (Persons)userList.get(0);
 				if(person.getPersonPassword().equals(password)) {
@@ -170,44 +166,5 @@ public class RssFeeds extends HttpServlet {
 			
 		}
 	}
-	
-	private byte[] toByteArray(Blob fromBlob) {
-		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		 try {
-			 return toByteArrayImpl(fromBlob, baos);
-		 } catch (SQLException e) {
-			 throw new RuntimeException(e);
-		 } catch (IOException e) {
-			 throw new RuntimeException(e);
-		 } finally {
-			 if (baos != null) {
-				 try {
-					 baos.close();
-				 } catch (IOException ex) {
-				 }
-		 	}
-		 }
-	}
-	
-	private byte[] toByteArrayImpl(Blob fromBlob, ByteArrayOutputStream baos) throws SQLException, IOException {
-		  byte[] buf = new byte[4000];
-		  InputStream is = fromBlob.getBinaryStream();
-		  try {
-			  for (;;) {
-				  int dataSize = is.read(buf);
 
-				  if (dataSize == -1)
-					  break;
-				  baos.write(buf, 0, dataSize);
-			  }
-		  	} finally {
-		  		if (is != null) {
-		  			try {
-		  				is.close();
-		  			} catch (IOException ex) {
-		  			}
-		  		}
-		  	}
-		  	return baos.toByteArray();
-		}
 }

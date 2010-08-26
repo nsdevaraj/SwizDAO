@@ -17,7 +17,7 @@ package com.adams.cambook.controller
 {
 	
 	import com.adams.cambook.models.vo.CurrentInstance;
-	import com.adams.cambook.service.NativeMessenger; 
+	import com.adams.cambook.service.NativeMessenger;
 	
 	import flash.events.StatusEvent;
 	
@@ -43,7 +43,7 @@ package com.adams.cambook.controller
 		[PostConstruct]
 		public function execute():void
 		{
-			currentInstance.config.serverLocation = FlexGlobals.topLevelApplication.parameters.serverLocation; 
+			currentInstance.config.serverLocation =FlexGlobals.topLevelApplication.parameters.serverLocation;
 			service.serverLocation = currentInstance.config.serverLocation;
 			
 			service.assignChannelSets();

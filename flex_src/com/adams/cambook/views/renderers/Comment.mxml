@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"  left="3" right="3" bottom="3" top="3"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" xmlns:components="com.adams.cambook.views.components.*">
+	<fx:Script>
+		<![CDATA[
+			import com.adams.cambook.models.vo.Notes;
+			private var note:Notes
+			override public function set data(value:Object):void{
+				super.data = value;
+				if(value){
+					note = value as Notes;
+					userTxt.text = note.PersonObj.personFirstname;
+					commentTxt.text = note.description;
+				}
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Line height="1"  top="0" left="3" right="3">
+		<s:stroke>
+			<s:SolidColorStroke weight="1" color="#cfcfcf" />
+		</s:stroke>
+	</s:Line>
+ 	<s:Rect top="1" left="3" right="3" bottom="0">
+		<s:fill>
+			<s:SolidColor color="#ffffff" />
+		</s:fill>
+	</s:Rect>
+ 
+		<s:VGroup left="3" right="12" top="3" bottom="3" verticalAlign="middle">
+			<s:Label id="userTxt" styleName="headerStyle"/>
+			<s:Label maxDisplayedLines="2" showTruncationTip="true" height="35" id="commentTxt"  width="100%"/>	
+		</s:VGroup>
+		<components:NativeButton toolTip="remove" styleName="removeButtonSkin" right="3" top="4"  />
+</s:ItemRenderer>

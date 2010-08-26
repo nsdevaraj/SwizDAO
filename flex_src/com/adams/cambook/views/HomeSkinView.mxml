@@ -12,6 +12,11 @@
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout> 
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="#b3c5cb"/>
+		</s:fill>
+	</s:Rect>
 	<fx:Declarations>
 		<mx:ArrayCollection id="dp">
 			<fx:String>Flash</fx:String> 
@@ -20,145 +25,128 @@
 			<fx:String>ColdFusion</fx:String> 
 		</mx:ArrayCollection>	
 	</fx:Declarations>
-	<s:HGroup horizontalCenter="0" height="100%" width="100%" verticalCenter="0" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" >	
-		<s:Panel id="infoPanel" height="100%" width="200" title="Information" >
-			<s:Scroller width="100%" height="100%">
-				<s:VGroup width="100%" height="100%" horizontalAlign="center">
-					 <mx:Image source="assets/images/3.jpg" />
-					<mx:Form id="personForm" horizontalCenter="0"> 
-						<mx:FormItem label="First Name" required="true">
-							<s:Label id="personFirstname"/>
-						</mx:FormItem>
-						<mx:FormItem label="Last Name">
-							<s:Label id="personLastname" />
-						</mx:FormItem>
-						<mx:FormItem label="Email" required="true">
-							<s:Label id="personEmail" />
-						</mx:FormItem>
-						<mx:FormItem>
-							<components:NativeButton id="passwordBtn" label="Modify Information"/>
-						</mx:FormItem>  
-					</mx:Form>
-					<mx:Form id="passwordForm" includeInLayout="false" visible="false">
-						<mx:FormHeading label="Modify Information"/>
-						<mx:FormItem label="Old Password" required="true">
-							<s:TextInput id="oldPersonPassword" displayAsPassword="true"/>
-						</mx:FormItem>
-						<mx:FormItem label="New Password" required="true">
-							<s:TextInput id="personPassword1" displayAsPassword="true"/>
-						</mx:FormItem>
-						<mx:FormItem label="Retype Password" required="true">
-							<s:TextInput id="personPassword2" displayAsPassword="true"/>
-						</mx:FormItem>
-						<mx:FormItem label="Twitter id">
-							<s:TextInput id="tweetId"/>
-						</mx:FormItem> 
-						<mx:FormItem label="Twitter Password">
-							<s:TextInput id="tweetPassword" displayAsPassword="true"/>
-						</mx:FormItem> 
-						<mx:FormItem label="Password Question">
-							<s:ComboBox id="personQuestion" />
-						</mx:FormItem>
-						<mx:FormItem label="Password Answer">
-							<s:TextInput id="personAnswer"/>
-						</mx:FormItem>
-						<mx:FormItem label="City">
-							<s:TextInput id="personCity"/>
-						</mx:FormItem>
-						<mx:FormItem label="Country">
-							<s:TextInput id="personCountry"/>
-						</mx:FormItem>
-						<mx:FormItem label="Postal Code">
-							<s:TextInput id="personPostalCode" />
-						</mx:FormItem>
-						<mx:FormItem>
-							<components:NativeButton id="submitBtn" label="Save" enabled="false" />
-							<components:NativeButton id="cancelBtn" label="Cancel"/>
-						</mx:FormItem>
-					</mx:Form> 
-					<s:Label text="Friends count" />
+	
+	<mx:ApplicationControlBar width="100%"   top="5" left="5" right="5"
+							  paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3"  dock="false" verticalAlign="middle">
+			<s:Label text="Alaguvel"/>
+			<s:Label text="[Profile]" id="profileTxt"/>	
+			<s:TextArea id="updateTxt" height="30" width="100%"/>	
+			<s:HGroup height="100%" verticalAlign="middle">
+				<components:NativeButton label="update" id="update"/>
+				<s:CheckBox label="tweet" id="tweet"/>	
+			</s:HGroup>
+			<mx:Spacer width="100%"/>
+			<s:Label text="search"/>
+			<s:TextInput />
+			<components:NativeButton id="goBtn" label="Go"/>
+	</mx:ApplicationControlBar>
+	
+	<s:HGroup height="100%" width="100%" top="50" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" >	
+		<components:NativePanel id="profilePanel" height="100%" width="100%"  title="Profile" 
+								showCloseButton="true" includeInLayout="false" visible="false">
+				<s:Scroller width="100%" height="100%">
+					<s:VGroup width="100%" height="100%" horizontalAlign="center">
+						<mx:Form id="personForm" horizontalCenter="0"> 
+							<mx:FormItem label="First Name" required="true">
+								<s:Label id="personFirstname"/>
+							</mx:FormItem>
+							<mx:FormItem label="Last Name">
+								<s:Label id="personLastname" />
+							</mx:FormItem>
+							<mx:FormItem label="Email" required="true">
+								<s:Label id="personEmail" />
+							</mx:FormItem>
+							<mx:FormItem>
+								<components:NativeButton id="passwordBtn" label="Modify Information"/>
+							</mx:FormItem>  
+						</mx:Form>
+						<mx:Form id="passwordForm" includeInLayout="false" visible="false">
+							<mx:FormHeading label="Modify Information"/>
+							<mx:FormItem label="Old Password" required="true">
+								<s:TextInput id="oldPersonPassword" displayAsPassword="true"/>
+							</mx:FormItem>
+							<mx:FormItem label="New Password" required="true">
+								<s:TextInput id="personPassword1" displayAsPassword="true"/>
+							</mx:FormItem>
+							<mx:FormItem label="Retype Password" required="true">
+								<s:TextInput id="personPassword2" displayAsPassword="true"/>
+							</mx:FormItem>
+							<mx:FormItem label="Twitter id">
+								<s:TextInput id="tweetId"/>
+							</mx:FormItem> 
+							<mx:FormItem label="Twitter Password">
+								<s:TextInput id="tweetPassword" displayAsPassword="true"/>
+							</mx:FormItem> 
+							<mx:FormItem label="Password Question">
+								<s:DropDownList id="personQuestion" />
+							</mx:FormItem>
+							<mx:FormItem label="Password Answer">
+								<s:TextInput id="personAnswer"/>
+							</mx:FormItem>
+							<mx:FormItem label="City">
+								<s:TextInput id="personCity"/>
+							</mx:FormItem>
+							<mx:FormItem label="Country">
+								<s:TextInput id="personCountry"/>
+							</mx:FormItem>
+							<mx:FormItem label="Postal Code">
+								<s:TextInput id="personPostalCode" />
+							</mx:FormItem>
+							<mx:FormItem>
+								<components:NativeButton id="submitBtn" label="Save" enabled="false" />
+								<components:NativeButton id="cancelBtn" label="Cancel"/>
+							</mx:FormItem>
+						</mx:Form> 
+						<s:Label text="Friends count" />
+					</s:VGroup>
+				</s:Scroller>
+		</components:NativePanel>
+		
+		<components:NativePanel height="100%" width="100%"  title="Wall" >
+				<s:Scroller width="100%" height="100%">
+					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+						<components:NativeDataGroup width="100%" height="100%" id="wallDG" />
+					</s:VGroup>
+				</s:Scroller>
+		</components:NativePanel>
+		
+		<components:NativePanel height="100%" width="100%"  title="My Update" >
+				<s:Scroller width="100%" height="100%">
+					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+						<components:NativeDataGroup width="100%" height="100%" id="myUpdateDG" />
+					</s:VGroup>
+				</s:Scroller>
+		</components:NativePanel>
+		
+		<components:NativePanel height="100%" width="100%"  title="Message" >
+			<s:Scroller width="100%" height="100%"> 
+				<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+					<components:NativeDataGroup width="100%" height="100%" id="messageDG" />
 				</s:VGroup>
 			</s:Scroller>
-		</s:Panel>
-		<s:VGroup width="100%" height="100%">
-			<s:HGroup verticalAlign="contentJustify" width="100%">
-				<s:TextArea id="updateTxt" height="50" width="100%"/>	
-				<components:NativeButton label="update" id="update"/>
-				<components:NativeButton label="tweet" id="tweet"/>
-			</s:HGroup>
-			<mx:TabNavigator width="100%" height="100%">
-				<s:NavigatorContent label="Wall">
-					<s:Scroller width="100%" height="100%">
-						<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-					</s:VGroup>
+		</components:NativePanel>	 
+		
+		<components:NativePanel height="100%" width="100%"  title="Friends List" >
+			
+				<s:Group  width="100%" height="100%">
+					<s:Scroller width="100%" top="0" bottom="122">
+						<s:VGroup width="100%" paddingLeft="2" paddingRight="2">
+							<components:NativeDataGroup width="100%" height="100%" id="friendsListDG" />
+						</s:VGroup>
 					</s:Scroller>
-				</s:NavigatorContent>
-				<s:NavigatorContent label="My Update">
-					<s:Scroller width="100%" height="100%">
-						<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-					</s:VGroup>
-						</s:Scroller>
-				</s:NavigatorContent>
-				<s:NavigatorContent label="Message">
-					<s:Scroller width="100%" height="100%"> 
-						<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-						<components:UpdateCard />
-					</s:VGroup>
-					</s:Scroller>
-				</s:NavigatorContent>
-			</mx:TabNavigator> 
-		</s:VGroup>
-		<s:VGroup id="searchPanel" height="100%" width="200">
-			<s:VGroup width="100%" height="150">
-				<s:HGroup width="100%" height="30">
-					<s:Label text="search"/>
-					<s:TextInput />
-				</s:HGroup>
-				<s:Scroller top="30" width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:BuddyCard />
-						<components:BuddyCard />
-						<components:BuddyCard />
-					</s:VGroup>	
-				</s:Scroller>
-			</s:VGroup>	
-			<s:Panel height="120" width="100%" title="Friend Suggestion" >
-				<s:Scroller width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:BuddyCard />
-						<components:BuddyCard />
-					</s:VGroup>	
-				</s:Scroller>	
-			</s:Panel>	
-			<s:Panel height="100%" width="100%"  title="Friends List" >
-				<s:Scroller width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					<components:BuddyCard />
-					</s:VGroup>
-				</s:Scroller>	
-			</s:Panel>	
-		</s:VGroup>
+						
+					<components:NativePanel height="120" bottom="0" width="100%" title="Suggested Friends" >
+						<s:Scroller width="100%" height="100%">
+							<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+								<components:NativeDataGroup width="100%" height="100%" id="suggestFriendsListDG" />
+							</s:VGroup>	
+						</s:Scroller>	
+					</components:NativePanel>	
+						
+				</s:Group >
+		</components:NativePanel>	
+		<components:NativePanel height="100%" id="searchPanel" width="100%" includeInLayout="false" visible="false" title="Search" showCloseButton="true">
+			
+		</components:NativePanel>
 	</s:HGroup> 
 </s:Skin>

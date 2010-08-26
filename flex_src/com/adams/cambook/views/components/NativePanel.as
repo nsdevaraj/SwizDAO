@@ -26,5 +26,17 @@ package com.adams.cambook.views.components
 		{
 			super();
 		}
+		private var _showCloseButton:Boolean=false;
+		[Bindable]
+		public function get showCloseButton():Boolean
+		{
+			return _showCloseButton;
+		}
+		
+		public function set showCloseButton(value:Boolean):void
+		{
+			_showCloseButton = value;
+		}
+
 	}
 }

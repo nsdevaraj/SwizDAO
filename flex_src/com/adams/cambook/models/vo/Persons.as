@@ -35,6 +35,8 @@ package com.adams.cambook.models.vo
 		private var _personMobile:String;
 		private var _personPassword:String;
 		private var _personPostalCode:String; 
+		
+		public var connectionArr:Array=[]; 
 		public function Persons()
 		{
 			super();

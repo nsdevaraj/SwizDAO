@@ -40,13 +40,13 @@
             var swfVersionStr = "${version_major}.${version_minor}.${version_revision}";
             <!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
             var xiSwfUrlStr = "${expressInstallSwf}";
-            var flashvars = { serverLocation: 'http://192.168.1.99:8080/cambook/', FileSeparator: '//' };
+            var flashvars = { serverLocation: 'http://192.168.1.102:8080/cambook/', FileSeparator: '//' };
             var params = {};
             params.quality = "high";
             params.bgcolor = "${bgcolor}";
             params.allowscriptaccess = "sameDomain";
             params.allowfullscreen = "true";
-            params.serverLocation = "http://192.168.1.99:8080/cambook/";
+            params.serverLocation = "http://192.168.1.102:8080/cambook/";
             params.FileSeparator = "//";
             var attributes = {};
             attributes.id = "${application}";
@@ -84,20 +84,20 @@
                 <param name="quality" value="high" />
                 <param name="bgcolor" value="${bgcolor}" />
                 <param name="allowScriptAccess" value="sameDomain" />
-                <param name="serverLocation" value="http://192.168.1.99:8080/cambook/"/>
+                <param name="serverLocation" value="http://192.168.1.102:8080/cambook/"/>
                 <param name="FileSeparator" value="//"/>
                 <param name="allowFullScreen" value="true" />
                 
-       			<param name='flashVars' value="serverLocation='http://192.168.1.99:8080/cambook/',FileSeparator='//'"/>
+       			<param name='flashVars' value="serverLocation='http://192.168.1.102:8080/cambook/',FileSeparator='//'"/>
                 <!--[if !IE]>-->
                 <object type="application/x-shockwave-flash" data="${swf}.swf" width="${width}" height="${height}">
                     <param name="quality" value="high" />
                     <param name="bgcolor" value="${bgcolor}" />
                     <param name="allowScriptAccess" value="sameDomain" />
-                    <param name="serverLocation" value="http://192.168.1.99:8080/cambook/" />
+                    <param name="serverLocation" value="http://192.168.1.102:8080/cambook/" />
                     <param name="FileSeparator" value="//" />
                     <param name="allowFullScreen" value="true" />
-       				<param name='flashVars' value="serverLocation='http://192.168.1.99:8080/cambook/',FileSeparator='//'"/>
+       				<param name='flashVars' value="serverLocation='http://192.168.1.102:8080/cambook/',FileSeparator='//'"/>
                 <!--<![endif]-->
                 <!--[if gte IE 6]>-->
                 	<p> 

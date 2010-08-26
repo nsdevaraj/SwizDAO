@@ -153,7 +153,7 @@ package com.adams.cambook.utils
 							throw new Error("Not a Text");
 						}catch(er:Error){
 							if(obj.hasOwnProperty([uiComp.id]))
-							uiComp.text = obj[uiComp.id].toString(); 
+							if(obj[uiComp.id])uiComp.text = obj[uiComp.id].toString(); 
 						}
 					}else if(uiComp is DateField ){
 						uiComp.selectedDate = obj[uiComp.id];

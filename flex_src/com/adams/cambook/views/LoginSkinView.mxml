@@ -11,11 +11,15 @@
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout> 
-	 
-	<s:Panel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
-		<s:layout>
+	 <s:Rect width="100%" height="100%">
+		 <s:fill>
+			 <s:SolidColor color="#b3c5cb"/>
+		 </s:fill>
+	 </s:Rect>
+	<components:NativePanel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
+		<components:layout>
 			<s:VerticalLayout horizontalAlign="center"/>
-		</s:layout>
+		</components:layout>
 		<s:Group width="100%">
 			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  /> 
 			<mx:Form id="loginForm" verticalCenter="0" horizontalCenter="0" paddingBottom="0">
@@ -23,7 +27,7 @@
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
 				</mx:FormItem>
 				<mx:FormItem width="100%" label="password:" required="true">
-					<s:TextInput id="passwordTextInput" text="tests" displayAsPassword="true" />
+					<s:TextInput id="passwordTextInput" text="adams" displayAsPassword="true" />
 				</mx:FormItem>
 				<mx:FormItem>
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
@@ -51,13 +55,13 @@
 				</mx:FormItem>  
 			</mx:Form>
 		</s:Group>
-		<s:controlBarContent>
+		<components:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
-				<components:NativeButton id="submitBtn" label="Login" enabled="false"/>
+				<components:NativeButton id="submitBtn" label="Login"  />
 				<components:NativeButton id="newUserBtn" label="New User"/>
 				<components:NativeButton id="registerBtn" label="Register" includeInLayout="false" visible="false" enabled="false"/>
 				<components:NativeButton id="cancelBtn" label="Cancel" includeInLayout="false" visible="false" />
 			</s:HGroup>
-		</s:controlBarContent>
-	</s:Panel> 
+		</components:controlBarContent>
+	</components:NativePanel> 
 </s:Skin>
