@@ -4,68 +4,65 @@
 @namespace view "com.adams.scrum.views.components.*";
 
 @font-face {
-	fontFamily: "scFont";
+	font-family: "scFont";
 	src: url("assets/fonts/mriam.ttf");
 	embedAsCff: true;
-}
- 
+}  
 mx|Button, mx|Form,mx|FormItem, mx|FormItemLabel{
-	fontFamily: scFont;
-	fontLookup: embeddedCFF;
+	font-family: scFont;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 }
 mx|DateField {
-	fontFamily: scFont;
+	font-family: scFont;
 	textInputClass: ClassReference("mx.controls.MXFTETextInput");
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
 mx|Label { 
+	color:#232323;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
 .headerStyle{
-	font-size:24;
-}
- 
-s|Label{
-	fontFamily:scFont;
-	fontLookup: embeddedCFF;
+	font-size:12;
 	color:#000000;
-	font-size:11;
+} 
+s|Label{
+	font-family:scFont;
+	color:#232323;
+	
 } 
 s|Application{
 	symbol-color:#ff0000; 
+	baseColor:#363636;
 	color: #000000;
-	background-alpha:0;
 	skin-class:ClassReference('assets.skins.DTApplicationSkin');
 }
+s|Panel{
+	skin-class:ClassReference('assets.skins.PanelSkin');	
+}
 s|TextInput{
-	fontFamily:scFont;
-	fontLookup: embeddedCFF;
+	font-family:scFont;
 	skinClass: ClassReference('assets.skins.Components.DTTextInput');
 	focus-alpha:0;
 }
  
 s|Button {
-	fontFamily:scFont;
-	fontLookup: embeddedCFF;
+	font-family:scFont;
 	skinClass: ClassReference('assets.skins.ButtonIcon');
 	color: #959494;
-}  
-s|List s|Scroller {
-	horizontalScrollPolicy: off;
-	verticalScrollPolicy: off;
+}   
+.removeButtonSkin{
+	upSkin: Embed(source='assets/images/closeBtn.png');	
+	overSkin:Embed(source='assets/images/closeBtn.png');
+	downSkin:Embed(source='assets/images/closeBtn.png');
+	disabled:Embed(source='assets/images/closeBtn.png');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
 }
-s|List{
-	skinClass:ClassReference("assets.skins.ListSkin");
-	fontFamily:scFont;
-	fontLookup: embeddedCFF;
-	alternating-item-colors:#f4f4f4,#e5e5e5;
-}
-view|RatingComponent.Star{
-	fontFamily:scFont;
-	fontLookup: embeddedCFF;
-	ratingIcon: ClassReference('assets.skins.Star');
-	activeIconColor: "0xffff00";
+.closeButtonSkin{
+	upSkin: Embed(source='assets/images/closeIcon.jpg');	
+	overSkin:Embed(source='assets/images/closeIcon.jpg');
+	downSkin:Embed(source='assets/images/closeIcon.jpg');
+	disabled:Embed(source='assets/images/closeIcon.jpg');
+	skinClass: ClassReference("assets.skins.ButtonSkin");
 }
 .messageSkin{
 	upSkin: Embed(source='assets/images/icons/message.png');	
@@ -77,6 +74,7 @@ view|RatingComponent.Star{
 	upSkin: Embed(source='assets/images/icons/tweet.png');	
 	overSkin:Embed(source='assets/images/icons/tweet.png');
 	downSkin:Embed(source='assets/images/icons/tweet.png');
+	disabledSkin:Embed(source='assets/images/icons/tweet.png');
 	skinClass: ClassReference("assets.skins.ButtonSkin");
 }
 .followSkin{

@@ -188,7 +188,7 @@ package com.adams.cambook.views.mediators
 					if( signal.action == Action.FINDBY_NAME ){
  						currentInstance.currentPerson =GetVOUtil.getPersonObject( currentInstance.currentPerson.personEmail, currentInstance.currentPerson.personPassword, personDAO.collection.items as ArrayCollection );
 						currentInstance.currentPerson.personAvailability = 1;
-						
+						view.personName.text = currentInstance.currentPerson.personFirstname;
 						ObjectUtils.setUpForm(currentInstance.currentPerson,view.personForm); 
 						ObjectUtils.setUpForm(currentInstance.currentPerson,view.passwordForm); 
 						if(currentInstance.currentPerson.personRelations == 0){

@@ -13,7 +13,7 @@
 	</s:layout> 
 	 <s:Rect width="100%" height="100%">
 		 <s:fill>
-			 <s:SolidColor color="#b3c5cb"/>
+			 <s:SolidColor color="#ffffff"/>
 		 </s:fill>
 	 </s:Rect>
 	<components:NativePanel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
@@ -27,7 +27,7 @@
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
 				</mx:FormItem>
 				<mx:FormItem width="100%" label="password:" required="true">
-					<s:TextInput id="passwordTextInput" text="adams" displayAsPassword="true" />
+					<s:TextInput id="passwordTextInput" text="tests" displayAsPassword="true" />
 				</mx:FormItem>
 				<mx:FormItem>
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>

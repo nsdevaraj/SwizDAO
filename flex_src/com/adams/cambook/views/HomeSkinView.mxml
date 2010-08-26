@@ -8,28 +8,16 @@
 	</fx:Metadata>  
 	<s:states>
 		<s:State name="BasicState" /> 
-	</s:states>
-	<s:layout>
-		<s:BasicLayout/>
-	</s:layout> 
+	</s:states> 
 	<s:Rect width="100%" height="100%">
 		<s:fill>
-			<s:SolidColor color="#b3c5cb"/>
+			<s:SolidColor color="#ffffff"/>
 		</s:fill>
-	</s:Rect>
-	<fx:Declarations>
-		<mx:ArrayCollection id="dp">
-			<fx:String>Flash</fx:String> 
-			<fx:String>Director</fx:String> 
-			<fx:String>Dreamweaver</fx:String> 
-			<fx:String>ColdFusion</fx:String> 
-		</mx:ArrayCollection>	
-	</fx:Declarations>
-	
+	</s:Rect> 
 	<mx:ApplicationControlBar width="100%"   top="5" left="5" right="5"
 							  paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3"  dock="false" verticalAlign="middle">
-			<s:Label text="Alaguvel"/>
-			<s:Label text="[Profile]" id="profileTxt"/>	
+			<s:Label id="personName"/>
+			<s:Label text="[Edit]" id="profileTxt"/>	
 			<s:TextArea id="updateTxt" height="30" width="100%"/>	
 			<s:HGroup height="100%" verticalAlign="middle">
 				<components:NativeButton label="update" id="update"/>

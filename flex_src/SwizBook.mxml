@@ -6,7 +6,6 @@
 	<fx:Style source="Style.css" />
 	<fx:Declarations>
 		<swiz:Context dispatcher="{ this }"/>
-	</fx:Declarations>
-	<s:layout><s:VerticalLayout gap="0"/></s:layout>
+	</fx:Declarations> 
 	<views:MyView/>
 </s:Application>
