@@ -24,7 +24,7 @@
 				<s:CheckBox label="tweet" id="tweet"/>	
 			</s:HGroup>
 			<mx:Spacer width="100%"/>
-			<s:Label text="search"/>
+			<s:Label text="Search"/>
 			<s:TextInput />
 			<components:NativeButton id="goBtn" label="Go"/>
 	</mx:ApplicationControlBar>

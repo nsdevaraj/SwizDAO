@@ -12,6 +12,10 @@ package com.adams.cambook.models.processor
 		
 		[Inject]
 		public var noteProcessor:NoteProcessor;
+		
+		[Inject("personDAO")]
+		public var personDAO:AbstractDAO;
+		
 		public function PersonProcessor()
 		{
 			super();
@@ -23,6 +27,10 @@ package com.adams.cambook.models.processor
 				for each(var connectedPerson:Persons in person.connectionSet){
 					processVO(connectedPerson);
 					person.connectionArr.push(connectedPerson.personId);
+					
+					if(!personDAO.collection.containsItem(connectedPerson)){
+						personDAO.collection.addItem(connectedPerson);
+					}
 				}
 				for each(var note:Notes in person.notesSet){
 					noteProcessor.processVO(note);

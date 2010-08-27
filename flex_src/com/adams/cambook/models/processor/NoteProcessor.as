@@ -12,6 +12,9 @@ package com.adams.cambook.models.processor
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
 		
+		[Inject("noteDAO")]
+		public var noteDAO:AbstractDAO;
+
 		public function NoteProcessor()
 		{
 			super();
@@ -21,7 +24,14 @@ package com.adams.cambook.models.processor
 		{
 			if(!vo.processed){
 				var notevo:Notes = vo as Notes;
-				notevo.PersonObj = GetVOUtil.getVOObject(notevo.personFK,personDAO.collection.items,personDAO.destination,Persons) as Persons;
+				notevo.PersonObj = GetVOUtil.getVOObject(notevo.createdPersonFK,personDAO.collection.items,personDAO.destination,Persons) as Persons;
+				
+				for each(var repliedNote:Notes in notevo.notesSet){
+					processVO(repliedNote);
+					if(!noteDAO.collection.containsItem(repliedNote)){
+						noteDAO.collection.addItem(repliedNote);
+					}
+				}
 				super.processVO(vo);
 			}
 		}
