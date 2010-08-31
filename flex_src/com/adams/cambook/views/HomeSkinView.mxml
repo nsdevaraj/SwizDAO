@@ -9,25 +9,30 @@
 	<s:states>
 		<s:State name="BasicState" /> 
 	</s:states> 
-	<s:Rect width="100%" height="100%">
-		<s:fill>
-			<s:SolidColor color="#ffffff"/>
-		</s:fill>
+	<s:Rect width="100%" height="49">
+		<s:fill><s:SolidColor color="#171717"/></s:fill>
+		<s:stroke><s:SolidColorStroke color="#333333"/></s:stroke>
+		<s:filters><s:DropShadowFilter angle="90" distance="3" alpha=".3" blurX="5" blurY="5"/></s:filters>
 	</s:Rect> 
-	<mx:ApplicationControlBar width="100%"   top="5" left="5" right="5"
-							  paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3"  dock="false" verticalAlign="middle">
-			<s:Label id="personName"/>
-			<s:Label text="[Edit]" id="profileTxt"/>	
-			<s:TextArea id="updateTxt" height="30" width="100%"/>	
-			<s:HGroup height="100%" verticalAlign="middle">
+	<s:Rect width="100%" height="49">
+		<s:fill><s:SolidColor color="#171717"/></s:fill>
+	</s:Rect>
+	<s:HGroup width="100%"   top="2" left="142" right="0" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="0"  
+			  verticalAlign="middle">
+			<s:VGroup>
+				<s:Label id="personName" styleName="headerStyle"/>
+				<s:Label text="[Edit]" id="profileTxt"/>		
+			</s:VGroup>
+			<s:TextArea id="updateTxt" height="40" width="100%"/>	
+			<s:VGroup height="100%" verticalAlign="middle">
+				<s:CheckBox label="tweet" id="tweet"/>
 				<components:NativeButton label="update" id="update"/>
-				<s:CheckBox label="tweet" id="tweet"/>	
-			</s:HGroup>
+			</s:VGroup>
 			<mx:Spacer width="100%"/>
 			<s:Label text="Search"/>
 			<s:TextInput />
 			<components:NativeButton id="goBtn" label="Go"/>
-	</mx:ApplicationControlBar>
+	</s:HGroup>
 	
 	<s:HGroup height="100%" width="100%" top="50" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" >	
 		<components:NativePanel id="profilePanel" height="100%" width="100%"  title="Profile" 
@@ -49,7 +54,7 @@
 							</mx:FormItem>  
 						</mx:Form>
 						<mx:Form id="passwordForm" includeInLayout="false" visible="false">
-							<mx:FormHeading label="Modify Information"/>
+							<mx:FormHeading label="Modify"/>
 							<mx:FormItem label="Old Password" required="true">
 								<s:TextInput id="oldPersonPassword" displayAsPassword="true"/>
 							</mx:FormItem>
@@ -85,7 +90,7 @@
 								<components:NativeButton id="cancelBtn" label="Cancel"/>
 							</mx:FormItem>
 						</mx:Form> 
-						<s:Label text="Friends count" />
+						<s:Label id="friendsCount" />
 					</s:VGroup>
 				</s:Scroller>
 		</components:NativePanel>
@@ -98,43 +103,50 @@
 				</s:Scroller>
 		</components:NativePanel>
 		
-		<components:NativePanel height="100%" width="100%"  title="My Update" >
+		<components:NativePanel height="100%" width="100%"  title="My Updates" >
 				<s:Scroller width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:NativeDataGroup width="100%" height="100%" id="myUpdateDG" />
-					</s:VGroup>
+						<components:NativeDataGroup width="100%" height="100%" id="myUpdateDG" >
+							<components:layout><s:VerticalLayout /></components:layout>
+						</components:NativeDataGroup>
 				</s:Scroller>
 		</components:NativePanel>
 		
-		<components:NativePanel height="100%" width="100%"  title="Message" >
+		<components:NativePanel height="100%" width="100%"  title="Messages" >
 			<s:Scroller width="100%" height="100%"> 
 				<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-					<components:NativeDataGroup width="100%" height="100%" id="messageDG" />
+					<components:NativeDataGroup width="100%" height="100%" id="messageDG" >
+						<components:layout><s:VerticalLayout /></components:layout>
+					</components:NativeDataGroup>
 				</s:VGroup>
 			</s:Scroller>
 		</components:NativePanel>	 
 		
-		<components:NativePanel height="100%" width="100%"  title="Friends List" >
-			
+		<s:VGroup width="100%" height="100%">
+			<components:NativePanel height="100%" width="100%"  title="Friends List" >
 				<s:Group  width="100%" height="100%">
 					<s:Scroller width="100%" top="0" bottom="122">
 						<s:VGroup width="100%" paddingLeft="2" paddingRight="2">
-							<components:NativeDataGroup width="100%" height="100%" id="friendsListDG" />
+							<components:NativeDataGroup width="100%" height="100%" id="friendsListDG">
+								<components:layout><s:VerticalLayout /></components:layout>
+							</components:NativeDataGroup>
 						</s:VGroup>
 					</s:Scroller>
-						
-					<components:NativePanel height="120" bottom="0" width="100%" title="Suggested Friends" >
-						<s:Scroller width="100%" height="100%">
-							<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-								<components:NativeDataGroup width="100%" height="100%" id="suggestFriendsListDG" />
-							</s:VGroup>	
-						</s:Scroller>	
-					</components:NativePanel>	
-						
 				</s:Group >
-		</components:NativePanel>	
+			</components:NativePanel>
+			<components:NativePanel height="120" bottom="0" width="100%" title="Suggested Friends" >
+				<s:Scroller width="100%" height="100%">
+					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+						<components:NativeDataGroup width="100%" height="100%" id="suggestFriendsListDG">
+							<components:layout><s:VerticalLayout /></components:layout>
+						</components:NativeDataGroup>
+					</s:VGroup>	
+				</s:Scroller>	
+			</components:NativePanel>	
+		</s:VGroup>
+		
 		<components:NativePanel height="100%" id="searchPanel" width="100%" includeInLayout="false" visible="false" title="Search" showCloseButton="true">
 			
 		</components:NativePanel>
 	</s:HGroup> 
+	<s:BitmapImage source="@Embed('assets/images/icons/cbLogo.png')" left="10" top="10" />
 </s:Skin>

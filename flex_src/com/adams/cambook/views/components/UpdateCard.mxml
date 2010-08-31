@@ -57,5 +57,6 @@
 			<s:Button label="Comment" click="addReply()"/>
 			<s:Button label="Cancel" click="currentState=''"/>
 		</s:HGroup>
+		
 	</s:VGroup>	 
 </s:Group>

@@ -52,7 +52,7 @@
 				background.left = background.top = background.right = background.bottom = 0;
 				contents.left = contents.top = contents.right = contents.bottom = 0;
 			}
-			
+			background.top = 30;
 			dropShadow.visible = getStyle("dropShadowVisible");
 			
 			var cr:Number = getStyle("cornerRadius");
@@ -125,7 +125,7 @@
 	
 	<!-- drop shadow can't be hittable so it stays sibling of other graphics -->
 	<!--- @private -->
-	<s:RectangularDropShadow id="dropShadow" blurX="20" blurY="20" alpha="0.32" distance="11" 
+	<s:RectangularDropShadow id="dropShadow" blurX="20" blurY="20" alpha="0" distance="11" 
 							 angle="90" color="#000000" left="0" top="0" right="0" bottom="0"/>
 	
 	<!-- drop shadow can't be hittable so all other graphics go in this group -->
@@ -165,11 +165,11 @@
 		
 		<!-- layer 2: background fill -->
 		<!--- Defines the appearance of the PanelSkin class's background. -->
-		<s:Rect id="background" left="1" top="1" right="1" bottom="1">
+		<s:Rect id="background" left="1" top="30" right="1" bottom="1">
 			<s:fill>
 				<!--- @private
 				Defines the  PanelSkin class's background fill. The default color is 0xFFFFFF. -->
-				<s:SolidColor id="backgroundFill" color="#FFFFFF"/>
+				<s:SolidColor id="backgroundFill" color="#ffffff"/>
 			</s:fill>
 		</s:Rect>
 		
@@ -181,43 +181,26 @@
 			</s:layout>
 			
 			<!--- @private -->
-			<s:Group id="topGroup" mask="{topGroupMask}">
+			<s:Group id="topGroup" mask="{topGroupMask}" >
 				
 				<!-- layer 0: title bar fill -->
 				<!--- @private -->
-				<s:Rect id="tbFill" left="0" right="0" top="0" bottom="1">
+				<s:Rect id="tbFill" left="0" right="0" top="0" bottom="1" alpha="0">
 					<s:fill>
 						<s:LinearGradient rotation="90">
-							<s:GradientEntry color="0xE2E2E2" />
-							<s:GradientEntry color="0xD9D9D9" />
+							<s:GradientEntry color="0x2c2c2c" />
+							<s:GradientEntry color="0x2c2c2c" />
 						</s:LinearGradient>
 					</s:fill>
 				</s:Rect>
 				
-				<!-- layer 1: title bar highlight -->
-				<!--- @private -->
-				<s:Rect id="tbHilite" left="0" right="0" top="0" bottom="0">
-					<s:stroke>
-						<s:LinearGradientStroke rotation="90" weight="1">
-							<s:GradientEntry color="0xEAEAEA" />
-							<s:GradientEntry color="0xD9D9D9" />
-						</s:LinearGradientStroke>
-					</s:stroke>
-				</s:Rect>
-				
-				<!-- layer 2: title bar divider -->
-				<!--- @private -->
-				<s:Rect id="tbDiv" left="0" right="0" height="1" bottom="0">
-					<s:fill>
-						<s:SolidColor color="0xC0C0C0" />
-					</s:fill>
-				</s:Rect>
+			 
 				
 				<!-- layer 3: text -->
 				<!--- @copy spark.components.Panel#titleDisplay -->
 				<s:Label id="titleDisplay" maxDisplayedLines="1"
 						 left="9" right="3" top="1" bottom="0" minHeight="30"
-						 verticalAlign="middle" styleName="headerStyle">
+						 verticalAlign="middle" styleName="panelHeader">
 				</s:Label>
 				<components:NativeButton id="closeButton" styleName="closeButtonSkin"  
 										 verticalCenter="0" right="3" visible="{hostComponent.showCloseButton}"/>
@@ -229,7 +212,7 @@
 			more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
 			-->
 			<!--- @copy spark.components.SkinnableContainer#contentGroup -->
-			<s:Group id="contentGroup" width="100%" height="100%" minWidth="0" minHeight="0">
+			<s:Group id="contentGroup" width="100%" height="100%" top="30" minWidth="0" minHeight="0">
 			</s:Group>
 			
 			<!--- @private -->
@@ -244,23 +227,14 @@
 							<s:SolidColor color="0x000000" />
 						</s:fill>
 					</s:Rect>
-					
-					<!-- layer 1: control bar highlight -->
-					<s:Rect left="0" right="0" top="1" bottom="0">
-						<s:stroke>
-							<s:LinearGradientStroke rotation="90" weight="1">
-								<s:GradientEntry color="0xE5E5E5" />
-								<s:GradientEntry color="0xD8D8D8" />
-							</s:LinearGradientStroke>
-						</s:stroke>
-					</s:Rect>
+				 
 					
 					<!-- layer 2: control bar fill -->
 					<s:Rect left="1" right="1" top="2" bottom="1">
 						<s:fill>
 							<s:LinearGradient rotation="90">
-								<s:GradientEntry color="0xDADADA" />
-								<s:GradientEntry color="0xC5C5C5" />
+								<s:GradientEntry color="0x2c2c2c" />
+								<s:GradientEntry color="0x2c2c2c" />
 							</s:LinearGradient>
 						</s:fill>
 					</s:Rect>

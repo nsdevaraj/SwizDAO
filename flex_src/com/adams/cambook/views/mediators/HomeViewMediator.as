@@ -191,6 +191,8 @@ package com.adams.cambook.views.mediators
 						view.personName.text = currentInstance.currentPerson.personFirstname;
 						ObjectUtils.setUpForm(currentInstance.currentPerson,view.personForm); 
 						ObjectUtils.setUpForm(currentInstance.currentPerson,view.passwordForm); 
+						
+						view.friendsCount.text ='Friends Count : '+ currentInstance.currentPerson.connectionArr.length;
 						if(currentInstance.currentPerson.personRelations == 0){
 							changeToPasswordView();
 							currentInstance.currentPerson.personRelations = 1;

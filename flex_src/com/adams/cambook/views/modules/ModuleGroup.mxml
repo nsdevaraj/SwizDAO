@@ -65,6 +65,6 @@
 		]]>
 	</fx:Script>
 	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" />
+		<s:VerticalLayout horizontalAlign="center"/>
 	</s:layout> 
 </s:Group>
