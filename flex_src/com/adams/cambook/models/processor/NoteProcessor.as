@@ -8,10 +8,6 @@ package com.adams.cambook.models.processor
 
 	public class NoteProcessor extends AbstractProcessor
 	{  
-		
-		[Inject("personDAO")]
-		public var personDAO:AbstractDAO;
-		
 		[Inject("noteDAO")]
 		public var noteDAO:AbstractDAO;
 
@@ -24,7 +20,6 @@ package com.adams.cambook.models.processor
 		{
 			if(!vo.processed){
 				var notevo:Notes = vo as Notes;
-				notevo.PersonObj = GetVOUtil.getVOObject(notevo.createdPersonFK,personDAO.collection.items,personDAO.destination,Persons) as Persons;
 				if(!noteDAO.collection.containsItem(notevo)){
 					noteDAO.collection.addItem(notevo);
 				}

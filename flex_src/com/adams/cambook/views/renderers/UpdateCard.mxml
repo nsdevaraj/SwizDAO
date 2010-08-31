@@ -3,17 +3,16 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"  clipAndEnableScrolling="false"
 		 xmlns:components="com.adams.cambook.views.components.*"
-		 creationComplete="onCreationComplete()">
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		
-	</fx:Declarations>
+		 creationComplete="onCreationComplete()"> 
 	<fx:Script>
 		<![CDATA[
 			import com.adams.cambook.models.vo.Notes;
+			import com.adams.cambook.models.vo.Persons;
+			import com.adams.cambook.utils.GetVOUtil;
 			import com.adams.cambook.utils.Utils;
 			import com.adams.cambook.views.components.NativeList;
 			
+			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
 			import mx.core.IFlexDisplayObject;
 			import mx.core.mx_internal;
@@ -31,26 +30,28 @@
 				if(value){
 					note = value as Notes;
 					noteTxt.text = note.description;
-					notePersonName.text = note.PersonObj.personFirstname + ' '+note.PersonObj.personLastname;
+					var personObj:Persons = new Persons();
+					personObj.personId = note.createdPersonFK;
+					personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
+					notePersonName.text = personObj.personFirstname + ' '+personObj.personLastname;
+					if(note.notesSet.length>0)
 					commentDG.dataProvider = note.notesSet;
 					sharBtn.visible = note.personFK ? true:false;
 					likeBtn.visible = note.createdPersonFK == currentPersonId ? false:true;
 				}
 			}
-			private function addReply():void{
-				/* var temp:Comment = new Comment();
-				temp.userTxt.text = 'Alaguvel';
-				temp.commentTxt.text = commentArea.text;
-				commentContainer.addElement(temp); */ 
+			private function addReply(eve:MouseEvent):void{ 
 				var replyNote:Notes = new Notes();
 				replyNote.description = commentArea.text;
 				replyNote.createdPersonFK =currentPersonId;
 				replyNote.creationDate = new Date();
+				note.notesSet.addItem(replyNote);
 				Object( owner ).renderSignal.dispatch(NativeList.REPLIEDUPDATE,replyNote);
 				currentState='';
 			}
 			
 			public static var currentPersonId:int;
+			public static var currentPersonsList:ArrayCollection;
 		 
 			private var buddyCard:BuddyCard = new BuddyCard();
 			
@@ -85,7 +86,7 @@
 		<s:HGroup verticalAlign="contentJustify" width="100%" includeIn="replyState"
 				  paddingLeft="5" paddingRight="5">
 			<s:TextArea height="35" id="commentArea" width="100%"/>	
-			<components:NativeButton label="reply" click="addReply()"/>
+			<components:NativeButton label="reply" id="replyBtn" click="addReply(event)"/>
 		</s:HGroup>
 		<s:Line width="100%" height="1"><s:stroke><s:SolidColorStroke color="#3a3a3a"/></s:stroke></s:Line>
 	</s:VGroup>	 

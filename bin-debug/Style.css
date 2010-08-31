@@ -10,7 +10,7 @@ s|ItemRenderer s|VGroup s|VGroup #notePersonName{
 s|ItemRenderer s|VGroup s|VGroup #noteTxt{
 	color:#efefef;
 	fontSize:13;
-} 
+}
 s|VScrollBar{
 	skinClass: ClassReference('assets.skins.Scroller.VScrollBarSkin');
 }
@@ -24,8 +24,7 @@ s|ItemRenderer{
 	font-family: "scFont";
 	src: url("assets/fonts/mriam.ttf");
 	embedAsCff: true;
-}  
-
+} 
 .headerStyle{
 	font-size:15;
 	color:#efefef;
@@ -152,7 +151,4 @@ mx|Label {
 	overSkin:Embed(source='assets/images/icons/share.png');
 	downSkin:Embed(source='assets/images/icons/share.png');
 	skinClass: ClassReference("assets.skins.ButtonSkin");
-}
-global
-{
 }

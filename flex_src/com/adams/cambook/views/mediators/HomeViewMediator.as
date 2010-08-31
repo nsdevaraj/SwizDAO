@@ -13,6 +13,7 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.views.HomeSkinView;
 	import com.adams.cambook.views.components.NativeList;
 	import com.adams.cambook.views.renderers.BuddyCard;
+	import com.adams.cambook.views.renderers.Comment;
 	import com.adams.cambook.views.renderers.UpdateCard;
 	
 	import flash.events.Event;
@@ -146,21 +147,70 @@ package com.adams.cambook.views.mediators
 			createFormValidators();
 			//load all persons
 		 	if(!int( currentInstance.currentPerson.personId) ) {
+				var perAllsignal:SignalVO = new SignalVO( this, personDAO, Action.SQL_FINDALL );
+				signalSeq.addSignal( perAllsignal ); 
+				
 				var persignal:SignalVO = new SignalVO( this, personDAO, Action.FINDBY_NAME );
 				persignal.name = currentInstance.currentPerson.personEmail;
 				signalSeq.addSignal( persignal ); 
-				
-				var perAllsignal:SignalVO = new SignalVO( this, personDAO, Action.SQL_FINDALL );
-				signalSeq.addSignal( perAllsignal ); 
 			 }
 		}
 		protected function setDataProviders():void {	
+			setDataProviderFilters('wall');
 			view.wallDG.dataProvider = noteDAO.collection.items;
+			setDataProviderFilters('upd');
 			view.myUpdateDG.dataProvider = currentInstance.currentPerson.notesSet;
+			setDataProviderFilters('msg');
 			view.messageDG.dataProvider = noteDAO.collection.items;
 			view.friendsListDG.dataProvider = currentInstance.currentPerson.connectionSet;
+			setDataProviderFilters('suggest');
 			view.suggestFriendsListDG.dataProvider = personDAO.collection.items;
 		} 
+		protected function setDataProviderFilters(filterStr:String):void {	
+			switch(filterStr){
+				case 'wall':
+					(noteDAO.collection.items as ArrayCollection).filterFunction = wallFilter;
+					(noteDAO.collection.items as ArrayCollection).refresh();
+					break;
+				case 'msg':
+					(noteDAO.collection.items as ArrayCollection).filterFunction = msgFilter;
+					(noteDAO.collection.items as ArrayCollection).refresh();
+					break;
+				case 'suggest':
+					(personDAO.collection.items as ArrayCollection).filterFunction = suggestFilter;
+					(personDAO.collection.items as ArrayCollection).refresh();
+					break; 
+				case 'upd':
+					currentInstance.currentPerson.notesSet.filterFunction = updateFilter;
+					currentInstance.currentPerson.notesSet.refresh();
+					break; 
+			}
+		}
+		
+		protected function updateFilter(obj:Object):Boolean{
+			if ( Notes(obj).personFK == 0){
+				return true;
+			}
+			return false;
+		}
+		protected function msgFilter(obj:Object):Boolean{
+			if ( Notes(obj).personFK == currentInstance.currentPerson.personId || (Notes(obj).createdPersonFK == currentInstance.currentPerson.personId && Notes(obj).personFK != 0)){
+				return true;
+			}
+			return false;
+		}
+		protected function wallFilter(obj:Object):Boolean{
+			if ( Notes(obj).createdPersonFK!= currentInstance.currentPerson.personId){
+				return true;
+			}
+			return false;
+		}
+		protected function suggestFilter(obj:Object):Boolean{
+			if ( currentInstance.currentPerson.connectionArr.indexOf(Persons(obj).personId)==-1){
+				return true;
+			}
+			return false;
+		}
 		override protected function setRenderers():void {
 			super.setRenderers(); 
 			BuddyCard.personsArr = currentInstance.currentPerson.connectionArr;
@@ -195,6 +245,7 @@ package com.adams.cambook.views.mediators
 						ObjectUtils.setUpForm(currentInstance.currentPerson,view.passwordForm); 
 						
 						view.friendsCount.text ='Friends Count : '+ currentInstance.currentPerson.connectionArr.length;
+						currentInstance.currentPerson.connectionArr.push(currentInstance.currentPerson.personId);
 						if(currentInstance.currentPerson.personRelations == 0){
 							changeToPasswordView();
 							currentInstance.currentPerson.personRelations = 1;
@@ -210,14 +261,17 @@ package com.adams.cambook.views.mediators
 					}
 					if( signal.action == Action.SQL_FINDALL ){
 					currentInstance.currentPersonsList = obj as ArrayCollection;
+					UpdateCard.currentPersonsList = currentInstance.currentPersonsList;
+ 					Comment.currentPersonsList = currentInstance.currentPersonsList;
 					}
 				}
 				if( signal.destination == noteDAO.destination ) {
 					if( signal.action == Action.CREATE ){
-						var newNote:Notes = GetVOUtil.getVOObject((obj as Notes).noteId,noteDAO.collection.items,noteDAO.destination,Notes) as Notes;
-						currentInstance.currentPerson.notesSet.addItem(newNote);
-					//	view.myUpdateDG.dataProvider =	currentInstance.currentPerson.notesSet;
-						view.updateTxt.text = '';
+						if(Notes(obj).personFK ==0){
+							currentInstance.currentPerson.notesSet.addItem(obj);
+							view.myUpdateDG.dataProvider =	currentInstance.currentPerson.notesSet;
+							view.updateTxt.text = '';
+						}
 					}
 				}
 				if( signal.destination == pagingDAO.destination ) { 
@@ -260,19 +314,25 @@ package com.adams.cambook.views.mediators
 			view.suggestFriendsListDG.renderSignal.add(suggestFriendsListDGHandler);
 		}
 		private function wallHandler(str:String, note:Notes):void{ 
+			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
 			updateNoteSignal.valueObject = note;
 			signalSeq.addSignal( updateNoteSignal );
+			}
 		}
 		private function myUpdateDGHandler(str:String, note:Notes):void{
+			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
 			updateNoteSignal.valueObject = note;
 			signalSeq.addSignal( updateNoteSignal );
+			}
 		}
 		private function messageDGHandler(str:String, note:Notes):void{
+			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
 			updateNoteSignal.valueObject = note;
 			signalSeq.addSignal( updateNoteSignal );
+			}
 		}
 		private function friendsListDGHandler(str:String, person:Persons):void{
 			
