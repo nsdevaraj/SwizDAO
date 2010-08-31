@@ -10,7 +10,7 @@ s|ItemRenderer s|VGroup s|VGroup #notePersonName{
 s|ItemRenderer s|VGroup s|VGroup #noteTxt{
 	color:#efefef;
 	fontSize:13;
-}
+} 
 s|VScrollBar{
 	skinClass: ClassReference('assets.skins.Scroller.VScrollBarSkin');
 }

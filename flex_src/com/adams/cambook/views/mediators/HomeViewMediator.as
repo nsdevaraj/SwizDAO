@@ -38,13 +38,15 @@ package com.adams.cambook.views.mediators
 
 	public class HomeViewMediator extends AbstractViewMediator
 	{ 		 
-		
+		[Bindable]
 		[Inject]
 		public var currentInstance:CurrentInstance; 
 		 
+		[Bindable]
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
 		
+		[Bindable]
 		[Inject("noteDAO")]
 		public var noteDAO:AbstractDAO;
 		
@@ -210,7 +212,15 @@ package com.adams.cambook.views.mediators
 					currentInstance.currentPersonsList = obj as ArrayCollection;
 					}
 				}
-				if( signal.destination == pagingDAO.destination ) {
+				if( signal.destination == noteDAO.destination ) {
+					if( signal.action == Action.CREATE ){
+						var newNote:Notes = GetVOUtil.getVOObject((obj as Notes).noteId,noteDAO.collection.items,noteDAO.destination,Notes) as Notes;
+						currentInstance.currentPerson.notesSet.addItem(newNote);
+					//	view.myUpdateDG.dataProvider =	currentInstance.currentPerson.notesSet;
+						view.updateTxt.text = '';
+					}
+				}
+				if( signal.destination == pagingDAO.destination ) { 
 					if(obj == Utils.TWEETSUCCESS){
 						view.updateTxt.text = '';
 					}else{

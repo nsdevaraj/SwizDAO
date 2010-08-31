@@ -97,9 +97,9 @@
 		
 		<components:NativePanel height="100%" width="100%"  title="Wall" >
 				<s:Scroller width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-						<components:NativeDataGroup width="100%" height="100%" id="wallDG" />
-					</s:VGroup>
+						<components:NativeDataGroup width="100%" height="100%" id="wallDG" >
+							<components:layout><s:VerticalLayout /></components:layout>
+						</components:NativeDataGroup>
 				</s:Scroller>
 		</components:NativePanel>
 		
@@ -113,11 +113,9 @@
 		
 		<components:NativePanel height="100%" width="100%"  title="Messages" >
 			<s:Scroller width="100%" height="100%"> 
-				<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 					<components:NativeDataGroup width="100%" height="100%" id="messageDG" >
 						<components:layout><s:VerticalLayout /></components:layout>
 					</components:NativeDataGroup>
-				</s:VGroup>
 			</s:Scroller>
 		</components:NativePanel>	 
 		
@@ -125,21 +123,17 @@
 			<components:NativePanel height="100%" width="100%"  title="Friends List" >
 				<s:Group  width="100%" height="100%">
 					<s:Scroller width="100%" top="0" bottom="122">
-						<s:VGroup width="100%" paddingLeft="2" paddingRight="2">
 							<components:NativeDataGroup width="100%" height="100%" id="friendsListDG">
 								<components:layout><s:VerticalLayout /></components:layout>
 							</components:NativeDataGroup>
-						</s:VGroup>
 					</s:Scroller>
 				</s:Group >
 			</components:NativePanel>
 			<components:NativePanel height="120" bottom="0" width="100%" title="Suggested Friends" >
 				<s:Scroller width="100%" height="100%">
-					<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 						<components:NativeDataGroup width="100%" height="100%" id="suggestFriendsListDG">
 							<components:layout><s:VerticalLayout /></components:layout>
 						</components:NativeDataGroup>
-					</s:VGroup>	
 				</s:Scroller>	
 			</components:NativePanel>	
 		</s:VGroup>
