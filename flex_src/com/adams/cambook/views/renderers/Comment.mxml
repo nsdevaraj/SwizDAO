@@ -17,8 +17,8 @@
 					note = value as Notes;
 					var personObj:Persons = new Persons();
 					personObj.personId = note.createdPersonFK;
-					personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
-					userTxt.text = personObj.personFirstname;
+					//personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
+				//	userTxt.text = personObj.personFirstname;
 					commentTxt.text = note.description;
 				}
 			}

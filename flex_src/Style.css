@@ -4,43 +4,58 @@
 @namespace view "com.adams.scrum.views.components.*";
 
 s|ItemRenderer s|VGroup s|VGroup #notePersonName{
-	color:#efefef;
-	fontSize:15;
+	fontSize:15; 
 }
 s|ItemRenderer s|VGroup s|VGroup #noteTxt{
-	color:#efefef;
 	fontSize:13;
 }
 s|VScrollBar{
 	skinClass: ClassReference('assets.skins.Scroller.VScrollBarSkin');
-}
+} 
 s|HScrollBar{
 	skinClass: ClassReference('assets.skins.Scroller.HScrollBarSkin');
 }
+s|TitleWindow{
+	font-family: scFont; 
+	skinClass: ClassReference('assets.skins.TitleWindowSkin');
+	border-color:#3b3b3b;
+	backgroundColor:#272727;
+	closeButtonColor:#858585;
+	closeButtonOverColor:#ffffff;
+	color:#858585;
+	
+}
+
 s|ItemRenderer{
-	roll-over-color:#2d2d2d;
+	roll-over-color:#2c2c2c;
+}
+s|List{
+	skinClass: ClassReference('assets.skins.ListSkin');
+	content-background-alpha:0;
+	selection-color:#2c2c2c;
+	border-visible:false;
 }
 @font-face {
 	font-family: "scFont";
 	src: url("assets/fonts/mriam.ttf");
 	embedAsCff: true;
-} 
+}  
+
 .headerStyle{
 	font-size:15;
-	color:#efefef;
 } 
 .panelHeader{
 	font-size:18;
-	color:#efefef;
 }
 s|Label{
+	color: #d2d2d2;
 	font-family:scFont;
-	color:#efefef;
 } 
+
 s|Application{
+	font-family: "scFont";
 	symbol-color:#ff0000; 
 	baseColor:#363636;
-	color: #efefef;
 	background-color:#333333;
 	skin-class:ClassReference('assets.skins.DTApplicationSkin');
 }
@@ -49,21 +64,24 @@ s|Panel{
 	background-color:#2c2c2c;
 }
 s|TextInput{
+	color: #d2d2d2;
 	content-background-color:#494949;
-	font-family:scFont;
-/*	skinClass: ClassReference('assets.skins.Components.DTTextInput');*/
+	font-family:scFont; 
 	focus-alpha:0;
 }
 s|TextArea{
+	font-family:scFont;
+	focus-alpha:0;
+	color: #d2d2d2;
 	content-background-color:#494949;
 }
  
 s|Button {
 	font-family:scFont;
 	skinClass: ClassReference('assets.skins.ButtonIcon');
-	color: #959494;
 }   
 mx|Button, mx|Form,mx|FormItem, mx|FormItemLabel{
+	color: #d2d2d2;
 	font-family: scFont;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 }
@@ -73,7 +91,6 @@ mx|DateField {
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
 mx|Label { 
-	color:#efefef;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
 
@@ -151,4 +168,7 @@ mx|Label {
 	overSkin:Embed(source='assets/images/icons/share.png');
 	downSkin:Embed(source='assets/images/icons/share.png');
 	skinClass: ClassReference("assets.skins.ButtonSkin");
+}
+global
+{
 }

@@ -10,8 +10,10 @@ package com.adams.cambook.views.mediators
 	import com.adams.cambook.utils.GetVOUtil;
 	import com.adams.cambook.utils.ObjectUtils;
 	import com.adams.cambook.utils.Utils;
+	import com.adams.cambook.views.ChatTitleWindow;
 	import com.adams.cambook.views.HomeSkinView;
 	import com.adams.cambook.views.components.NativeList;
+	import com.adams.cambook.views.mediators.ChatWindowMediator;
 	import com.adams.cambook.views.renderers.BuddyCard;
 	import com.adams.cambook.views.renderers.Comment;
 	import com.adams.cambook.views.renderers.UpdateCard;
@@ -23,31 +25,32 @@ package com.adams.cambook.views.mediators
 	import mx.collections.ArrayList;
 	import mx.controls.Alert;
 	import mx.core.ClassFactory;
+	import mx.core.FlexGlobals;
 	import mx.core.IFactory;
 	import mx.events.CloseEvent;
 	import mx.events.FlexEvent;
 	import mx.events.ItemClickEvent;
 	import mx.events.ListEvent;
 	import mx.events.ValidationResultEvent;
+	import mx.managers.PopUpManager;
 	import mx.validators.StringValidator;
 	import mx.validators.Validator;
 	
 	import spark.components.TextInput;
+	import spark.components.TitleWindow;
 	import spark.events.IndexChangeEvent;
 	import spark.skins.spark.DefaultItemRenderer;
 	
 
 	public class HomeViewMediator extends AbstractViewMediator
 	{ 		 
-		[Bindable]
+		
 		[Inject]
 		public var currentInstance:CurrentInstance; 
 		 
-		[Bindable]
 		[Inject("personDAO")]
 		public var personDAO:AbstractDAO;
 		
-		[Bindable]
 		[Inject("noteDAO")]
 		public var noteDAO:AbstractDAO;
 		
@@ -169,16 +172,22 @@ package com.adams.cambook.views.mediators
 		protected function setDataProviderFilters(filterStr:String):void {	
 			switch(filterStr){
 				case 'wall':
+					if(noteDAO.collection.items){
 					(noteDAO.collection.items as ArrayCollection).filterFunction = wallFilter;
 					(noteDAO.collection.items as ArrayCollection).refresh();
+					}
 					break;
 				case 'msg':
+					if(noteDAO.collection.items){
 					(noteDAO.collection.items as ArrayCollection).filterFunction = msgFilter;
 					(noteDAO.collection.items as ArrayCollection).refresh();
+					}
 					break;
 				case 'suggest':
+					if(personDAO.collection.items){
 					(personDAO.collection.items as ArrayCollection).filterFunction = suggestFilter;
 					(personDAO.collection.items as ArrayCollection).refresh();
+					}
 					break; 
 				case 'upd':
 					currentInstance.currentPerson.notesSet.filterFunction = updateFilter;
@@ -334,8 +343,28 @@ package com.adams.cambook.views.mediators
 			signalSeq.addSignal( updateNoteSignal );
 			}
 		}
+		
+		public var openedUser:Array = [];
 		private function friendsListDGHandler(str:String, person:Persons):void{
-			
+			if(str==NativeList.OPENCHAT){
+				if(openedUser.indexOf(person)==-1){ 
+					var chatWindow:ChatTitleWindow = PopUpManager.createPopUp(this,ChatTitleWindow, false) as ChatTitleWindow;
+					chatWindow.addEventListener(CloseEvent.CLOSE,closeChatWindow);
+					chatWindow.addEventListener(FlexEvent.CREATION_COMPLETE,setPositions)
+					chatWindow.person = person;
+					openedUser.push(person);
+				}	
+			}
+		}
+		private function setPositions(event:Event):void{
+			event.currentTarget.x = Math.random()*(this.width-event.currentTarget.width);
+			event.currentTarget.y = Math.random()*(this.height-event.currentTarget.height);
+		}
+		private function closeChatWindow(event:Event):void{
+			if(openedUser.indexOf(event.currentTarget.person)!= -1){
+				openedUser.splice(openedUser.indexOf(event.currentTarget.person),1);
+			};
+			PopUpManager.removePopUp(ChatTitleWindow(event.currentTarget));
 		}
 		private function suggestFriendsListDGHandler(str:String, person:Persons):void{
 			

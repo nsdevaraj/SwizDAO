@@ -9,6 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.adams.cambook.models.vo.Persons;
+			import com.adams.cambook.views.components.NativeList;
 			
 			import mx.events.FlexEvent;
 			import mx.events.FlexMouseEvent;
@@ -37,6 +38,11 @@
 				mesgPanel.includeInLayout = msgState;
 				mesgPanel.visible = msgState;
 			} 
+			private function onChatClickHandler():void{
+				Object( owner ).renderSignal.dispatch(NativeList.OPENCHAT,person);	
+			}
+			
+			
 		]]>
 	</fx:Script>
 	<!--<s:Rect width="100%" height="100%" verticalCenter="0" horizontalCenter="0">
@@ -52,7 +58,7 @@
 			<mx:Spacer width="100%"/>
 			<components:NativeButton id="followBtn" toolTip="follow" styleName="followSkin"/>
 			<components:NativeButton id="tweetBtn" toolTip="Tweet" styleName="tweetSkin"/>
-			<components:NativeButton id="chatBtn" toolTip="chat" styleName="chatSkin"/>
+			<components:NativeButton id="chatBtn" toolTip="chat" styleName="chatSkin" click="onChatClickHandler()"/>
 			<components:NativeButton toolTip="Private Message" id="privateMsgState" styleName="messageSkin"/>
 		</s:HGroup>
 		<s:HGroup id="mesgPanel" paddingLeft="3" paddingRight="3" width="100%" height="35" verticalAlign="justify" 
@@ -62,5 +68,4 @@
 		</s:HGroup>
 		<s:Line width="100%" height="1"><s:stroke><s:SolidColorStroke color="#3a3a3a"/></s:stroke></s:Line>
 	</s:VGroup>	
-	
 </s:ItemRenderer>

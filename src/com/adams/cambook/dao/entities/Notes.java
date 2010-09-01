@@ -15,6 +15,13 @@ public class Notes implements Serializable{
 	private String description;
 	private Date creationDate;
 	private int createdPersonFK;
+	private int noteFK;
+	public int getNoteFK() {
+		return noteFK;
+	}
+	public void setNoteFK(int noteFK) {
+		this.noteFK = noteFK;
+	}
 	private FileDetails FileObj;
 	private int noteType;
 	private Set<Notes> notesSet;
@@ -45,6 +52,7 @@ public class Notes implements Serializable{
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+	
 	public int getCreatedPersonFK() {
 		return createdPersonFK;
 	}

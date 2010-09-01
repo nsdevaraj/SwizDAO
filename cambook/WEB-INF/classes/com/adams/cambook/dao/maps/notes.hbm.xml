@@ -23,7 +23,9 @@
 		 	<column name="Person_FK"/>
 		</property>
 		
-	  
+	 	 <property name="noteFK">
+		 	<column name="Note_FK"/>
+		</property>
         <many-to-one name="FileObj" class="com.adams.cambook.dao.entities.FileDetails" column="File_FK" cascade="none" lazy="false" />
         
         <set name="notesSet" table="notes" order-by="Creation_Date" inverse="true" cascade="none" lazy="false">

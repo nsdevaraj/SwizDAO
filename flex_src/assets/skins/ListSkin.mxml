@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+ADOBE SYSTEMS INCORPORATED
+Copyright 2008 Adobe Systems Incorporated
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file
+in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for a Spark List component.  
+
+@see spark.components.List
+
+@langversion 3.0
+@playerversion Flash 10
+@playerversion AIR 1.5
+@productversion Flex 4
+-->
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
 			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" minWidth="112"
-			 alpha.disabled="0.5" blendMode="normal" width="100%"> 
+			 alpha.disabled="0.5" blendMode="normal"> 
 	
 	<fx:Metadata>
 		<![CDATA[ 
@@ -116,15 +137,14 @@
 	</s:Rect>
 	
 	<!--- The Scroller component to add scroll bars to the list. -->
-	<s:Scroller width="100%" height="100%" id="scroller" minViewportInset="1" hasFocusableChildren="false">
+	<s:Scroller left="0" top="0" right="0" bottom="0" id="scroller" minViewportInset="1" hasFocusableChildren="false">
 		<!--- @copy spark.components.SkinnableDataContainer#dataGroup -->
-		<s:DataGroup id="dataGroup" width="100%" clipAndEnableScrolling="true" height="100%" itemRenderer="spark.skins.spark.DefaultItemRenderer">
+		<s:DataGroup id="dataGroup" itemRenderer="spark.skins.spark.DefaultItemRenderer">
 			<s:layout>
 				<!--- The default layout is vertical and measures at least for 5 rows.  
 				When switching to a different layout, HorizontalLayout for example,
 				make sure to adjust the minWidth, minHeihgt sizes of the skin -->
-				<s:VerticalLayout gap="1" horizontalAlign="contentJustify"
-								 rowHeight="25" variableRowHeight="false" requestedMinRowCount="5"/>
+				<s:VerticalLayout gap="0" horizontalAlign="contentJustify" requestedMinRowCount="5" />
 			</s:layout>
 		</s:DataGroup>
 	</s:Scroller>

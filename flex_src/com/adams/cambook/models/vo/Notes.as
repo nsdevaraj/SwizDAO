@@ -10,6 +10,7 @@ package com.adams.cambook.models.vo
 		private var _description:String;
 		private var _creationDate:Date;
 		private var _createdPersonFK:int;
+		private var _noteFK:int
 		private var _fileObj:Files;
 		private var  _noteType:int;
 		private var  _PersonObj:Persons;
@@ -21,6 +22,16 @@ package com.adams.cambook.models.vo
 		public function Notes()
 		{
 			super();
+		}
+
+		public function get noteFK():int
+		{
+			return _noteFK;
+		}
+
+		public function set noteFK(value:int):void
+		{
+			_noteFK = value;
 		}
 
 		public function get noteStatusFK():int
