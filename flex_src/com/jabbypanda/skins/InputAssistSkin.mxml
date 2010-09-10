@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--- AutoComplete Skin: contains a List in a PopUpAnchor and a TextInput
+
+-->
+
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:c="com.jabbypanda.controls.*"
+        alpha.disabled=".5" > 
+    
+    <!-- host component -->
+    <fx:Metadata>
+        <![CDATA[     
+        [HostComponent("com.jabbypanda.controls.InputAssist")]
+        ]]>
+    </fx:Metadata>     
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>    
+    <!--- 
+    The PopUpAnchor control that opens the drop-down list. 
+    -->
+ 
+        <s:VGroup id="dropDown" width="100%">
+			<s:HGroup width="100%" horizontalAlign="right">
+				<s:TextInput id="inputTxt" width="100%"/>
+			</s:HGroup>
+            <c:HighlightItemList id="list" width="100%"                                 
+                                 itemRenderer="com.jabbypanda.renderers.HighlightListItemRenderer">
+                <c:layout> 
+                    <s:VerticalLayout horizontalAlign="justify" 
+                                      gap="0"
+                                      requestedRowCount="{Math.min(hostComponent.maxRows, hostComponent.dataProvider.length)}"/> 
+                </c:layout> 
+            </c:HighlightItemList>
+        </s:VGroup>        
+  
+</s:Skin>
