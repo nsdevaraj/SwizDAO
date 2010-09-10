@@ -197,14 +197,14 @@ package com.adams.cambook.views.mediators
 		}
 		
 		protected function updateFilter(obj:Object):Boolean{
-			if ( Notes(obj).personFK == 0){
+			if ( Notes(obj).personFK == 0 &&  Notes(obj).noteType ==0){
 				return true;
 			}
 			return false;
 		}
 		protected function msgFilter(obj:Object):Boolean{
-			if ( Notes(obj).personFK == currentInstance.currentPerson.personId || (Notes(obj).createdPersonFK == currentInstance.currentPerson.personId && Notes(obj).personFK != 0)){
-				return true;
+			if ( Notes(obj).personFK == currentInstance.currentPerson.personId || (Notes(obj).createdPersonFK == currentInstance.currentPerson.personId && Notes(obj).personFK != 0 ) ){
+					return true;
 			}
 			return false;
 		}
@@ -223,7 +223,6 @@ package com.adams.cambook.views.mediators
 		override protected function setRenderers():void {
 			super.setRenderers(); 
 			BuddyCard.personsArr = currentInstance.currentPerson.connectionArr;
-			UpdateCard.currentPersonId = currentInstance.currentPerson.personId;
 			view.wallDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
 			view.myUpdateDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
 			view.messageDG.itemRenderer = Utils.getCustomRenderer(Utils.NOTEDAO);
@@ -259,6 +258,10 @@ package com.adams.cambook.views.mediators
 							changeToPasswordView();
 							currentInstance.currentPerson.personRelations = 1;
 						}
+						
+						view.wallDG.currentPersonId = currentInstance.currentPerson.personId;
+						view.myUpdateDG.currentPersonId = currentInstance.currentPerson.personId;
+						view.messageDG.currentPersonId = currentInstance.currentPerson.personId;
 						var perAvailSignal:SignalVO = new SignalVO( this, personDAO, Action.UPDATE );
 						perAvailSignal.valueObject = currentInstance.currentPerson;
 						signalSeq.addSignal( perAvailSignal ); 
@@ -272,6 +275,8 @@ package com.adams.cambook.views.mediators
 					currentInstance.currentPersonsList = obj as ArrayCollection;
 					UpdateCard.currentPersonsList = currentInstance.currentPersonsList;
  					Comment.currentPersonsList = currentInstance.currentPersonsList;
+					view.searchInput.dataProvider = currentInstance.currentPersonsList
+					view.searchInput.labelField = 'personFirstname'	
 					}
 				}
 				if( signal.destination == noteDAO.destination ) {
@@ -280,7 +285,17 @@ package com.adams.cambook.views.mediators
 							currentInstance.currentPerson.notesSet.addItem(obj);
 							view.myUpdateDG.dataProvider =	currentInstance.currentPerson.notesSet;
 							view.updateTxt.text = '';
+							if(parentUpdateNote!=null && Notes(obj).noteType == 1){
+								var updateParentNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.UPDATE );
+								parentUpdateNote.notesSet.addItem(Notes(obj));
+								updateParentNoteSignal.valueObject = parentUpdateNote;
+								signalSeq.addSignal( updateParentNoteSignal );
+							}
 						}
+						 
+					}
+					if( signal.action == Action.UPDATE ){
+						parentUpdateNote = null;
 					}
 				}
 				if( signal.destination == pagingDAO.destination ) { 
@@ -307,13 +322,14 @@ package com.adams.cambook.views.mediators
 			view.submitBtn.clicked.add(modifyPasswordHandler);
 			view.personPassword1.addEventListener(Event.CHANGE, inputChgHandler);
 			view.personPassword2.addEventListener(Event.CHANGE, inputChgHandler);
+			view.wallStack.addEventListener(Event.TAB_INDEX_CHANGE,changeWallFilter);
 			view.passwordBtn.clicked.add(changeToPasswordView);
 			view.cancelBtn.clicked.add(changeToPasswordView);
 			
 			view.profilePanel.panelSignal.add(profilePanelHandler);
 			view.searchPanel.panelSignal.add(searchPanelHandler);
 			view.profileTxt.addEventListener(MouseEvent.CLICK,profilePanelHandler);
-			view.goBtn.clicked.add(searchPanelHandler);
+			view.findFriendsBtn.clicked.add(searchPanelHandler);
 			view.update.clicked.add(newUpdateHandler);
 			
 			view.wallDG.renderSignal.add(wallHandler);
@@ -322,24 +338,38 @@ package com.adams.cambook.views.mediators
 			view.friendsListDG.renderSignal.add(friendsListDGHandler);
 			view.suggestFriendsListDG.renderSignal.add(suggestFriendsListDGHandler);
 		}
-		private function wallHandler(str:String, note:Notes):void{ 
+		private function changeWallFilter(ev:Event):void{
+			if(view.wallStack.tabIndex == 0){
+			setDataProviderFilters('wall');
+			view.wallDG.dataProvider = noteDAO.collection.items;
+			}else{
+			
+			setDataProviderFilters('msg');
+			view.messageDG.dataProvider = noteDAO.collection.items;
+			}
+		} 
+		private var parentUpdateNote:Notes
+		private function wallHandler(str:String, note:Notes,parentNote:Notes):void{ 
 			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
 			updateNoteSignal.valueObject = note;
+			parentUpdateNote= parentNote;
 			signalSeq.addSignal( updateNoteSignal );
 			}
 		}
-		private function myUpdateDGHandler(str:String, note:Notes):void{
+		private function myUpdateDGHandler(str:String, note:Notes,parentNote:Notes):void{
 			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
-			updateNoteSignal.valueObject = note;
-			signalSeq.addSignal( updateNoteSignal );
+			updateNoteSignal.valueObject = note; 
+			parentUpdateNote= parentNote;
+			signalSeq.addSignal( updateNoteSignal ); 
 			}
 		}
-		private function messageDGHandler(str:String, note:Notes):void{
+		private function messageDGHandler(str:String, note:Notes,parentNote:Notes):void{
 			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
-			updateNoteSignal.valueObject = note;
+			updateNoteSignal.valueObject = note; 
+			parentUpdateNote= parentNote;
 			signalSeq.addSignal( updateNoteSignal );
 			}
 		}

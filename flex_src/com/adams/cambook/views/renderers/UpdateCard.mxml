@@ -43,11 +43,10 @@
 			private function addReply(eve:MouseEvent):void{ 
 				var replyNote:Notes = new Notes();
 				replyNote.description = commentArea.text;
-				replyNote.createdPersonFK =currentPersonId;
-				replyNote.creationDate = new Date();
-				replyNote.noteFK = note.noteId;
-				note.notesSet.addItem(replyNote);
-				Object( owner ).renderSignal.dispatch(NativeList.REPLIEDUPDATE,note);
+				replyNote.createdPersonFK =Object( owner ).currentPersonId;
+				replyNote.creationDate = new Date(); 
+				replyNote.noteType = 1;
+				Object( owner ).renderSignal.dispatch(NativeList.REPLIEDUPDATE,replyNote,note);
 				currentState='normal';
 			}
 			

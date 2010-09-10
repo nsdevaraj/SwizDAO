@@ -9,6 +9,7 @@ package com.adams.cambook.views.components
 		
 		public static const REPLIEDUPDATE:String = 'replyUpdate';
 		public static const FOLLOWPERSON:String = 'followPerson';  
+		public var currentPersonId:int;  
 		public var renderSignal:Signal = new Signal();
 		public function NativeDataGroup()
 		{

@@ -10,28 +10,28 @@ package com.adams.cambook.models.vo
 		private var _description:String;
 		private var _creationDate:Date;
 		private var _createdPersonFK:int;
-		private var _noteFK:int
 		private var _fileObj:Files;
 		private var  _noteType:int;
 		private var  _PersonObj:Persons;
 		private var _noteStatusFK:int;
 		[ArrayElementType( "com.adams.cambook.models.vo.Notes" )]
-		public var  notesSet:ArrayCollection;
+		private var  _notesSet:ArrayCollection = new ArrayCollection();
 		public var  personFK:int;
- 
+ 		public var noteFK:int;
 		public function Notes()
 		{
 			super();
 		}
+ 
 
-		public function get noteFK():int
+		public function get notesSet():ArrayCollection
 		{
-			return _noteFK;
+			return _notesSet;
 		}
 
-		public function set noteFK(value:int):void
+		public function set notesSet(value:ArrayCollection):void
 		{
-			_noteFK = value;
+			_notesSet = value;
 		}
 
 		public function get noteStatusFK():int

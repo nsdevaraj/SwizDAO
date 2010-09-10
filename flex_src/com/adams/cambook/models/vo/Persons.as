@@ -20,10 +20,10 @@ package com.adams.cambook.models.vo
 		private var  _personRole:String;
 		 
 		[ArrayElementType( "com.adams.cambook.models.vo.Persons" )]
-		public var  connectionSet:ArrayCollection;
+		public var  connectionSet:ArrayCollection = new ArrayCollection();
 		
 		[ArrayElementType( "com.adams.cambook.models.vo.Notes" )]
-		public var  notesSet:ArrayCollection;
+		public var  notesSet:ArrayCollection = new ArrayCollection();
 		
 		private var _activated:int;
 		private var _personCity:String;
