@@ -53,7 +53,7 @@
 		</s:Group>
 		<components:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">
-				<components:NativeButton id="submitBtn" label="Login" enabled="false" />
+				<components:NativeButton id="submitBtn" label="Login"/>
 				<components:NativeButton id="newUserBtn" label="New User"/>
 				<components:NativeButton id="registerBtn" label="Register" includeInLayout="false" visible="false" enabled="false"/>
 				<components:NativeButton id="cancelBtn" label="Cancel" includeInLayout="false" visible="false" />

@@ -285,7 +285,7 @@ package com.adams.cambook.views.mediators
 							currentInstance.currentPerson.notesSet.addItem(obj);
 							view.myUpdateDG.dataProvider =	currentInstance.currentPerson.notesSet;
 							view.updateTxt.text = '';
-							if(parentUpdateNote!=null && Notes(obj).noteType == 1){
+							if(parentUpdateNote!=null && Notes(obj).noteType != 0){
 								var updateParentNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.UPDATE );
 								parentUpdateNote.notesSet.addItem(Notes(obj));
 								updateParentNoteSignal.valueObject = parentUpdateNote;

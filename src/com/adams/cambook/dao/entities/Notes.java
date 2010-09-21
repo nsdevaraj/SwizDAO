@@ -70,6 +70,7 @@ public class Notes implements Serializable{
 	}
 	public void setNoteType(int noteType) {
 		this.noteType = noteType;
+		this.noteFK = noteType;
 	} 
 	public Set<Notes> getNotesSet() {
 		return notesSet;

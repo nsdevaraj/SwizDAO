@@ -43,7 +43,7 @@ package com.adams.cambook.controller
 		[PostConstruct]
 		public function execute():void
 		{
-			currentInstance.config.serverLocation =FlexGlobals.topLevelApplication.parameters.serverLocation;
+			currentInstance.config.serverLocation =  'http://'+URLUtil.getServerNameWithPort(FlexGlobals.topLevelApplication.url)+"/cambook/"; //FlexGlobals.topLevelApplication.parameters.serverLocation;
 			service.serverLocation = currentInstance.config.serverLocation;
 			
 			service.assignChannelSets();

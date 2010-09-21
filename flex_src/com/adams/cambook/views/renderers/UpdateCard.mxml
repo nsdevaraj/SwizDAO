@@ -45,7 +45,8 @@
 				replyNote.description = commentArea.text;
 				replyNote.createdPersonFK =Object( owner ).currentPersonId;
 				replyNote.creationDate = new Date(); 
-				replyNote.noteType = 1;
+				replyNote.noteType = note.noteId;
+				replyNote.noteFK = note.noteId;
 				Object( owner ).renderSignal.dispatch(NativeList.REPLIEDUPDATE,replyNote,note);
 				currentState='normal';
 			}

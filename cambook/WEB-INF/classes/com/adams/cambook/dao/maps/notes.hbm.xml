@@ -21,11 +21,10 @@
 		
 		<property name="personFK">
 		 	<column name="Person_FK"/>
-		</property>
-		  
+		</property> 
         <many-to-one name="FileObj" class="com.adams.cambook.dao.entities.FileDetails" column="File_FK" cascade="none" lazy="false" />
           
-        <set name="notesSet" table="notes" order-by="Creation_Date" inverse="true" cascade="none" lazy="false">
+        <set name="notesSet" table="notes" order-by="Note_ID" inverse="true" cascade="none" lazy="false">
         	<key column="Note_FK"/>
         	<one-to-many class="com.adams.cambook.dao.entities.Notes"/>
         </set>
