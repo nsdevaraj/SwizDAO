@@ -352,9 +352,13 @@ package com.adams.cambook.views.mediators
 		private function wallHandler(str:String, note:Notes,parentNote:Notes):void{ 
 			if(str==NativeList.REPLIEDUPDATE){
 			var updateNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.CREATE );
+			var updateParentNoteSignal:SignalVO = new SignalVO( this, noteDAO, Action.UPDATE );
+			parentNote.notesSet.addItem(note);
 			updateNoteSignal.valueObject = note;
 			parentUpdateNote= parentNote;
+			updateParentNoteSignal.valueObject = parentNote;
 			signalSeq.addSignal( updateNoteSignal );
+			signalSeq.addSignal( updateParentNoteSignal );
 			}
 		}
 		private function myUpdateDGHandler(str:String, note:Notes,parentNote:Notes):void{

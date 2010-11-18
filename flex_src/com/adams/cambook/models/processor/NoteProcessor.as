@@ -24,10 +24,10 @@ package com.adams.cambook.models.processor
 					noteDAO.collection.addItem(notevo);
 				}
 				for each(var repliedNote:Notes in notevo.notesSet){
-					processVO(repliedNote);
+					/*processVO(repliedNote);
 					if(!noteDAO.collection.containsItem(repliedNote)){
 						noteDAO.collection.addItem(repliedNote);
-					}
+					}*/
 				}
 				super.processVO(vo);
 			}
