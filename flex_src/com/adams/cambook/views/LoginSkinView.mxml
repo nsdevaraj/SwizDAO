@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:components="com.adams.cambook.views.components.*"  >
 	 
 	<fx:Metadata>
 		[HostComponent("com.adams.cambook.views.mediators.LoginViewMediator")]
 	</fx:Metadata> 
-	
-	<s:layout>
-		<s:BasicLayout/>
-	</s:layout> 
 	 
 	<components:NativePanel width="600" title="AS3 Book"  horizontalCenter="0" verticalCenter="0"  >
 		<components:layout>
@@ -18,38 +13,38 @@
 		</components:layout>
 		<s:Group width="100%">
 			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  /> 
-			<mx:Form id="loginForm" verticalCenter="0" horizontalCenter="0" paddingBottom="0">
-				<mx:FormItem width="100%" label="email id:" required="true">
+			<s:Form id="loginForm" verticalCenter="0" horizontalCenter="0">
+				<s:FormItem width="100%" label="email id:" required="true">
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
-				</mx:FormItem>
-				<mx:FormItem width="100%" label="password:" required="true">
+				</s:FormItem>
+				<s:FormItem width="100%" label="password:" required="true">
 					<s:TextInput id="passwordTextInput" text="tests" displayAsPassword="true" />
-				</mx:FormItem>
-				<mx:FormItem>
+				</s:FormItem>
+				<s:FormItem>
 					<s:Label bottom="10" horizontalCenter="0" id="wrongCredentials" color="red"/>
-				</mx:FormItem>
-			</mx:Form>
-			<mx:Form id="registerForm" includeInLayout="false" visible="false" horizontalCenter="0">
-				<mx:FormHeading label="Register Form"/>
-				<mx:FormItem label="First Name" required="true">
+				</s:FormItem>
+			</s:Form>
+			<s:Form id="registerForm" includeInLayout="false" visible="false" horizontalCenter="0">
+				<s:FormHeading label="Register Form"/>
+				<s:FormItem label="First Name" required="true">
 					<s:TextInput id="personFirstname"/>
-				</mx:FormItem>
-				<mx:FormItem label="Last Name">
+				</s:FormItem>
+				<s:FormItem label="Last Name">
 					<s:TextInput id="personLastname" />
-				</mx:FormItem>
-				<mx:FormItem label="Email" required="true">
+				</s:FormItem>
+				<s:FormItem label="Email" required="true">
 					<s:TextInput id="personEmail" />
-				</mx:FormItem> 
-				<mx:FormItem label="Twitter id">
+				</s:FormItem> 
+				<s:FormItem label="Twitter id">
 					<s:TextInput id="tweetId"/>
-				</mx:FormItem> 
-				<mx:FormItem label="Twitter Password">
+				</s:FormItem> 
+				<s:FormItem label="Twitter Password">
 					<s:TextInput id="tweetPassword" displayAsPassword="true"/>
-				</mx:FormItem> 
-				<mx:FormItem label="Mobile">
+				</s:FormItem> 
+				<s:FormItem label="Mobile">
 					<s:TextInput id="personMobile"  />
-				</mx:FormItem>  
-			</mx:Form>
+				</s:FormItem>  
+			</s:Form>
 		</s:Group>
 		<components:controlBarContent>
 			<s:HGroup horizontalAlign="center" width="100%" verticalAlign="middle">

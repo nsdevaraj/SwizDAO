@@ -63,5 +63,5 @@
   <servlet-mapping>
     <servlet-name>UploadHandler</servlet-name>
     <url-pattern>/UploadHandler</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> 
 </web-app>

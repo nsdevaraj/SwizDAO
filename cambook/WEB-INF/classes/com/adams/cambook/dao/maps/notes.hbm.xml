@@ -21,13 +21,15 @@
 		
 		<property name="personFK">
 		 	<column name="Person_FK"/>
-		</property> 
+		</property>
+		  
         <many-to-one name="FileObj" class="com.adams.cambook.dao.entities.FileDetails" column="File_FK" cascade="none" lazy="false" />
-          
-        <set name="notesSet" table="notes" order-by="Note_ID" inverse="true" cascade="none" lazy="false">
-        	<key column="Note_FK"/>
-        	<one-to-many class="com.adams.cambook.dao.entities.Notes"/>
-        </set>
+        
+        <set name="notesSet" table="replies" inverse="false" cascade="none" lazy="false">
+        	<key column="note_FK"></key> 
+        	<many-to-many column="replyNote_FK" class="com.adams.cambook.dao.entities.Notes" />
+        </set> 
+        
   		<property name="noteStatusFK">
             <column name="Note_Status_FK" />
         </property>

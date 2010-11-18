@@ -18,8 +18,7 @@ package org.swizframework.core
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	
-	import mx.utils.UIDUtil;
+	import flash.utils.Dictionary;
 	
 	import org.swizframework.processors.IMetadataProcessor;
 	import org.swizframework.processors.IProcessor;
@@ -27,7 +26,7 @@ package org.swizframework.core
 	public class SwizManager
 	{
 		public static var swizzes:Array = [];
-		public static var wiredViews:Array = [];
+		public static var wiredViews:Dictionary = new Dictionary( true );
 		public static var metadataNames:Array = [];
 		
 		public static function addSwiz( swiz:ISwiz ):void
@@ -36,7 +35,7 @@ package org.swizframework.core
 			
 			for each( var p:IProcessor in swiz.processors )
 				if( p is IMetadataProcessor )
-					metadataNames = metadataNames.concat( IMetadataProcessor( p ).metadataNames )
+					metadataNames = metadataNames.concat( IMetadataProcessor( p ).metadataNames );
 		}
 		
 		public static function removeSwiz( swiz:ISwiz ):void
@@ -44,39 +43,37 @@ package org.swizframework.core
 			swizzes.splice( swizzes.indexOf( swiz ), 1 );
 		}
 		
-		public static function setUp( dObj:DisplayObject ):void
+		public static function setUp( view:DisplayObject ):void
 		{
-			var uid:String = UIDUtil.getUID( dObj );
-			
 			// already wired
-			if( wiredViews.indexOf( uid ) > -1 )
+			if( wiredViews[ view ] != null )
 				return;
 			
 			for( var i:int = swizzes.length - 1; i > -1; i-- )
 			{
 				var swiz:ISwiz = ISwiz( swizzes[ i ] );
 				
-				if( DisplayObjectContainer( swiz.dispatcher ).contains( dObj ) )
+				if( DisplayObjectContainer( swiz.dispatcher ).contains( view ) )
 				{
-					wiredViews.push( uid );
-					swiz.beanFactory.setUpBean( BeanFactory.constructBean( dObj, null, swiz.domain ) );
+					setUpView( view, swiz );
 					return;
 				}
 			}
 			
-			// this is stupid, if we got here, no swiz had a dispatcher 
-			// containing the view (like, it's a freaking popup). make the first swiz do it
-			var rootSwiz:ISwiz = swizzes[ 0 ];
-			wiredViews.push( uid );
-			rootSwiz.beanFactory.setUpBean( BeanFactory.constructBean( dObj, null, swiz.domain ) );
+			// pop ups not registered to a particular Swiz instance must be handled by the root instance
+			setUpView( view, ISwiz( swizzes[ 0 ] ) );
 		}
 		
-		public static function tearDown( dObj:DisplayObject ):void
+		private static function setUpView( viewToWire:DisplayObject, swizInstance:ISwiz ):void
 		{
-			var uid:String = UIDUtil.getUID( dObj );
-			
+			wiredViews[ viewToWire ] = swizInstance;
+			swizInstance.beanFactory.setUpBean( BeanFactory.constructBean( viewToWire, null, swizInstance.domain ) );
+		}
+		
+		public static function tearDown( wiredView:DisplayObject ):void
+		{
 			// wasn't wired
-			if( wiredViews.indexOf( uid ) == -1 )
+			if( wiredViews[ wiredView ] == null )
 				return;
 			
 			for( var i:int = swizzes.length - 1; i > -1; i-- )
@@ -84,23 +81,33 @@ package org.swizframework.core
 				var swiz:ISwiz = ISwiz( swizzes[ i ] );
 				
 				// if this is the dispatcher for a swiz instance tear down swiz 
-				if( swiz.dispatcher == dObj )
-					swiz.tearDown();
-				
-				// if the passed in object is a child of swiz's dispatcher, use that instance for tearDown
-				if( DisplayObjectContainer( swiz.dispatcher ).contains( dObj ) )
+				if( swiz.dispatcher == wiredView )
 				{
-					wiredViews.splice( wiredViews.indexOf( uid ), 1 );
-					swiz.beanFactory.tearDownBean( BeanFactory.constructBean( dObj, null, swiz.domain ) );
+					swiz.tearDown();
 					return;
 				}
 			}
 			
-			// this is stupid, if we got here, no swiz had a dispatcher 
-			// containing the view (like, it's a freaking popup). make the first swiz do it
-			var rootSwiz:ISwiz = swizzes[ 0 ];
-			wiredViews.splice( wiredViews.indexOf( uid ), 1 );
-			rootSwiz.beanFactory.tearDownBean( BeanFactory.constructBean( dObj, null, swiz.domain ) );
+			// for tear down use the swiz instance that was associated at set up time 
+			tearDownWiredView( wiredView, wiredViews[ wiredView ] );
+		}
+		
+		public static function tearDownWiredView( wiredView:DisplayObject, swizInstance:ISwiz ):void
+		{
+			delete wiredViews[ wiredView ];
+			swizInstance.beanFactory.tearDownBean( BeanFactory.constructBean( wiredView, null, swizInstance.domain ) );
+		}
+		
+		public static function tearDownAllWiredViewsForSwizInstance( swizInstance:ISwiz ):void
+		{
+			for each( var wiredView:DisplayObject in wiredViews )
+			{
+				// this will also tear down the swiz dispatcher itself
+				if( wiredViews[ wiredView ] == swizInstance )
+				{
+					tearDownWiredView( wiredView, swizInstance );
+				}
+			}
 		}
 	}
 }

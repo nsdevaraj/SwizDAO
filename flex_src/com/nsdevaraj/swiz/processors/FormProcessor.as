@@ -20,8 +20,6 @@ package com.nsdevaraj.swiz.processors {
 	
 	import mx.binding.utils.BindingUtils;
 	import mx.binding.utils.ChangeWatcher;
-	import mx.containers.Form;
-	import mx.containers.FormItem;
 	import mx.controls.DateField;
 	import mx.controls.TextArea;
 	import mx.controls.TextInput;
@@ -37,6 +35,8 @@ package com.nsdevaraj.swiz.processors {
 	import org.swizframework.reflection.MetadataArg;
 	import org.swizframework.utils.logging.SwizLogger;
 	
+	import spark.components.Form;
+	import spark.components.FormItem;
 	import spark.components.TextArea;
 	import spark.components.TextInput;
 
@@ -94,8 +94,8 @@ package com.nsdevaraj.swiz.processors {
 		}
 		private function setUpForm(obj:Object,taskForm:Form,oldObj:Object = null ):void {
  			for (var i: int =0; i<taskForm.numElements; i++){
-				if(taskForm.getChildAt(i) is FormItem){
-					var uiComp:Object = FormItem(taskForm.getChildAt(i)).getChildAt(0) as Object;
+				if(taskForm.getElementAt(i) is FormItem){
+					var uiComp:Object = FormItem(taskForm.getElementAt(i)).getElementAt(0) as Object;
 					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea ||uiComp is DateField  || uiComp is mx.controls.TextArea || uiComp is mx.controls.TextInput ){
 						var watcher:ChangeWatcher = BindingUtils.bindProperty(obj, uiComp.name, uiComp, "text");
 						// Bind property

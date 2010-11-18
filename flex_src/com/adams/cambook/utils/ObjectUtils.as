@@ -19,9 +19,7 @@ package com.adams.cambook.utils
 	
 	import flash.utils.ByteArray;
 	import flash.utils.describeType;
-	
-	import mx.containers.Form;
-	import mx.containers.FormItem;
+	 
 	import mx.controls.DateField;
 	import mx.controls.TextArea;
 	import mx.controls.TextInput;
@@ -30,6 +28,8 @@ package com.adams.cambook.utils
 	import org.swizframework.reflection.TypeDescriptor;
 	
 	import spark.components.DropDownList;
+	import spark.components.Form;
+	import spark.components.FormItem;
 	import spark.components.Label;
 	import spark.components.TextArea;
 	import spark.components.TextInput;
@@ -145,8 +145,8 @@ package com.adams.cambook.utils
 		
 		public static function setUpForm(obj:Object,taskForm:Form):void {
 			for (var i: int =0; i<taskForm.numElements; i++){
-				if(taskForm.getChildAt(i) is FormItem){
-					var uiComp:Object = FormItem(taskForm.getChildAt(i)).getChildAt(0) as Object;
+				if(taskForm.getElementAt(i) is FormItem){
+					var uiComp:Object = FormItem(taskForm.getElementAt(i)).getElementAt(0) as Object;
 					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea || uiComp is mx.controls.TextArea || uiComp is mx.controls.TextInput  || uiComp is Label ){
 						try{
 							uiComp.text = obj[uiComp.id];

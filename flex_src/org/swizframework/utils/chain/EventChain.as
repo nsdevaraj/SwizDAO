@@ -16,18 +16,25 @@
 
 package org.swizframework.utils.chain
 {
-	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	
 	public class EventChain extends BaseCompositeChain
 	{
+		// ========================================
+		// protected properties
+		// ========================================
+
 		/**
 		 * Backing variable for <code>dispatcher</code> getter/setter.
 		 */
 		protected var _dispatcher:IEventDispatcher;
 		
+		// ========================================
+		// public properties
+		// ========================================
+
 		/**
-		 *
+		 * Target Event dispatcher.
 		 */
 		public function get dispatcher():IEventDispatcher
 		{
@@ -39,6 +46,13 @@ package org.swizframework.utils.chain
 			_dispatcher = value;
 		}
 		
+		// ========================================
+		// constructor
+		// ========================================
+
+		/**
+		 * Constructor.
+		 */
 		public function EventChain( dispatcher:IEventDispatcher, mode:String = ChainType.SEQUENCE, stopOnError:Boolean = true )
 		{
 			super( mode, stopOnError );
@@ -46,6 +60,13 @@ package org.swizframework.utils.chain
 			this.dispatcher = dispatcher;
 		}
 		
+		// ========================================
+		// public methods
+		// ========================================
+		
+		/**
+		 * Add an EventChainStep to this EventChain.
+		 */
 		public function addEvent( event:EventChainStep ):EventChain
 		{
 			addStep( event );
@@ -53,14 +74,14 @@ package org.swizframework.utils.chain
 		}
 		
 		/**
-		 *
+		 * @inheritDoc
 		 */
 		override public function doProceed():void
 		{
 			if( currentStep is EventChainStep )
-				dispatcher.dispatchEvent( Event( currentStep ) );
-			else
-				super.doProceed();
+				EventChainStep( currentStep ).dispatcher ||= dispatcher;
+			
+			super.doProceed();
 		}
 	}
 }

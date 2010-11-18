@@ -3,13 +3,15 @@ package com.adams.cambook.dao.hibernate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
+import java.io.*;
+import java.net.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.adams.cambook.dao.entities.Notes;
 import com.adams.cambook.dao.entities.Persons;
+import com.adams.cambook.util.BuildConfig;
 import com.adams.cambook.util.MailUtil;
 import com.adams.cambook.util.TwitterSupport;
 
@@ -31,8 +33,7 @@ public class CambookPageDAO extends HibernateDaoSupport {
 			sqle.printStackTrace();			
 		}
 		return list;
-	}
-	
+	} 
 	public Object save(Object o)  {
 		 try {
 			getHibernateTemplate().save(o);

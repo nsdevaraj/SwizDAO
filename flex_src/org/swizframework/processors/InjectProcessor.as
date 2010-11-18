@@ -29,6 +29,11 @@ package org.swizframework.processors
 	import org.swizframework.reflection.MetadataHostMethod;
 	import org.swizframework.reflection.MethodParameter;
 	import org.swizframework.utils.logging.SwizLogger;
+	import org.swizframework.utils.services.IServiceHelper;
+	import org.swizframework.utils.services.IURLRequestHelper;
+	import org.swizframework.utils.services.MockDelegateHelper;
+	import org.swizframework.utils.services.ServiceHelper;
+	import org.swizframework.utils.services.URLRequestHelper;
 	
 	/**
 	 * Inject Processor
@@ -48,10 +53,9 @@ package org.swizframework.processors
 		
 		protected var logger:SwizLogger = SwizLogger.getLogger( this );
 		protected var injectByProperty:Dictionary = new Dictionary();
-		protected var injectByName:Object = {};
-		protected var injectByType:Object = {};
-		protected var queueByName:Object = {};
-		protected var queueByType:Array = [];
+		protected var sharedServiceHelper:IServiceHelper;
+		protected var sharedURLRequestHelper:IURLRequestHelper;
+		protected var sharedMockDelegateHelper:MockDelegateHelper;
 		
 		// ========================================
 		// public properties
@@ -87,7 +91,6 @@ package org.swizframework.processors
 		override public function setUpMetadataTag( metadataTag:IMetadataTag, bean:Bean ):void
 		{
 			var injectTag:InjectMetadataTag = metadataTag as InjectMetadataTag;
-			var beanNotFound:Boolean = false;
 			
 			if( injectTag.name == AUTOWIRE )
 				logger.warn( "[Autowire] has been deprecated in favor of [Inject]. Please update {0} accordingly.", bean );
@@ -216,7 +219,7 @@ package org.swizframework.processors
 			
 			removePropertyBinding( bean, namedBean, injectTag );
 			
-			setDestinationValue( injectTag, bean,  null );
+			setDestinationValue( injectTag, bean, null );
 		}
 		
 		/**
@@ -236,7 +239,6 @@ package org.swizframework.processors
 			var targetType:Class = ( setterInjection ) ? MethodParameter( MetadataHostMethod( injectTag.host ).parameters[ 0 ] ).type : injectTag.host.type;
 			if( targetType == null && injectTag.host is MetadataHostClass )
 			{
-				// targetType = getDefinitionByName( injectTag.host.name ) as Class;
 				targetType = swiz.domain.getDefinition( injectTag.host.name ) as Class;
 			}
 			var typedBean:Bean = getBeanByType( targetType );
@@ -247,6 +249,33 @@ package org.swizframework.processors
 			}
 			else
 			{
+				// helper classes can be created on demand so users don't have to declare them
+				switch( targetType )
+				{
+					case ServiceHelper:
+					case IServiceHelper:
+						if( sharedServiceHelper == null )
+							sharedServiceHelper = new ServiceHelper();
+						
+						setDestinationValue( injectTag, bean, sharedServiceHelper );
+						return;
+						
+					case URLRequestHelper:
+					case IURLRequestHelper:
+						if( sharedURLRequestHelper == null )
+							sharedURLRequestHelper = new URLRequestHelper();
+						
+						setDestinationValue( injectTag, bean, sharedURLRequestHelper );
+						return;
+						
+					case MockDelegateHelper:
+						if( sharedMockDelegateHelper == null )
+							sharedMockDelegateHelper = new MockDelegateHelper();
+						
+						setDestinationValue( injectTag, bean, sharedMockDelegateHelper );
+						return;
+				}
+				
 				if( injectTag.required )
 					throw new Error("InjectProcessor Error: bean of type " + targetType.toString() + " not found!" );
 				else
