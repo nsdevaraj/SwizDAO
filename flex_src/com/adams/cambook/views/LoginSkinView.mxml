@@ -14,10 +14,10 @@
 		<s:Group width="100%">
 			<s:BitmapImage source="@Embed('assets/images/swizImg.jpg')"  /> 
 			<s:Form id="loginForm" verticalCenter="0" horizontalCenter="0">
-				<s:FormItem width="100%" label="email id:" required="true">
+				<s:FormItem width="100%" skinClass="assets.skins.CustomFormItem" label="email id:"  required="true">
 					<s:TextInput id="userNameTextInput" text="devaraj@wp.pl" />
 				</s:FormItem>
-				<s:FormItem width="100%" label="password:" required="true">
+				<s:FormItem width="100%" skinClass="assets.skins.CustomFormItem" label="password:" required="true">
 					<s:TextInput id="passwordTextInput" text="tests" displayAsPassword="true" />
 				</s:FormItem>
 				<s:FormItem>

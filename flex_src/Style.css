@@ -95,8 +95,8 @@ s|Button {
 	font-family:scFont;
 	skinClass: ClassReference('assets.skins.ButtonIcon');
 }   
-mx|Button, mx|Form,mx|FormItem, mx|FormItemLabel{
-	color: #d2d2d2;
+mx|Button, s|Form,s|FormItem{
+	color: #ffffff; 
 	font-family: scFont;
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 }
@@ -105,7 +105,7 @@ mx|DateField {
 	textInputClass: ClassReference("mx.controls.MXFTETextInput");
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
-mx|Label { 
+s|Label { 
 	textFieldClass: ClassReference("mx.core.UIFTETextField");
 } 
 

@@ -100,7 +100,7 @@
 	</fx:Script>
 	<fx:Script>
 		<![CDATA[
-			import mx.containers.Panel;
+ 
 			import mx.events.FlexEvent;
 			
 			protected function onComplete(event:FlexEvent):void

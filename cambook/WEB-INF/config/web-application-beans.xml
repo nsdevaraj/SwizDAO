@@ -25,7 +25,7 @@
 				</constructor-arg>
 			</bean>
 		</property>
-	</bean>    
+	</bean>   
 	<bean id="fileID" parent="abstractDao">
 		<flex:remoting-destination/>
 		<property name="target">

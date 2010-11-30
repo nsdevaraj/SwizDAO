@@ -29,7 +29,6 @@ package com.adams.cambook.service
 	
 	import flash.utils.Dictionary;
 	
-	import mx.controls.Alert;
 	import mx.messaging.events.MessageEvent;
 	import mx.messaging.messages.AsyncMessage;
 	
@@ -151,7 +150,7 @@ package com.adams.cambook.service
 							var sentPerson:Persons = new Persons();
 							sentPerson.personId = personSentId;
 							sentPerson =	Utils.findObject(sentPerson,currentInstance.currentPersonsList,personDAO.destination) as Persons;
-							Alert.show(message,sentPerson.personFirstname);
+							//Alert.show(message,sentPerson.personFirstname);
 							
 						}else if( currentInstance.currentPerson.personId != ( receivedSignal.description as int ) ) {
 							//check previous push

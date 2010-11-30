@@ -10,9 +10,7 @@
 		<![CDATA[ 
 			import com.adams.cambook.models.vo.CurrentInstance;
 			import com.adams.cambook.utils.Utils;
-			import com.adams.cambook.views.modules.ModuleGroup; 
 			import mx.events.FlexEvent;
-			
 			[Bindable]
 			[Inject]
 			public var currentInstance:CurrentInstance;  
@@ -34,14 +32,26 @@
 				changeModuleIndex();
 			}
 			
-			protected function changeModuleIndex():void{
-				part.url ='';
-				part.url = Utils.VIEW_INDEX_ARR[moduleIndex];
+			protected function changeModuleIndex():void{ 
+				if(moduleIndex== 1){
+					currentState = "HomeState";
+					home.mainViewStackIndex = currentInstance.mainViewStackIndex
+				}else{
+					currentState = "LoginState";
+				}
 			}
 		]]>  
 	</fx:Script> 
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center"/>
 	</s:layout> 
-	<modules:ModuleGroup id="part" width="100%" height="100%"/>
+	
+	<s:states>
+		<s:State name="LoginState" />
+		<s:State name="HomeState" />
+	</s:states> 
+	<mediators:LoginViewMediator id="login" skinClass="com.adams.cambook.views.LoginSkinView" 
+								 width="100%" height="100%" includeIn="LoginState"/>
+	<mediators:HomeViewMediator id="home" skinClass="com.adams.cambook.views.HomeSkinView"
+								width="100%" height="100%" includeIn="HomeState"/>
  </s:Group>

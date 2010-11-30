@@ -17,25 +17,19 @@
 					note = value as Notes;
 					var personObj:Persons = new Persons();
 					personObj.personId = note.createdPersonFK;
-					//personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
-				//	userTxt.text = personObj.personFirstname;
+					personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
+					userTxt.text = personObj.personFirstname;
 					commentTxt.text = note.description;
 				}
 			}
 		]]>
-	</fx:Script> 
-	<s:Line height="1"  top="0" left="3" right="3">
-		<s:stroke>
-			<s:SolidColorStroke weight="1" color="#cfcfcf" />
-		</s:stroke>
-	</s:Line>
+	</fx:Script>  
  	<s:Rect top="1" left="3" right="3" bottom="0">
 		<s:fill>
-			<s:SolidColor color="#ffffff" />
+			<s:SolidColor color="#272727" />
 		</s:fill>
 	</s:Rect>
- 
-		<s:VGroup left="3" right="12" top="3" bottom="3" verticalAlign="middle">
+		<s:VGroup left="10" right="12" top="3" bottom="3" verticalAlign="middle">
 			<s:Label id="userTxt" styleName="headerStyle"/>
 			<s:Label maxDisplayedLines="2" showTruncationTip="true" height="35" id="commentTxt"  width="100%"/>	
 		</s:VGroup>

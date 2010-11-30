@@ -24,7 +24,6 @@ package org.swizframework.core
 	import flash.system.ApplicationDomain;
 	import flash.utils.getQualifiedClassName;
 	
-	import mx.modules.Module;
 	
 	import org.swizframework.events.BeanEvent;
 	import org.swizframework.processors.IBeanProcessor;
@@ -449,7 +448,7 @@ package org.swizframework.core
 			if( event.target is ISetUpValidator && !( ISetUpValidator( event.target ).allowSetUp() ) )
 				return;
 			
-			if( isPotentialInjectionTarget( event.target ) || event.target is Module )
+			if( isPotentialInjectionTarget( event.target )  )
 			{
 				SwizManager.setUp( DisplayObject( event.target ) );
 			}

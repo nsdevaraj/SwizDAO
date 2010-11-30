@@ -20,9 +20,7 @@ package com.adams.cambook.utils
 	import flash.utils.ByteArray;
 	import flash.utils.describeType;
 	 
-	import mx.controls.DateField;
-	import mx.controls.TextArea;
-	import mx.controls.TextInput;
+ 
 	import mx.utils.ObjectUtil;
 	
 	import org.swizframework.reflection.TypeDescriptor;
@@ -147,7 +145,7 @@ package com.adams.cambook.utils
 			for (var i: int =0; i<taskForm.numElements; i++){
 				if(taskForm.getElementAt(i) is FormItem){
 					var uiComp:Object = FormItem(taskForm.getElementAt(i)).getElementAt(0) as Object;
-					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea || uiComp is mx.controls.TextArea || uiComp is mx.controls.TextInput  || uiComp is Label ){
+					if(uiComp is spark.components.TextInput || uiComp is spark.components.TextArea ||  uiComp is Label ){
 						try{
 							uiComp.text = obj[uiComp.id];
 							throw new Error("Not a Text");
@@ -155,8 +153,6 @@ package com.adams.cambook.utils
 							if(obj.hasOwnProperty([uiComp.id]))
 							if(obj[uiComp.id])uiComp.text = obj[uiComp.id].toString(); 
 						}
-					}else if(uiComp is DateField ){
-						uiComp.selectedDate = obj[uiComp.id];
 					}
 				}
 			}

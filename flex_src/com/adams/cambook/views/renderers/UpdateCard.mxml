@@ -2,7 +2,7 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark"  width="100%"  clipAndEnableScrolling="false"
 		 xmlns:components="com.adams.cambook.views.components.*"
-		 creationComplete="onCreationComplete()"> 
+		 creationComplete="onCreationComplete()" xmlns:renderers="com.adams.cambook.views.renderers.*" > 
 	<fx:Script>
 		<![CDATA[
 			import com.adams.cambook.models.vo.Notes;
@@ -33,9 +33,12 @@
 					personObj.personId = note.createdPersonFK;
 					personObj = Utils.findObject(personObj,currentPersonsList,Utils.PERSONKEY) as Persons;
 					notePersonName.text = personObj.personFirstname + ' '+personObj.personLastname;
-					if(note.notesSet)if(note.notesSet.length>0)
+					commentDG.height =0
+					if(note.notesSet)if(note.notesSet.length>0){
 					commentDG.dataProvider = note.notesSet;
-					sharBtn.visible = note.personFK ? true:false;
+					commentDG.height =40
+					}
+ 					sharBtn.visible = note.personFK ? true:false;
 					likeBtn.visible = note.createdPersonFK == currentPersonId ? false:true;
 				}
 			}
@@ -52,35 +55,27 @@
 			
 			public static var currentPersonId:int;
 			public static var currentPersonsList:ArrayCollection;
-		 
-			private var buddyCard:BuddyCard = new BuddyCard();
-			
-			protected function onClickHandler(event:MouseEvent):void{
-				buddyCard.x = stage.mouseX;
-				buddyCard.y = stage.mouseY;
-				PopUpManager.addPopUp(buddyCard,this);
-			}
-			protected function label1_rollOutHandler(event:MouseEvent):void{
-				PopUpManager.removePopUp(buddyCard);
-			}
+		  
 		]]>
 	</fx:Script>
 	<s:states>
 		<s:State name="normal" />
-		<s:State name="hover" />
+		<s:State name="more"/>
 		<s:State name="replyState" />
 	</s:states>
 	<s:VGroup width="100%" height="100%" bottom="4">
 		<s:VGroup width="100%" height="100%" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-			<s:Label id="notePersonName" click="onClickHandler(event)" width="100%" />
+			<s:Label id="notePersonName" width="100%" rollOver="{currentState='more'}"/>
+			<s:HGroup width="100%" horizontalAlign="right" paddingRight="5">
+				<components:NativeButton id="sharBtn" toolTip="share" styleName="shareSkin"/>
+				<components:NativeButton id="likeBtn" toolTip="Like" styleName="likeSkin"/>
+				<components:NativeButton id="commentBtn" toolTip="Comment" styleName="commentSkin" click="currentState='replyState'"/>	
+			</s:HGroup>
+			<renderers:BuddyCard includeIn="more" width="100%" height="100%" />
 			<s:Label id="noteTxt"  maxDisplayedLines="3" showTruncationTip="true" width="100%"/>	
 		</s:VGroup>
-		<s:HGroup width="100%" horizontalAlign="right" paddingRight="5">
-			<components:NativeButton id="sharBtn" toolTip="share" styleName="shareSkin"/>
-			<components:NativeButton id="likeBtn" toolTip="Like" styleName="likeSkin"/>
-			<components:NativeButton id="commentBtn" toolTip="Comment" styleName="commentSkin" click="currentState='replyState'"/>	
-		</s:HGroup>
-			<components:NativeList id="commentDG" width="100%" minHeight="40"/>
+		
+			<components:NativeList id="commentDG" width="100%" />
 		<s:HGroup verticalAlign="contentJustify" width="100%" includeIn="replyState"
 				  paddingLeft="5" paddingRight="5">
 			<s:TextArea height="35" id="commentArea" width="100%"/>	

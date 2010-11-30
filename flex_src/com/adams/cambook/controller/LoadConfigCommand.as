@@ -22,8 +22,6 @@ package com.adams.cambook.controller
 	import flash.events.StatusEvent;
 	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
-	import mx.core.Application;
 	import mx.core.FlexGlobals;
 	import mx.utils.URLUtil;
 	

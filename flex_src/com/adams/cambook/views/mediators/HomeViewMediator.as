@@ -23,14 +23,12 @@ package com.adams.cambook.views.mediators
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
-	import mx.controls.Alert;
 	import mx.core.ClassFactory;
 	import mx.core.FlexGlobals;
 	import mx.core.IFactory;
 	import mx.events.CloseEvent;
 	import mx.events.FlexEvent;
 	import mx.events.ItemClickEvent;
-	import mx.events.ListEvent;
 	import mx.events.ValidationResultEvent;
 	import mx.managers.PopUpManager;
 	import mx.validators.StringValidator;
@@ -159,8 +157,6 @@ package com.adams.cambook.views.mediators
 			 }
 		}
 		protected function setDataProviders():void {	
-			setDataProviderFilters('wall');
-			view.wallDG.dataProvider = noteDAO.collection.items;
 			setDataProviderFilters('upd');
 			view.myUpdateDG.dataProvider = currentInstance.currentPerson.notesSet;
 			setDataProviderFilters('msg');
@@ -168,6 +164,10 @@ package com.adams.cambook.views.mediators
 			view.friendsListDG.dataProvider = currentInstance.currentPerson.connectionSet;
 			setDataProviderFilters('suggest');
 			view.suggestFriendsListDG.dataProvider = personDAO.collection.items;
+			
+			setDataProviderFilters('wall');
+			view.wallDG.dataProvider = noteDAO.collection.items;
+			view.wallTab.dispatchEvent(new IndexChangeEvent(IndexChangeEvent.CHANGE))
 		} 
 		protected function setDataProviderFilters(filterStr:String):void {	
 			switch(filterStr){
@@ -272,11 +272,11 @@ package com.adams.cambook.views.mediators
 						setDataProviders();
 					}
 					if( signal.action == Action.SQL_FINDALL ){
-					currentInstance.currentPersonsList = obj as ArrayCollection;
-					UpdateCard.currentPersonsList = currentInstance.currentPersonsList;
- 					Comment.currentPersonsList = currentInstance.currentPersonsList;
-					view.searchInput.dataProvider = currentInstance.currentPersonsList
-					view.searchInput.labelField = 'personFirstname'	
+						currentInstance.currentPersonsList = obj as ArrayCollection;
+						UpdateCard.currentPersonsList = currentInstance.currentPersonsList;
+	 					Comment.currentPersonsList = currentInstance.currentPersonsList;
+						view.searchInput.dataProvider = currentInstance.currentPersonsList
+						view.searchInput.labelField = 'personFirstname'	
 					}
 				}
 				if( signal.destination == noteDAO.destination ) {
@@ -302,7 +302,7 @@ package com.adams.cambook.views.mediators
 					if(obj == Utils.TWEETSUCCESS){
 						view.updateTxt.text = '';
 					}else{
-						Alert.show(obj as String,Utils.ALERTHEADER);
+						//Alert.show(obj as String,Utils.ALERTHEADER);
 					}
 				}
 		}
@@ -322,7 +322,7 @@ package com.adams.cambook.views.mediators
 			view.submitBtn.clicked.add(modifyPasswordHandler);
 			view.personPassword1.addEventListener(Event.CHANGE, inputChgHandler);
 			view.personPassword2.addEventListener(Event.CHANGE, inputChgHandler);
-			view.wallStack.addEventListener(Event.TAB_INDEX_CHANGE,changeWallFilter);
+			view.wallTab.addEventListener(IndexChangeEvent.CHANGE,changeWallFilter);
 			view.passwordBtn.clicked.add(changeToPasswordView);
 			view.cancelBtn.clicked.add(changeToPasswordView);
 			
@@ -338,14 +338,16 @@ package com.adams.cambook.views.mediators
 			view.friendsListDG.renderSignal.add(friendsListDGHandler);
 			view.suggestFriendsListDG.renderSignal.add(suggestFriendsListDGHandler);
 		}
-		private function changeWallFilter(ev:Event):void{
-			if(view.wallStack.tabIndex == 0){
-			setDataProviderFilters('wall');
-			view.wallDG.dataProvider = noteDAO.collection.items;
+		private function changeWallFilter(ev:IndexChangeEvent=null,index:int = 1):void{
+			if(ev) index = ev.newIndex
+			if(index == 1){
+				view.currentState ="WallState";
+				setDataProviderFilters('wall');
+				view.wallDG.dataProvider = noteDAO.collection.items;
 			}else{
-			
-			setDataProviderFilters('msg');
-			view.messageDG.dataProvider = noteDAO.collection.items;
+				view.currentState = "UpdateState"
+				setDataProviderFilters('msg');
+				view.messageDG.dataProvider = noteDAO.collection.items;
 			}
 		} 
 		private var parentUpdateNote:Notes
@@ -439,7 +441,7 @@ package com.adams.cambook.views.mediators
 				signalSeq.addSignal(perPasswdSignal);
 				changeToPasswordView();
 			}else{
-				Alert.show('Passwords should match',Utils.ALERTHEADER);
+				//Alert.show('Passwords should match',Utils.ALERTHEADER);
 			}
 		}
 		override protected function pushResultHandler( signal:SignalVO ): void { 

@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="SwizBook.mxml" projectUUID="94022d11-6fd3-411c-82a2-7172879fb001" version="6">
-  <compiler additionalCompilerArguments="-locale en_US -use-network=false -debug=false -keep-as3-metadata+=Dispatcher,Inject,MediateView,Mediate,PostConstruct,PreDestroy,MediateSignal,Form,Random" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="flex_src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="SwizBook.mxml" projectUUID="94022d11-6fd3-411c-82a2-7172879fb001" version="7">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" flex3CompatMode="false" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="flex_src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
-    <libraryPath defaultLinkType="3">
+    <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/datavisualization.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry index="7" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/mx/mx.swc" useDefaultLinkType="true">
+            <crossDomainRsls>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.5.0.17689/mx_4.5.0.17689.swz"/>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="mx_4.5.0.17689.swz"/>
+            </crossDomainRsls>
+          </libraryPathEntry>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/spark_dmv.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="1" linkType="1" path="libs"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
   <applications>
     <application path="SwizBook.mxml"/>
   </applications>
-  <modules>
-    <module application="flex_src/SwizBook.mxml" destPath="com/adams/cambook/views/modules/HomeViewModule.swf" optimize="true" sourcePath="flex_src/com/adams/cambook/views/modules/HomeViewModule.mxml"/>
-    <module application="flex_src/SwizBook.mxml" destPath="com/adams/cambook/views/modules/LoginModule.swf" optimize="true" sourcePath="flex_src/com/adams/cambook/views/modules/LoginModule.mxml"/>
-  </modules>
+  <modules/>
   <buildCSSFiles/>
+  <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>

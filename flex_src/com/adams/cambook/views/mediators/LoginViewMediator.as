@@ -15,8 +15,6 @@ package com.adams.cambook.views.mediators
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
-	import mx.controls.Alert;
-	import mx.controls.TextInput;
 	import mx.events.ValidationResultEvent;
 	import mx.validators.EmailValidator;
 	import mx.validators.StringValidator;
@@ -152,7 +150,7 @@ package com.adams.cambook.views.mediators
 		override protected function serviceResultHandler( obj:Object,signal:SignalVO ):void {  
 			if( signal.destination == pagingDAO.destination ) {
 				if(signal.action == Action.CREATEPERSON){
-					Alert.show("Your Password have been mailed to your email\n" +view.personEmail.text,Utils.ALERTHEADER);
+				//	Alert.show("Your Password have been mailed to your email\n" +view.personEmail.text,Utils.ALERTHEADER);
 					changeToRegisterView();
 				}
 			}
@@ -243,9 +241,10 @@ package com.adams.cambook.views.mediators
 			
 			// create the user name validator
 			userNameValidator = new StringValidator();
-			userNameValidator.requiredFieldError = "Please enter minimum 5 Characters";
+			/*userNameValidator.requiredFieldError =' ' 
+			view.personFirstname.toolTip= "Please enter minimum 5 Characters";
 			userNameValidator.minLength = 5;
-			userNameValidator.property = "text";
+			userNameValidator.property = "text";*/
 			
 			// create the password validator
 			emailValidator = new EmailValidator();
